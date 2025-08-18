@@ -126,6 +126,7 @@ android {
             applicationIdSuffix '.debug'
             minifyEnabled false
             shrinkResources false
+            debuggable false
             proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
             signingConfig signingConfigs.customDebug
             resValue 'string', 'application_package', 'org.angelauramc.amethyst.debug'
