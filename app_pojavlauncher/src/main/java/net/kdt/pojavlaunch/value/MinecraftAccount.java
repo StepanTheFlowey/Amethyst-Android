@@ -31,7 +31,7 @@ public class MinecraftAccount {
     public long expiresAt;
     public String skinFaceBase64;
     private Bitmap mFaceCache;
-    
+
     void updateSkinFace(String uuid) {
         try {
             File skinFile = getSkinFaceFile(username);
@@ -52,7 +52,7 @@ public class MinecraftAccount {
     public boolean isDemo(){
         return username.startsWith("Demo.");
     }
-    
+
     public void updateSkinFace() {
         updateSkinFace(profileId);
     }
@@ -61,14 +61,15 @@ public class MinecraftAccount {
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
         return username;
     }
-    
+
     public String save() throws IOException {
         return save(Tools.DIR_ACCOUNT_NEW + "/" + username + ".json");
     }
-    
+
     public static MinecraftAccount parse(String content) throws JsonSyntaxException {
         return Tools.GLOBAL_GSON.fromJson(content, MinecraftAccount.class);
     }
+
     @Nullable
     public static MinecraftAccount load(String name) {
         if(!accountExists(name)) return null;

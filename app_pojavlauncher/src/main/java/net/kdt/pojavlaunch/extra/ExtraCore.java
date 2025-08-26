@@ -151,5 +151,4 @@ public final class ExtraCore {
     public static void removeAllExtraListeners(){
         getInstance().mListenerMap.clear();
     }
-
 }

@@ -33,10 +33,6 @@ public class LocalLoginFragment extends Fragment {
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        // This is overkill but meh
-        if (!hasOnlineProfile()){
-            Tools.swapFragment(requireActivity(), MainMenuFragment.class, MainMenuFragment.TAG, null);
-        }
         mUsernameEditText = view.findViewById(R.id.login_edit_email);
         view.findViewById(R.id.login_button).setOnClickListener(v -> {
             if(!checkEditText()) {
@@ -45,17 +41,15 @@ public class LocalLoginFragment extends Fragment {
                 return;
             }
 
-            ExtraCore.setValue(ExtraConstants.MOJANG_LOGIN_TODO, new String[]{
-                    mUsernameEditText.getText().toString(), "" });
+            ExtraCore.setValue(ExtraConstants.MOJANG_LOGIN_TODO, mUsernameEditText.getText().toString());
 
-            Tools.swapFragment(requireActivity(), MainMenuFragment.class, MainMenuFragment.TAG, null);
+            Tools.backToMainMenu(requireActivity());
         });
     }
 
 
     /** @return Whether the mail (and password) text are eligible to make an auth request  */
     private boolean checkEditText(){
-
         String text = mUsernameEditText.getText().toString();
 
         Matcher matcher = mUsernameValidationPattern.matcher(text);
