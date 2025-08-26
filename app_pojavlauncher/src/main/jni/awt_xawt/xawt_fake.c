@@ -34,26 +34,26 @@ JNIEXPORT void JNICALL
 Java_java_awt_Cursor_initIDs
   (JNIEnv *env, jclass cls)
 {
-    
+
 }
 
 JNIEXPORT void JNICALL
 Java_java_awt_Cursor_finalizeImpl(JNIEnv *env, jclass clazz, jlong pData)
 {
-    
+
 }
 
 JNIEXPORT void JNICALL
 Java_java_awt_Dialog_initIDs
   (JNIEnv *env, jclass cls)
 {
-    
+
 }
 
 JNIEXPORT void JNICALL
 Java_java_awt_Event_initIDs(JNIEnv *env, jclass cls)
 {
-    
+
 }
 
 JNIEXPORT void JNICALL
@@ -79,7 +79,7 @@ JNIEXPORT void JNICALL
 Java_java_awt_KeyboardFocusManager_initIDs
   (JNIEnv *env, jclass cls)
 {
-    
+
 }
 
 JNIEXPORT void JNICALL Java_java_awt_Menu_initIDs
@@ -90,7 +90,7 @@ JNIEXPORT void JNICALL Java_java_awt_Menu_initIDs
 JNIEXPORT void JNICALL
 Java_java_awt_MenuComponent_initIDs(JNIEnv *env, jclass cls)
 {
-    
+
 }
 
 JNIEXPORT void JNICALL Java_java_awt_MenuItem_initIDs
@@ -155,7 +155,7 @@ JNIEXPORT void JNICALL
 Java_sun_awt_SunToolkit_closeSplashScreen
   (JNIEnv *env, jclass cls)
 {
-    
+
 }
 // sun.awt.UNIXToolkit
 JNIEXPORT jboolean JNICALL
@@ -209,7 +209,3 @@ Java_sun_awt_UNIXToolkit_unload_1gtk(JNIEnv *env, jclass klass)
 {
     return JNI_FALSE;
 }
-
-
-
-
