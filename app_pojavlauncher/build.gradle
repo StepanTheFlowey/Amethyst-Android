@@ -135,14 +135,14 @@ android {
         }
 
         release {
-            // Don't set to true or java.awt will be a.a or something similar.
-            minifyEnabled false
-            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-            // defaultConfig already set
-            // multiDexEnabled = true
-            // debuggable = true
-            resValue 'string', 'storageProviderAuthorities', 'org.angelauramc.amethyst.scoped.gamefolder'
+            debuggable false
+            minifyEnabled true
+            shrinkResources true
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+            signingConfig signingConfigs.customDebug
             resValue 'string', 'application_package', 'org.angelauramc.amethyst'
+            resValue 'string', 'storageProviderAuthorities', 'org.angelauramc.amethyst.scoped.gamefolder'
+            resValue 'string', 'shareProviderAuthority', 'org.angelauramc.amethyst.scoped.controlfolder'
         }
         gplay {
             initWith release
