@@ -1,9 +1,9 @@
 {
   "profiles": {
-    "(Default)": {
-      "name": "(Default)",
+    "1.7.10": {
+      "name": "1.7.10",
       "lastVersionId": "1.7.10"
     }
   },
-  "selectedProfile": "(Default)"
+  "selectedProfile": "1.7.10"
 }
