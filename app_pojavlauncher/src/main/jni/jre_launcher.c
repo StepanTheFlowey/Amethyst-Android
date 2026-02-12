@@ -116,7 +116,7 @@ static void abort_waiter_setup() {
         if(sigaction(tracked_signals[i], &sigactions[i], NULL) != 0) {
             // Not returning here because we may have set some handlers successfully.
             // Some handling is better than no handling.
-            printf("Failed to set signal hander for signal %i: %s", i, strerror(errno));
+            printf("Failed to set signal hander for signal %zu: %s", i, strerror(errno));
         }
     }
 }
@@ -182,7 +182,6 @@ static jint launchJVM(int margc, char** margv) {
  * Signature: ([Ljava/lang/String;)I
  */
 JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, jclass clazz, jobjectArray argsArray) {
-
    jint res = 0;
 
     if (argsArray == NULL) {
@@ -191,8 +190,8 @@ JNIEXPORT jint JNICALL Java_com_oracle_dalvik_VMLauncher_launchJVM(JNIEnv *env, 
         return 0;
     }
 
-    int argc = (*env)->GetArrayLength(env, argsArray);
-    char **argv = convert_to_char_array(env, argsArray);
+    const int argc = (*env)->GetArrayLength(env, argsArray);
+    const char **argv = convert_to_char_array(env, argsArray);
 
     LOGD("Done processing args");
 
