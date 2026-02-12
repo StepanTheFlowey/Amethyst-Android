@@ -169,7 +169,7 @@ static jint launchJVM(int margc, char** margv) {
                    (const_jargs != NULL) ? JNI_TRUE : JNI_FALSE,
                    const_cpwildcard, const_javaw, const_ergo_class);
 /*
-   return pJLI_Launch(argc, argv, 
+   return pJLI_Launch(argc, argv,
        0, NULL, 0, NULL, FULL_VERSION,
        DOT_VERSION, *margv, *margv, // "java", "openjdk",
        JNI_FALSE, JNI_TRUE, JNI_FALSE, 0);

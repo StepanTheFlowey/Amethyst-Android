@@ -251,4 +251,3 @@ Java_org_lwjgl_vulkan_VK_getVulkanDriverHandle(ABI_COMPAT JNIEnv *env, ABI_COMPA
 EXTERNAL_API void pojavSwapInterval(int interval) {
     br_swap_interval(interval);
 }
-
