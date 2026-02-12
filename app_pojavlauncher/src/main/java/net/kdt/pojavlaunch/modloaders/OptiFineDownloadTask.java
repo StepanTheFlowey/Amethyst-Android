@@ -36,19 +36,23 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
     @Override
     public void run() {
         ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, 0, R.string.of_dl_progress, mOptiFineVersion.versionName);
+
         try {
             if(runCatching()) mListener.onDownloadFinished(mDestinationFile);
         }catch (IOException e) {
             mListener.onDownloadError(e);
         }
+
         ProgressLayout.clearProgress(ProgressLayout.INSTALL_MODPACK);
     }
 
     public boolean runCatching() throws IOException {
-        String downloadUrl = scrapeDownloadsPage();
+        final String downloadUrl = scrapeDownloadsPage();
         if(downloadUrl == null) return false;
-        String minecraftVersion = determineMinecraftVersion();
+
+        final String minecraftVersion = determineMinecraftVersion();
         if(minecraftVersion == null) return false;
+
         if(!downloadMinecraft(minecraftVersion)) {
             if(mDownloaderThrowable instanceof Exception) {
                 mListener.onDownloadError((Exception) mDownloaderThrowable);
@@ -58,12 +62,13 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
             }
             return false;
         }
+
         DownloadUtils.downloadFileMonitored(downloadUrl, mDestinationFile, new byte[8192], this);
         return true;
     }
 
     public String scrapeDownloadsPage() throws IOException{
-        String scrapeResult = OFDownloadPageScraper.run(mOptiFineVersion.downloadUrl);
+        final String scrapeResult = OFDownloadPageScraper.run(mOptiFineVersion.downloadUrl);
         if(scrapeResult == null) mListener.onDataNotAvailable();
         return scrapeResult;
     }
@@ -104,7 +109,7 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
 
     @Override
     public void updateProgress(int curr, int max) {
-        int progress100 = (int)(((float)curr / (float)max)*100f);
+        final int progress100 = (int)(((float)curr / (float)max)*100f);
         ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, progress100, R.string.of_dl_progress, mOptiFineVersion.versionName);
     }
 

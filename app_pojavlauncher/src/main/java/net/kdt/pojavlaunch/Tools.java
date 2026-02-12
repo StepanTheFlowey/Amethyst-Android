@@ -110,7 +110,7 @@ import java.util.Map;
 
 @SuppressWarnings("IOStreamConstructor")
 public final class Tools {
-    public  static final float BYTE_TO_MB = 1024 * 1024;
+    public static final float BYTE_TO_MB = 1024 * 1024;
     public static final Handler MAIN_HANDLER = new Handler(Looper.getMainLooper());
     public static String APP_NAME = "Amethyst";
 
@@ -1036,8 +1036,6 @@ public final class Tools {
         ContextExecutor.execute(new ShowErrorActivity.RemoteErrorTask(e, rolledMessage));
     }
 
-
-
     public static void dialogOnUiThread(final Activity activity, final CharSequence title, final CharSequence message) {
         activity.runOnUiThread(()->dialog(activity, title, message));
     }
@@ -1069,9 +1067,8 @@ public final class Tools {
     }
 
     public static void preProcessLibraries(DependentLibrary[] libraries) {
-        for (int i = 0; i < libraries.length; i++) {
-            DependentLibrary libItem = libraries[i];
-            String[] version = libItem.name.split(":")[2].split("\\.");
+        for (DependentLibrary libItem : libraries) {
+            final String[] version = libItem.name.split(":")[2].split("\\.");
             if (libItem.name.startsWith("net.java.dev.jna:jna:")) {
                 // Special handling for LabyMod 1.8.9, Forge 1.12.2(?) and oshi
                 // we have libjnidispatch 5.13.0 in jniLibs directory
@@ -1123,7 +1120,7 @@ public final class Tools {
             if (libItem.name.startsWith("org.ow2.asm:asm") && !libItem.name.startsWith("org.ow2.asm:asm-all:")){
                 libDir.remove(Tools.DIR_HOME_LIBRARY + "/" + artifactToPath(new DependentLibrary(){{
                     name = "org.ow2.asm:asm-all:5.0.4";
-                }} ));
+                }}));
             }
         }
         return libDir.toArray(new String[0]);
@@ -1289,14 +1286,13 @@ public final class Tools {
         Logger.appendToLog("Info: API version: " + SDK_INT);
         Logger.appendToLog("Info: Selected Minecraft version: " + gameVersion);
         Logger.appendToLog("Info: Custom Java arguments: \"" + javaArguments + "\"");
-        GLInfoUtils.GLInfo info = GLInfoUtils.getGlInfo();
-        Logger.appendToLog("Info: Graphics device: "+info.vendor+ " "+info.renderer+" (OpenGL ES "+info.glesMajorVersion+")");
+        final GLInfoUtils.GLInfo info = GLInfoUtils.getGlInfo();
+        Logger.appendToLog("Info: Graphics device: " + info.vendor + " " + info.renderer + " (OpenGL ES " + info.glesMajorVersion + ")");
     }
 
     public interface DownloaderFeedback {
         void updateProgress(int curr, int max);
     }
-
 
     public static boolean compareSHA1(File f, String sourceSHA) {
         try {
@@ -1344,7 +1340,8 @@ public final class Tools {
     private static int internalGetMaxContinuousAddressSpaceSize() throws Exception{
         MemoryHoleFinder memoryHoleFinder = new MemoryHoleFinder();
         new SelfMapsParser(memoryHoleFinder).run();
-        long largestHole = memoryHoleFinder.getLargestHole();
+
+        final long largestHole = memoryHoleFinder.getLargestHole();
         if(largestHole == -1) return -1;
         else return (int)(largestHole / 1048576L);
     }
@@ -1380,20 +1377,26 @@ public final class Tools {
                                     @Nullable String fragmentTag, @Nullable Bundle bundle) {
         // When people tab out, it might happen
         //TODO handle custom animations
-        fragmentActivity.getSupportFragmentManager().beginTransaction()
-                .setReorderingAllowed(true)
-                .addToBackStack(fragmentClass.getName())
-                .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag).commit();
+        fragmentActivity
+            .getSupportFragmentManager()
+            .beginTransaction()
+            .setReorderingAllowed(true)
+            .addToBackStack(fragmentClass.getName())
+            .replace(R.id.container_fragment, fragmentClass, bundle, fragmentTag)
+            .commit();
     }
 
     public static void backToMainMenu(FragmentActivity fragmentActivity) {
-        fragmentActivity.getSupportFragmentManager()
-                .popBackStack("ROOT", 0);
+        fragmentActivity
+            .getSupportFragmentManager()
+            .popBackStack("ROOT", 0);
     }
 
     /** Remove the current fragment */
     public static void removeCurrentFragment(FragmentActivity fragmentActivity){
-        fragmentActivity.getSupportFragmentManager().popBackStack();
+        fragmentActivity
+            .getSupportFragmentManager()
+            .popBackStack();
     }
 
     public static void installMod(Activity activity, boolean customJavaArgs) {
@@ -1415,7 +1418,7 @@ public final class Tools {
         editText.setSingleLine();
         editText.setHint("-jar/-cp /path/to/file.jar ...");
 
-        AlertDialog.Builder builder = new AlertDialog.Builder(activity)
+        final AlertDialog.Builder builder = new AlertDialog.Builder(activity)
                 .setTitle(R.string.alerttitle_installmod)
                 .setNegativeButton(android.R.string.cancel, null)
                 .setView(editText)
@@ -1434,7 +1437,6 @@ public final class Tools {
         barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
         barrier.setCancelable(false);
         barrier.show();
-
         return barrier;
     }
 
@@ -1446,7 +1448,6 @@ public final class Tools {
         intent.putExtra("modUri", uri);
         activity.startActivity(intent);
     }
-
 
     public static void installRuntimeFromUri(Context context, Uri uri){
         sExecutorService.execute(() -> {
@@ -1468,7 +1469,8 @@ public final class Tools {
         int whatForStart = input.indexOf(whatFor);
         if(whatForStart == -1) return null;
         whatForStart += whatFor.length();
-        int terminatorIndex = input.indexOf(terminator, whatForStart);
+
+        final int terminatorIndex = input.indexOf(terminator, whatForStart);
         if(terminatorIndex == -1) return null;
         return input.substring(whatForStart, terminatorIndex);
     }
@@ -1584,6 +1586,7 @@ public final class Tools {
         // Android Oreo and onwards have GSIs and most phone firmwares at that point were not modified
         // *that* intrusively. So assume that we are not affected.
         if(SDK_INT >= Build.VERSION_CODES.O) return false;
+
         // Since the affected function in LWJGL is rarely used (and when used, it's mainly for debug prints)
         // we can make the search scope a bit more broad and check if we are running on a Huawei device.
         return Build.MANUFACTURER.toLowerCase(Locale.ROOT).contains("huawei");
@@ -1653,7 +1656,6 @@ public final class Tools {
 
     public static boolean deviceSupportsGyro(@NonNull Context context) {
         return ((SensorManager)context.getSystemService(Context.SENSOR_SERVICE)).getDefaultSensor(Sensor.TYPE_GYROSCOPE) != null;
-
     }
 
     public static void dialogForceClose(Context ctx) {
@@ -1682,51 +1684,19 @@ public final class Tools {
     }
 
     private static NetworkInfo getActiveNetworkInfo(Context ctx) {
-        ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo = connMgr.getActiveNetworkInfo();
-        return networkInfo; // This can return null when there is no wifi or data connected
+        final ConnectivityManager connMgr = (ConnectivityManager) ctx.getSystemService(Context.CONNECTIVITY_SERVICE);
+        return connMgr.getActiveNetworkInfo(); // This can return null when there is no wifi or data connected
     }
 
     public static boolean isOnline(Context ctx) {
-        NetworkInfo info = getActiveNetworkInfo(ctx);
+        final NetworkInfo info = getActiveNetworkInfo(ctx);
         if(info == null) return false;
-        return (info.isConnected());
+        return info.isConnected();
     }
 
     public static boolean isDemoProfile(Context ctx){
-        MinecraftAccount currentProfile = PojavProfile.getCurrentProfileContent(ctx, null);
+        final MinecraftAccount currentProfile = PojavProfile.getCurrentProfileContent(ctx, null);
         return currentProfile != null && currentProfile.isDemo();
-    }
-
-    public static boolean isLocalProfile(Context ctx){
-        MinecraftAccount currentProfile = PojavProfile.getCurrentProfileContent(ctx, null);
-        return currentProfile == null || currentProfile.isLocal();
-    }
-    public static boolean hasOnlineProfile(){
-        return true;
-    }
-
-    public static void hasNoOnlineProfileDialog(Activity activity, @Nullable Runnable run, @Nullable String customTitle, @Nullable String customMessage){
-        if (hasOnlineProfile() && !Tools.isDemoProfile(activity)){
-            if (run != null) { // Demo profile handling should be using customTitle and customMessage
-                run.run();
-            }
-        } else { // If there is no online profile, show a dialog
-            customTitle = customTitle == null ? activity.getString(R.string.no_minecraft_account_found) : customTitle;
-            customMessage = customMessage == null ? activity.getString(R.string.feature_requires_java_account) : customMessage;
-            dialogOnUiThread(activity, customTitle, customMessage);
-        }
-    }
-
-    // Some boilerplate to reduce boilerplate elsewhere
-    public static void hasNoOnlineProfileDialog(Activity activity){
-        hasNoOnlineProfileDialog(activity, null, null, null);
-    }
-    public static void hasNoOnlineProfileDialog(Activity activity, Runnable run){
-        hasNoOnlineProfileDialog(activity, run, null, null);
-    }
-    public static void hasNoOnlineProfileDialog(Activity activity, String customTitle, String customMessage){
-        hasNoOnlineProfileDialog(activity, null, customTitle, customMessage);
     }
 
     public static String getSelectedVanillaMcVer(){
@@ -1744,17 +1714,20 @@ public final class Tools {
         } catch (IOException e) {
             throw new RuntimeException(e);
         }
+
         try {
             vanillaVersion = providedJsonVersion.inheritsFrom != null ? providedJsonVersion.inheritsFrom : vanillaVersion;
         } catch (NullPointerException e) {
             throw new RuntimeException(e);
         }
+
         return vanillaVersion;
     }
 
     public static Integer mcVersiontoInt(String mcVersion){
         String[] sVersionArray = mcVersion.split("\\.");
         String[] iVersionArray = new String[3];
+
         // Make sure this is actually a version string
         for (int i = 0; i < iVersionArray.length; i++) {
             try {
@@ -1775,12 +1748,12 @@ public final class Tools {
                 throw new RuntimeException("Tools(mcVersiontoInt): Invalid version string");
             }
         }
+
         return Integer.parseInt(iVersionArray[0] + iVersionArray[1] + iVersionArray[2]);
     }
 
     public static boolean isPointerDeviceConnected() {
-        int[] deviceIds = InputDevice.getDeviceIds();
-        for (int id : deviceIds) {
+        for (int id : InputDevice.getDeviceIds()) {
             InputDevice device = InputDevice.getDevice(id);
             if (device == null) continue;
             int sources = device.getSources();

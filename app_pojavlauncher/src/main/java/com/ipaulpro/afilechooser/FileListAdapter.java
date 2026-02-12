@@ -25,7 +25,7 @@ import net.kdt.pojavlaunch.*;
 
 /**
  * List adapter for Files.
- * 
+ *
  * @version 2013-12-11
  * @author paulburke (ipaulpro)
  *

@@ -57,10 +57,10 @@ public class PojavProfile {
 		}
 		return accountList;
 	}
-	
+
 	public static void setCurrentProfile(@NonNull Context ctx, @Nullable  Object obj) {
 		SharedPreferences.Editor pref = getPrefs(ctx).edit();
-		
+
 		try { if (obj instanceof String) {
                 String acc = (String) obj;
 				pref.putString(PROFILE_PREF_FILE, acc);

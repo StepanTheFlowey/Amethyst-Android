@@ -16,14 +16,16 @@ public class ForgeVersionListAdapter extends BaseExpandableListAdapter implement
     private final LayoutInflater mLayoutInflater;
 
     public ForgeVersionListAdapter(List<String> forgeVersions, LayoutInflater layoutInflater) {
-        this.mLayoutInflater = layoutInflater;
+        mLayoutInflater = layoutInflater;
         mGameVersions = new ArrayList<>();
         mForgeVersions = new ArrayList<>();
+
         for(String version : forgeVersions) {
-            int dashIndex = version.indexOf("-");
-            String gameVersion = version.substring(0, dashIndex);
+            final int dashIndex = version.indexOf("-");
+            final String gameVersion = version.substring(0, dashIndex);
+            final int gameVersionIndex = mGameVersions.indexOf(gameVersion);
+
             List<String> versionList;
-            int gameVersionIndex = mGameVersions.indexOf(gameVersion);
             if(gameVersionIndex != -1) versionList = mForgeVersions.get(gameVersionIndex);
             else {
                 versionList = new ArrayList<>();

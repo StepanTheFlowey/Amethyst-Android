@@ -39,7 +39,7 @@ public class NeoForgeDownloadTask implements Runnable, Tools.DownloaderFeedback 
 
     @Override
     public void updateProgress(int curr, int max) {
-        int progress100 = (int)(((float)curr / (float)max)*100f);
+        int progress100 = (int)(((float)curr / (float)max) * 100f);
         ProgressKeeper.submitProgress(ProgressLayout.INSTALL_MODPACK, progress100, R.string.forge_dl_progress, mLoaderVersion);
     }
 

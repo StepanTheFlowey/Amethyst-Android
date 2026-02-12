@@ -61,7 +61,6 @@ public class MinecraftDownloader {
 
     private static final ThreadLocal<byte[]> sThreadLocalDownloadBuffer = new ThreadLocal<>();
 
-    private boolean isLocalProfile = false;
     private boolean isOnline;
 
     /**
@@ -75,12 +74,10 @@ public class MinecraftDownloader {
                       @NonNull String realVersion,
                       @NonNull AsyncMinecraftDownloader.DoneListener listener) {
         if(activity != null){
-            isLocalProfile = Tools.isLocalProfile(activity);
             isOnline = Tools.isOnline(activity);
             Tools.switchDemo(Tools.isDemoProfile(activity));
 
         } else {
-            isLocalProfile = true;
             Tools.switchDemo(true);
         }
 
@@ -106,11 +103,11 @@ public class MinecraftDownloader {
                         listener.onDownloadDone();
                     } catch (Exception e) {
                         String tryagain = !isOnline ? "Please ensure you have an internet connection" : "Please try again on your Microsoft Account";
-                        Tools.showErrorRemote(versionMessage + " is not currently installed. "+ tryagain, e);
+                        Tools.showErrorRemote(versionMessage + " is not currently installed. " + tryagain, e);
                     }
                 }else {
-                downloadGame(activity, version, realVersion);
-                listener.onDownloadDone();
+                    downloadGame(activity, version, realVersion);
+                    listener.onDownloadDone();
                 }
             }catch (Exception e) {
                 listener.onDownloadFailed(e);
@@ -211,13 +208,13 @@ public class MinecraftDownloader {
         if(mSourceJarFile.equals(mTargetJarFile)) return;
         if(mTargetJarFile.exists()) return;
         FileUtils.ensureParentDirectory(mTargetJarFile);
-        Log.i("NewMCDownloader", "Copying " + mSourceJarFile.getName() + " to "+mTargetJarFile.getAbsolutePath());
+        Log.i("NewMCDownloader", "Copying " + mSourceJarFile.getName() + " to " + mTargetJarFile.getAbsolutePath());
         org.apache.commons.io.FileUtils.copyFile(mSourceJarFile, mTargetJarFile, false);
     }
 
     private void extractNatives(String versionName) throws IOException {
         if(mDeclaredNatives.isEmpty()) return;
-        int totalCount = mDeclaredNatives.size();
+        final int totalCount = mDeclaredNatives.size();
 
         ProgressLayout.setProgress(ProgressLayout.DOWNLOAD_MINECRAFT, 0,
                 R.string.newdl_extracting_native_libraries, 0, totalCount);
@@ -266,7 +263,7 @@ public class MinecraftDownloader {
         });
         return Tools.GLOBAL_GSON.fromJson(Tools.read(targetFile), JAssets.class);
     }
-    
+
     private MinecraftClientInfo getClientInfo(JMinecraftVersionList.Version verInfo) {
         Map<String, MinecraftClientInfo> downloads = verInfo.downloads;
         if(downloads == null) return null;
@@ -396,7 +393,7 @@ public class MinecraftDownloader {
             );
         }
     }
-    
+
     private void scheduleAssetDownloads(JAssets assets) throws IOException {
         Map<String, JAssetInfo> assetObjects = assets.objects;
         if(assetObjects == null) return;
@@ -569,7 +566,7 @@ public class MinecraftDownloader {
                 else downloadFile();
             }
         }
-        
+
         private void verifyFileSha1() throws Exception {
             if(mTargetPath.isFile() && mTargetPath.canRead() && Tools.compareSHA1(mTargetPath, mTargetSha1)) {
                 finishWithoutDownloading();
@@ -579,7 +576,7 @@ public class MinecraftDownloader {
                 downloadFile();
             }
         }
-        
+
         private void downloadFile() throws Exception {
             try {
                 DownloadUtils.ensureSha1(mTargetPath, mTargetSha1, () -> {

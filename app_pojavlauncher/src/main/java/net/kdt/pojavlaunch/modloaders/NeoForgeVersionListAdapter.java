@@ -8,7 +8,6 @@ import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
 import java.util.List;
 
@@ -16,7 +15,6 @@ public class NeoForgeVersionListAdapter extends BaseExpandableListAdapter implem
     private final List<String> mGameVersions;
     private final List<List<String>> mNeoForgeVersions;
     private final LayoutInflater mLayoutInflater;
-
 
     public NeoForgeVersionListAdapter(List<String> neoforgeVersions, LayoutInflater layoutInflater) {
         this.mLayoutInflater = layoutInflater;

@@ -15,4 +15,3 @@ public class JAssets {
     /* Used by the legacy.json (~1.6.X) asset file, used for paths at the root of the .minecraft/assets folder */
     public boolean virtual;
 }
-

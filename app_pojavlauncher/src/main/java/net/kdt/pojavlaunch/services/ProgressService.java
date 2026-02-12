@@ -28,7 +28,6 @@ import net.kdt.pojavlaunch.utils.NotificationUtils;
  * Can be created from context, can be killed statically
  */
 public class ProgressService extends Service implements TaskCountListener {
-
     private NotificationManagerCompat notificationManagerCompat;
 
     /** Simple wrapper to start the service */

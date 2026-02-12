@@ -20,18 +20,17 @@ import javax.xml.parsers.SAXParserFactory;
 public class ForgeUtils {
     private static final String FORGE_METADATA_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/maven-metadata.xml";
     private static final String FORGE_INSTALLER_URL = "https://maven.minecraftforge.net/net/minecraftforge/forge/%1$s/forge-%1$s-installer.jar";
+
     public static List<String> downloadForgeVersions() throws IOException {
         SAXParser saxParser;
         try {
-            SAXParserFactory parserFactory = SAXParserFactory.newInstance();
-            saxParser = parserFactory.newSAXParser();
+            saxParser = SAXParserFactory.newInstance().newSAXParser();
         }catch (SAXException | ParserConfigurationException e) {
             e.printStackTrace();
             // if we cant make a parser we might as well not even try to parse anything
             return null;
         }
         try {
-            //of_test();
             return DownloadUtils.downloadStringCached(FORGE_METADATA_URL, "forge_versions", input -> {
                 try {
                     ForgeVersionListHandler handler = new ForgeVersionListHandler();
@@ -47,8 +46,8 @@ public class ForgeUtils {
             e.printStackTrace();
             return null;
         }
-
     }
+
     public static String getInstallerUrl(String version) {
         return String.format(FORGE_INSTALLER_URL, version);
     }

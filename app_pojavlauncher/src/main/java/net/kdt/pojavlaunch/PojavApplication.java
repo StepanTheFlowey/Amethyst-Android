@@ -27,7 +27,7 @@ import net.kdt.pojavlaunch.utils.FileUtils;
 public class PojavApplication extends Application {
 	public static final String CRASH_REPORT_TAG = "PojavCrashReport";
 	public static final ExecutorService sExecutorService = new ThreadPoolExecutor(4, 4, 500, TimeUnit.MILLISECONDS,  new LinkedBlockingQueue<>());
-	
+
 	@Override
 	public void onCreate() {
 		ContextExecutor.setApplication(this);
@@ -55,7 +55,7 @@ public class PojavApplication extends Application {
 			FatalErrorActivity.showError(PojavApplication.this, crashFile.getAbsolutePath(), storagePermAllowed, th);
 			Tools.fullyExit();
 		});
-		
+
 		try {
 			super.onCreate();
 			if(Tools.checkStorageRoot(this)){

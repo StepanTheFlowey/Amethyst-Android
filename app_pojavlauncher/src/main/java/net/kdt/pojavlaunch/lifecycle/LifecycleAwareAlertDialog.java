@@ -78,7 +78,7 @@ public abstract class LifecycleAwareAlertDialog implements LifecycleEventObserve
             if(listener != null) listener.onCancel(dialog);
         };
     }
-    
+
     public interface DialogCreator {
         /**
          * This methods is called when the LifecycleAwareAlertDialog needs to set up its dialog.

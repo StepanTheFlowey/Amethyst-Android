@@ -14,7 +14,6 @@ import java.io.UnsupportedEncodingException;
 import java.net.URLEncoder;
 
 public class FabriclikeUtils {
-
     public static final FabriclikeUtils FABRIC_UTILS = new FabriclikeUtils("https://meta.fabricmc.net/v2", "fabric", "Fabric", "fabric");
     public static final FabriclikeUtils QUILT_UTILS = new FabriclikeUtils("https://meta.quiltmc.org/v3", "quilt", "Quilt", "quilt");
 
@@ -46,9 +45,9 @@ public class FabriclikeUtils {
 
     public FabricVersion[] downloadLoaderVersions(String gameVersion) throws IOException{
         try {
-            String urlEncodedGameVersion = URLEncoder.encode(gameVersion, "UTF-8");
+            final String urlEncodedGameVersion = URLEncoder.encode(gameVersion, "UTF-8");
             return DownloadUtils.downloadStringCached(String.format(LOADER_METADATA_URL, mApiUrl, urlEncodedGameVersion),
-                    mCachePrefix+"_loader_versions."+urlEncodedGameVersion,
+                    mCachePrefix + "_loader_versions." + urlEncodedGameVersion,
                     (input)->{ try {
                         return deserializeLoaderVersions(input);
                     }catch (JSONException e) {
@@ -74,23 +73,26 @@ public class FabriclikeUtils {
     public String getName() {
         return mName;
     }
+
     public String getIconName() {
         return mIconName;
     }
 
     private static FabricVersion[] deserializeLoaderVersions(String input) throws JSONException {
-        JSONArray jsonArray = new JSONArray(input);
+        final JSONArray jsonArray = new JSONArray(input);
         FabricVersion[] fabricVersions = new FabricVersion[jsonArray.length()];
         for(int i = 0; i < jsonArray.length(); i++) {
-            JSONObject jsonObject = jsonArray.getJSONObject(i).getJSONObject("loader");
+            final JSONObject jsonObject = jsonArray.getJSONObject(i).getJSONObject("loader");
             FabricVersion fabricVersion = new FabricVersion();
             fabricVersion.version = jsonObject.getString("version");
+
             //Quilt has a skill issue and does not say which versions are stable or not
             if(jsonObject.has("stable")) {
                 fabricVersion.stable = jsonObject.getBoolean("stable");
             } else {
                 fabricVersion.stable = !fabricVersion.version.contains("beta");
             }
+
             fabricVersions[i] = fabricVersion;
         }
         return fabricVersions;

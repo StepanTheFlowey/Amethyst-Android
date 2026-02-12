@@ -52,7 +52,7 @@ public class AWTInputEvent {
      * middle mouse button was pressed or released.
      */
     public static final int ALT_MASK            = 1 << 3;
-    
+
     /**
      * The AltGraph key modifier constant.
      */
@@ -823,8 +823,8 @@ public class AWTInputEvent {
      * @since 1.4
      */
     public static final int KEY_LOCATION_NUMPAD   = 4;
-    
-    
+
+
 // MOUSE
     /**
      * The first number in the range of ids used for mouse events.

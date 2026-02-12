@@ -1,11 +1,9 @@
 package net.kdt.pojavlaunch.value;
 
-
 import android.graphics.BitmapFactory;
 import android.util.Log;
 
 import net.kdt.pojavlaunch.*;
-import net.kdt.pojavlaunch.utils.FileUtils;
 
 import java.io.*;
 import com.google.gson.*;
@@ -14,8 +12,6 @@ import android.util.Base64;
 
 import androidx.annotation.Keep;
 import androidx.annotation.Nullable;
-
-import org.apache.commons.io.IOUtils;
 
 @SuppressWarnings("IOStreamConstructor")
 @Keep
@@ -31,12 +27,12 @@ public class MinecraftAccount {
     public long expiresAt;
     public String skinFaceBase64;
     private Bitmap mFaceCache;
-    
+
     void updateSkinFace(String uuid) {
         try {
-            File skinFile = getSkinFaceFile(username);
+            final File skinFile = getSkinFaceFile(username);
             Tools.downloadFile("https://mc-heads.net/head/" + uuid + "/100", skinFile.getAbsolutePath());
-            
+
             Log.i("SkinLoader", "Update skin face success");
         } catch (IOException e) {
             // Skin refresh limit, no internet connection, etc...
@@ -52,20 +48,20 @@ public class MinecraftAccount {
     public boolean isDemo(){
         return username.startsWith("Demo.");
     }
-    
+
     public void updateSkinFace() {
         updateSkinFace(profileId);
     }
-    
+
     public String save(String outPath) throws IOException {
         Tools.write(outPath, Tools.GLOBAL_GSON.toJson(this));
         return username;
     }
-    
+
     public String save() throws IOException {
         return save(Tools.DIR_ACCOUNT_NEW + "/" + username + ".json");
     }
-    
+
     public static MinecraftAccount parse(String content) throws JsonSyntaxException {
         return Tools.GLOBAL_GSON.fromJson(content, MinecraftAccount.class);
     }

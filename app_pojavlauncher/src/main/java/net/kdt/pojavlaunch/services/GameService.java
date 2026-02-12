@@ -18,10 +18,7 @@ import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
 import net.kdt.pojavlaunch.utils.NotificationUtils;
 
-import java.lang.ref.WeakReference;
-
 public class GameService extends Service {
-    private static final WeakReference<Service> sGameService = new WeakReference<>(null);
     private final LocalBinder mLocalBinder = new LocalBinder();
 
     @Override

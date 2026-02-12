@@ -405,7 +405,7 @@ public class SDLSurface extends SurfaceView implements SurfaceHolder.Callback,
                     SDLActivity.onNativeMouse(button, action, x, y, true);
                     return true;
             }
-        }      
+        }
 
         return false;
     }

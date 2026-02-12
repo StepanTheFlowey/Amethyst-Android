@@ -74,8 +74,6 @@ public class Architecture {
 		return false;
 	}
 
-
-
 	/**
 	 * Convert an architecture from a String to an int.
 	 * @param arch The architecture as a String
@@ -103,5 +101,4 @@ public class Architecture {
 		if(arch == ARCH_X86) return "x86";
 		return "UNSUPPORTED_ARCH";
 	}
-
 }

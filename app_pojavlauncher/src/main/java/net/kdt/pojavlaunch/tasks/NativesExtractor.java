@@ -21,7 +21,7 @@ public class NativesExtractor {
 
     public NativesExtractor(File mDestinationDir) {
         this.mDestinationDir = mDestinationDir;
-        this.mLibraryLocation = "jni/"+getAarArchitectureName()+"/";
+        this.mLibraryLocation = "jni/" + getAarArchitectureName() + "/";
     }
 
     /**
@@ -101,9 +101,7 @@ public class NativesExtractor {
         org.apache.commons.io.FileUtils.copyInputStreamToFile(sourceStream, entryDestination);
     }
 
-
     private static class NonCloseableInputStream extends FilterInputStream {
-
         protected NonCloseableInputStream(InputStream in) {
             super(in);
         }

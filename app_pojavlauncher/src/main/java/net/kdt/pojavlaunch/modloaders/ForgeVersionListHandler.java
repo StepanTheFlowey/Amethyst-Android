@@ -1,15 +1,16 @@
 package net.kdt.pojavlaunch.modloaders;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.xml.sax.Attributes;
 import org.xml.sax.SAXException;
 import org.xml.sax.helpers.DefaultHandler;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class ForgeVersionListHandler extends DefaultHandler {
     private List<String> mForgeVersions;
     private StringBuilder mCurrentVersion = null;
+
     @Override
     public void startDocument() throws SAXException {
         mForgeVersions = new ArrayList<>();
@@ -33,6 +34,7 @@ public class ForgeVersionListHandler extends DefaultHandler {
             mCurrentVersion = null;
         }
     }
+
     public List<String> getVersions() {
         return mForgeVersions;
     }

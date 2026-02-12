@@ -67,4 +67,3 @@ public class SDLDummyEdit extends View implements View.OnKeyListener
         return ic;
     }
 }
-

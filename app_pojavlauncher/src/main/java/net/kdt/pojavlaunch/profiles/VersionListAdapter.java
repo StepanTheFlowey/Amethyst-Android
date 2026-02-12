@@ -18,7 +18,7 @@ import java.util.Arrays;
 import java.util.List;
 
 public class VersionListAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
-    
+
     private final LayoutInflater mLayoutInflater;
 
     private final String[] mGroups;

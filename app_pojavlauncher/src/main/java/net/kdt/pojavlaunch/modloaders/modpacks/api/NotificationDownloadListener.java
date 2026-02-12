@@ -15,7 +15,7 @@ import java.io.File;
 public class NotificationDownloadListener implements ModloaderDownloadListener {
     private final Context mContext;
     private final ModLoader mModLoader;
-    
+
     public NotificationDownloadListener(Context context, ModLoader modLoader) {
         mModLoader = modLoader;
         mContext = context.getApplicationContext();

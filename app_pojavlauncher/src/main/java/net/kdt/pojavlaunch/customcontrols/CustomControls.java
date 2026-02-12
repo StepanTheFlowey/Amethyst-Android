@@ -26,7 +26,7 @@ public class CustomControls {
 		this.mJoystickDataList = mJoystickDataList;
 		this.scaledAt = 100f;
 	}
-	
+
 	// Generate default control
 	// Here for historical reasons
 	// Just admire it idk
@@ -50,7 +50,7 @@ public class CustomControls {
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_right, new int[]{LwjglGlfwKeycode.GLFW_KEY_D}, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin} * 2 - ${height}", true));
 
 		this.mControlDataList.add(new ControlData(ctx, R.string.control_inventory, new int[]{LwjglGlfwKeycode.GLFW_KEY_E}, "${margin} * 3 + ${width} * 2", "${bottom} - ${margin}", true));
-        
+
         ControlData shiftData = new ControlData(ctx, R.string.control_shift, new int[]{LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT}, "${margin} * 2 + ${width}", "${screen_height} - ${margin} * 2 - ${height} * 2", true);
 		shiftData.isToggle = true;
 		this.mControlDataList.add(shiftData);
@@ -60,7 +60,7 @@ public class CustomControls {
 		version = 8;
 	}
 
-	
+
 	public void save(String path) throws IOException {
 		//Current version is the V3.2 so the version as to be marked as 8 !
 		version = 8;

@@ -33,7 +33,7 @@ public class ReadFromDiskTask implements Runnable {
             IconCacheJanitor.waitForJanitorToFinish();
             Bitmap bitmap = BitmapFactory.decodeFile(cacheFile.getAbsolutePath());
             if(bitmap != null) {
-                Tools.runOnUiThread(()->{
+                Tools.runOnUiThread(() -> {
                     if(taskCancelled()) {
                         bitmap.recycle(); // do not leak the bitmap if the task got cancelled right at the end
                         return;
@@ -43,11 +43,11 @@ public class ReadFromDiskTask implements Runnable {
                 return;
             }
         }
-        if(iconCache.cachePath.canWrite() &&
-                !taskCancelled()) { // don't run the download task if the task got canceled
+        if(iconCache.cachePath.canWrite() && !taskCancelled()) { // don't run the download task if the task got canceled
             runDownloadTask();
         }
     }
+
     @SuppressWarnings("BooleanMethodAlwaysInverted")
     public boolean taskCancelled() {
         return iconCache.checkCancelled(imageReceiver);

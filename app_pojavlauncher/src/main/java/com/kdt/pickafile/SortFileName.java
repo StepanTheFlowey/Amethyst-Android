@@ -10,4 +10,3 @@ public class SortFileName implements Comparator<File>
 		return f1.getName().compareToIgnoreCase(f2.getName());
     }
 }
-

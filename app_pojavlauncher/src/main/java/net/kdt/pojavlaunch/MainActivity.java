@@ -416,7 +416,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
        } catch (RuntimeException ignored){
             assetVersion = "legacy";
        } // If this fails.. oh well.
-        
+
         // Autoselect renderer
         if (Tools.LOCAL_RENDERER == null) {
             // Preferably we could detect when it is modded and swap to zink however that would also

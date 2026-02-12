@@ -23,7 +23,8 @@ public class SpeedCalculator {
         mSum += speed;
         mPreviousInputs[mIndex] = speed;
         if(++mIndex == mPreviousInputs.length) mIndex = 0;
-        double dLength = mPreviousInputs.length;
+
+        final double dLength = mPreviousInputs.length;
         return (mSum + (dLength / 2d)) / dLength;
     }
 
@@ -33,12 +34,13 @@ public class SpeedCalculator {
      * @return the current download speed in bytes per second
      */
     public double feed(long bytes) {
-        long millis = System.currentTimeMillis();
-        long deltaBytes = bytes - mLastBytes;
-        long deltaMillis = millis - mLastMillis;
+        final long millis = System.currentTimeMillis();
+        final long deltaBytes = bytes - mLastBytes;
+        final long deltaMillis = millis - mLastMillis;
         mLastBytes = bytes;
         mLastMillis = millis;
-        double speed = (double)deltaBytes / ((double)deltaMillis / 1000d);
+
+        final double speed = (double)deltaBytes / ((double)deltaMillis / 1000d);
         return addToAverage(speed);
     }
 }

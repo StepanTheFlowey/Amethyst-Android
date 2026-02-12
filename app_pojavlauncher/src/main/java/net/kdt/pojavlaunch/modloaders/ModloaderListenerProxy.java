@@ -7,6 +7,7 @@ public class ModloaderListenerProxy implements ModloaderDownloadListener {
     public static final int PROXY_RESULT_FINISHED = 0;
     public static final int PROXY_RESULT_NOT_AVAILABLE = 1;
     public static final int PROXY_RESULT_ERROR = 2;
+
     private ModloaderDownloadListener mDestinationListener;
     private Object mProxyResultObject;
     private int mProxyResult = PROXY_RESULT_NONE;
@@ -55,6 +56,7 @@ public class ModloaderListenerProxy implements ModloaderDownloadListener {
         }
         mDestinationListener = listener;
     }
+
     public synchronized void detachListener() {
         mDestinationListener = null;
     }

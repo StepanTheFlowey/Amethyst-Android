@@ -26,8 +26,10 @@ public class IconCacheJanitor implements Runnable{
     public void run() {
         File modIconCachePath = ModIconCache.getImageCachePath();
         if(!modIconCachePath.isDirectory() || !modIconCachePath.canRead()) return;
+
         File[] modIconFiles = modIconCachePath.listFiles();
         if(modIconFiles == null) return;
+
         ArrayList<File> writableModIconFiles = new ArrayList<>(modIconFiles.length);
         long directoryFileSize = 0;
         for(File modIconFile : modIconFiles) {
@@ -52,7 +54,7 @@ public class IconCacheJanitor implements Runnable{
                 filesCleanedUp++;
             }
         }
-        Log.i("IconCacheJanitor", "Cleaned up "+filesCleanedUp+ " files");
+        Log.i("IconCacheJanitor", "Cleaned up " + filesCleanedUp + " files");
         synchronized (IconCacheJanitor.class) {
             sJanitorFuture = null;
             sJanitorRan = true;

@@ -279,19 +279,16 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     private void performLogin(MinecraftAccount minecraftAccount){
         // Logging in when there's no internet is useless. This should really be turned into a network callback though.
-        if(!Tools.isOnline(getContext())){
-            return;
-        }
+        if(!Tools.isOnline(getContext())) return;
         if(minecraftAccount.isLocal()) return;
 
         mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
-        if(minecraftAccount.isMicrosoft){
-            if(System.currentTimeMillis() > minecraftAccount.expiresAt){
-                // Perform login only if needed
-                new MicrosoftBackgroundLogin(true, minecraftAccount.msaRefreshToken)
-                        .performLogin(mProgressListener, mDoneListener, mErrorListener);
-            }
-            return;
+        if(minecraftAccount.isMicrosoft) return;
+
+        if(System.currentTimeMillis() > minecraftAccount.expiresAt){
+            // Perform login only if needed
+            new MicrosoftBackgroundLogin(true, minecraftAccount.msaRefreshToken)
+                    .performLogin(mProgressListener, mDoneListener, mErrorListener);
         }
     }
 

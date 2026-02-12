@@ -12,6 +12,7 @@ class DownloadImageTask implements Runnable {
     private static final float BITMAP_FINAL_DIMENSION = 256f;
     private final ReadFromDiskTask mParentTask;
     private int mRetryCount;
+
     DownloadImageTask(ReadFromDiskTask parentTask) {
         this.mParentTask = parentTask;
         this.mRetryCount = 0;

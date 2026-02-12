@@ -85,4 +85,3 @@ public class JMinecraftVersionList {
         public long totalSize;
     }
 }
-

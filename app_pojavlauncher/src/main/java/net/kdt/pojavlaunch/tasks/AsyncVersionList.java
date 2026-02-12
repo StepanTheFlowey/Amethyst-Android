@@ -56,7 +56,6 @@ public class AsyncVersionList {
         });
     }
 
-
     @SuppressWarnings("SameParameterValue")
     private JMinecraftVersionList downloadVersionList(String mirror){
         JMinecraftVersionList list = null;
@@ -71,9 +70,6 @@ public class AsyncVersionList {
             FileOutputStream fos = new FileOutputStream(Tools.DIR_CACHE + "/version_list.json");
             fos.write(jsonString.getBytes());
             fos.close();
-
-
-
         }catch (IOException e){
             Log.e("AsyncVersionList", e.toString());
         }
@@ -84,5 +80,4 @@ public class AsyncVersionList {
     public interface VersionDoneListener{
         void onVersionDone(JMinecraftVersionList versions);
     }
-
 }

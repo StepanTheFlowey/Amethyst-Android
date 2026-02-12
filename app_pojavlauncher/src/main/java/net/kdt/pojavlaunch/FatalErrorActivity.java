@@ -14,20 +14,21 @@ public class FatalErrorActivity extends AppCompatActivity {
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
 		super.onCreate(savedInstanceState);
-		
+
 		Bundle extras = getIntent().getExtras();
 		if(extras == null) {
 			finish();
 			return;
 		}
-		boolean storageAllow = extras.getBoolean("storageAllow", false);
+
+		final boolean storageAllow = extras.getBoolean("storageAllow", false);
 		Throwable throwable = (Throwable) extras.getSerializable("throwable");
 		final String stackTrace = throwable != null ? Tools.printToString(throwable) : "<null>";
 		String strSavePath = extras.getString("savePath");
 		String errHeader = storageAllow ?
 			"Crash stack trace saved to " + strSavePath + "." :
 			"Storage permission is required to save crash stack trace!";
-		
+
 		new AlertDialog.Builder(this)
 			.setTitle(R.string.error_fatal)
 			.setMessage(errHeader + "\n\n" + stackTrace)

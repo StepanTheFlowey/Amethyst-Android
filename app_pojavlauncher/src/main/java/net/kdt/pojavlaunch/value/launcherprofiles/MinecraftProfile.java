@@ -4,9 +4,8 @@ import androidx.annotation.Keep;
 
 @Keep
 public class MinecraftProfile {
-
 	public static String LATEST_RELEASE = "latest-release";
-	public static String LATEST_SNAPSHOT= "latest-snapshot";
+	public static String LATEST_SNAPSHOT = "latest-snapshot";
 
 	public String name;
 	public String type;
@@ -23,7 +22,6 @@ public class MinecraftProfile {
 	public String controlFile;
 	public MinecraftResolution[] resolution;
 
-
 	public static MinecraftProfile createTemplate(){
 		MinecraftProfile TEMPLATE = new MinecraftProfile();
 		TEMPLATE.name = "";
@@ -33,7 +31,7 @@ public class MinecraftProfile {
 
 	public static MinecraftProfile getDefaultProfile(){
 		MinecraftProfile defaultProfile = new MinecraftProfile();
-		defaultProfile.name = "Default";
+		defaultProfile.name = "1.7.10";
 		defaultProfile.lastVersionId = "1.7.10";
 		return defaultProfile;
 	}

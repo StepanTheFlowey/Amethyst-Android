@@ -145,14 +145,14 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
             mButtonHolder = viewHolder;
             if(mButtonHolder != null) mButtonHolder.setPressed(mIsDown);
         }
-        
+
         @Override
         protected void onDownStateChanged(boolean isDown) {
             if(mButtonHolder == null) return;
             mButtonHolder.setPressed(isDown);
         }
     }
-    
+
     public class ViewHolder extends RecyclerView.ViewHolder implements AdapterView.OnItemSelectedListener, View.OnClickListener, CompoundButton.OnCheckedChangeListener {
         private static final int COLOR_ACTIVE_BUTTON = 0x2000FF00;
         private final Context mContext;
