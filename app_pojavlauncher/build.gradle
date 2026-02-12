@@ -82,7 +82,7 @@ configurations {
 android {
     namespace 'net.kdt.pojavlaunch'
 
-    compileSdk = 34
+    compileSdk = 36
 
     lintOptions {
         abortOnError false
