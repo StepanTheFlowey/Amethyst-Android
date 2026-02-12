@@ -115,6 +115,7 @@ android {
             ndkBuild {
                 // Fix for Windows command line length limit
                 arguments "APP_SHORT_COMMANDS=true"
+                arguments "-j8"
             }
         }
     }
