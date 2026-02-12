@@ -111,6 +111,7 @@ android {
         versionName getVersionName()
         multiDexEnabled true //important
         resValue 'string', 'curseforge_api_key', getCFApiKey()
+        ndkVersion = "27.3.13750724"
         externalNativeBuild {
             ndkBuild {
                 // Fix for Windows command line length limit
@@ -157,8 +158,6 @@ android {
             matchingFallbacks = [ 'release' ]
         }
     }
-
-    ndkVersion = "25.2.9519653"
 
     externalNativeBuild {
         ndkBuild {
