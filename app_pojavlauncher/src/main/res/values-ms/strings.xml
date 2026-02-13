@@ -306,9 +306,9 @@
     <string name="notif_error_occured_desc">Klik untuk melihat butiran lanjut</string>
     <string name="fabric_dl_only_stable">Tunjukkan hanya versi stabil</string>
     <string name="dl_tampered_manifest_title">Amaran pengesahan fail</string>
-    <string name="dl_tampered_manifest"><![CDATA[Manifes versi permainan pada mirror itu tidak sepadan dengan manifes versi Mojang yang rasmi, yang bermaksud ia mungkin telah diganggu.<br/> 
-        <b>Ini tidak selamat. Maklumat peribadi anda mungkin berisiko jika anda meneruskan.</b><br/> 
-        Jika anda masih mahu menggunakan mirror ini, tekan \"Matikan semakan manifes\" dan mulakan muat turun sekali lagi.<br/> 
+    <string name="dl_tampered_manifest"><![CDATA[Manifes versi permainan pada mirror itu tidak sepadan dengan manifes versi Mojang yang rasmi, yang bermaksud ia mungkin telah diganggu.<br/>
+        <b>Ini tidak selamat. Maklumat peribadi anda mungkin berisiko jika anda meneruskan.</b><br/>
+        Jika anda masih mahu menggunakan mirror ini, tekan \"Matikan semakan manifes\" dan mulakan muat turun sekali lagi.<br/>
         Jika anda ingin menggunakan sumber muat turun rasmi, tekan \"Tukar ke laman rasmi\" dan mulakan semula muat turun.<br/>]]></string>
     <string name="dl_turn_off_manifest_checks">Matikan semakan manifes</string>
     <string name="dl_switch_to_official_site">Beralih ke laman rasmi</string>

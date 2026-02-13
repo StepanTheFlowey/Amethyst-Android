@@ -150,4 +150,3 @@
             app:layout_constraintTop_toBottomOf="@+id/controller_mapper_key_spinner3" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </LinearLayout>
-

@@ -177,7 +177,7 @@
     <string name="global_delete">Διαγραφή</string>
     <string name="pedit_java_runtime">Έκδοση Java</string>
     <string name="pedit_renderer">Απόδοση</string>
-    <string name="arc_capes_desc">Ενεργοποιεί κάπες από τη Cosmetica (προηγουμένως Arc). Για περισσότερες πληροφορίες, παρακαλώ επισκεφθείτε την ιστοσελίδα https://cosmetica.cc. Απαιτείται 
+    <string name="arc_capes_desc">Ενεργοποιεί κάπες από τη Cosmetica (προηγουμένως Arc). Για περισσότερες πληροφορίες, παρακαλώ επισκεφθείτε την ιστοσελίδα https://cosmetica.cc. Απαιτείται
 το OptiFine.</string>
     <string name="notif_channel_name">Γενικά</string>
     <string name="lazy_service_default_title">Υπηρεσία Προσκήνιου Amethyst</string>

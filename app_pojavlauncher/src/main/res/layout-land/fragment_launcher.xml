@@ -150,4 +150,3 @@
         app:layout_constraintTop_toTopOf="@+id/mc_version_spinner" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
-

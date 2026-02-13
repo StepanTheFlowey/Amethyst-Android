@@ -3,4 +3,3 @@
 	<item android:state_pressed="true" android:drawable="@color/control_button_pressed_color" />
 	<item android:drawable="@color/control_button_color" />
 </selector>
-

@@ -81,4 +81,3 @@
 		android:id="@+id/main_navigation_view"/>
 
 </androidx.drawerlayout.widget.DrawerLayout>
-
