@@ -121,6 +121,15 @@ android {
         }
     }
 
+	splits {
+		abi {
+			enable true
+
+			reset()
+			include "armeabi-v7a", "arm64-v8a", "x86", "x86_64"
+		}
+	}
+
     buildTypes {
         debug {
             applicationIdSuffix '.debug'
