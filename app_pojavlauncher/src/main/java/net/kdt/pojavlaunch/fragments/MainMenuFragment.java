@@ -69,7 +69,7 @@ public class MainMenuFragment extends Fragment {
                 AlertDialog sodiumWarningDialog = new AlertDialog.Builder(requireContext())
                         .setTitle(R.string.sodium_warning_title)
                         .setMessage(R.string.sodium_warning_message)
-                        .setNeutralButton(R.string.delete_sodium, (d,w)-> {
+                        .setNeutralButton(R.string.delete_sodium, (d, w) -> {
                             Tools.deleteSodiumMods();
                             ExtraCore.setValue(ExtraConstants.LAUNCH_GAME, true);
                         })
@@ -80,7 +80,7 @@ public class MainMenuFragment extends Fragment {
 
         mShareLogsButton.setOnClickListener((v) -> shareLog(requireContext()));
 
-        mOpenDirectoryButton.setOnClickListener((v)-> {
+        mOpenDirectoryButton.setOnClickListener((v) -> {
             openPath(v.getContext(), getCurrentProfileDirectory(), false);
         });
 

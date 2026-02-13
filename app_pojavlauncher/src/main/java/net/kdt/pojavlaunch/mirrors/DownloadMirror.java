@@ -20,9 +20,9 @@ public class DownloadMirror {
 
     private static final String URL_PROTOCOL_TAIL = "://";
     private static final String[] MIRROR_BMCLAPI = {
-            "https://bmclapi2.bangbang93.com/maven",
-            "https://bmclapi2.bangbang93.com",
-            "https://bmclapi2.bangbang93.com/assets"
+        "https://bmclapi2.bangbang93.com/maven",
+        "https://bmclapi2.bangbang93.com",
+        "https://bmclapi2.bangbang93.com/assets"
     };
 
     /**
@@ -38,10 +38,9 @@ public class DownloadMirror {
     public static void downloadFileMirrored(int downloadClass, String urlInput, File outputFile,
                                             @Nullable byte[] buffer, Tools.DownloaderFeedback monitor) throws IOException {
         try {
-            DownloadUtils.downloadFileMonitored(getMirrorMapping(downloadClass, urlInput),
-                    outputFile, buffer, monitor);
+            DownloadUtils.downloadFileMonitored(getMirrorMapping(downloadClass, urlInput), outputFile, buffer, monitor);
             return;
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Log.w("DownloadMirror", "Cannot find the file on the mirror", e);
             Log.i("DownloadMirror", "Falling back to default source");
         }
@@ -103,12 +102,12 @@ public class DownloadMirror {
         String resultString = null;
         try {
             resultString = DownloadUtils.downloadString(getMirrorMapping(downloadClass,urlInput));
-        }catch (FileNotFoundException e) {
+        } catch (FileNotFoundException e) {
             Log.w("DownloadMirror", "Failed to download string from mirror", e);
         }
         if(Tools.isValidString(resultString)) {
             return resultString;
-        }else {
+        } else {
             Log.w("DownloadMirror", "Downloaded string is invalid, falling back to default");
         }
         return DownloadUtils.downloadString(urlInput);

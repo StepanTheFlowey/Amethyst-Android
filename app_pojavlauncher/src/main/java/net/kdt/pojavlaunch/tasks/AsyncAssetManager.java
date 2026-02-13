@@ -1,6 +1,5 @@
 package net.kdt.pojavlaunch.tasks;
 
-
 import static net.kdt.pojavlaunch.Architecture.archAsString;
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
@@ -21,8 +20,7 @@ import java.io.IOException;
 import java.io.InputStream;
 
 public class AsyncAssetManager {
-
-    private AsyncAssetManager(){}
+    private AsyncAssetManager() {}
 
     /**
      * Attempt to install the java 8 runtime, if necessary

@@ -43,7 +43,7 @@ public class IconCacheJanitor implements Runnable{
             return;
         }
         Arrays.sort(modIconFiles,
-                (x,y)-> Long.compare(y.lastModified(), x.lastModified())
+                (x,y) -> Long.compare(y.lastModified(), x.lastModified())
         );
         int filesCleanedUp = 0;
         for(File modFile : writableModIconFiles) {

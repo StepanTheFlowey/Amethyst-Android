@@ -8,13 +8,12 @@ import android.widget.ExpandableListAdapter;
 import android.widget.TextView;
 
 public class OptiFineVersionListAdapter extends BaseExpandableListAdapter implements ExpandableListAdapter {
-
     private final OptiFineUtils.OptiFineVersions mOptiFineVersions;
     private final LayoutInflater mLayoutInflater;
 
-    public OptiFineVersionListAdapter(OptiFineUtils.OptiFineVersions optiFineVersions, LayoutInflater mLayoutInflater) {
+    public OptiFineVersionListAdapter(OptiFineUtils.OptiFineVersions optiFineVersions, LayoutInflater layoutInflater) {
         mOptiFineVersions = optiFineVersions;
-        this.mLayoutInflater = mLayoutInflater;
+        mLayoutInflater = layoutInflater;
     }
 
     @Override

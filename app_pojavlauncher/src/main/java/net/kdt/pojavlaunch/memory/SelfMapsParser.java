@@ -20,9 +20,9 @@ public class SelfMapsParser {
     }
 
     private boolean forEachLine(String line) throws NumberFormatException {
-        int firstSpaceIndex = line.indexOf(' ');
-        String addresses = line.substring(0, firstSpaceIndex);
-        String[] addressArray = addresses.split("-");
+        final int firstSpaceIndex = line.indexOf(' ');
+        final String addresses = line.substring(0, firstSpaceIndex);
+        final String[] addressArray = addresses.split("-");
         if(addressArray.length < 2) return true;
         long begin = Long.parseLong(addressArray[0], 16);
         long end = Long.parseLong(addressArray[1], 16);

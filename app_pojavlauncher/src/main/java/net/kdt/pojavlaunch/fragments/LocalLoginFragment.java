@@ -39,19 +39,15 @@ public class LocalLoginFragment extends Fragment {
                 return;
             }
 
-            ExtraCore.setValue(ExtraConstants.MOJANG_LOGIN_TODO, new String[]{
-                    mUsernameEditText.getText().toString(), "" });
-
+            ExtraCore.setValue(ExtraConstants.MOJANG_LOGIN_TODO, new String(mUsernameEditText.getText().toString()));
             Tools.swapFragment(requireActivity(), MainMenuFragment.class, MainMenuFragment.TAG, null);
         });
     }
 
-
     /** @return Whether the mail (and password) text are eligible to make an auth request  */
     private boolean checkEditText(){
-        String text = mUsernameEditText.getText().toString();
-
-        Matcher matcher = mUsernameValidationPattern.matcher(text);
+        final String text = mUsernameEditText.getText().toString();
+        final Matcher matcher = mUsernameValidationPattern.matcher(text);
         return !(text.isEmpty()
                 || text.length() < 3
                 || text.length() > 16

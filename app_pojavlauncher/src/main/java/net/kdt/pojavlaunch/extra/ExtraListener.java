@@ -7,7 +7,6 @@ import androidx.annotation.NonNull;
  * An ExtraListener can listen to a virtually unlimited amount of values
  */
 public interface ExtraListener<T> {
-
     /**
      * Called upon a new value being set
      * @param key The name of the value
@@ -16,5 +15,4 @@ public interface ExtraListener<T> {
      */
     @SuppressWarnings("SameReturnValue")
     boolean onValueSet(String key, @NonNull T value);
-
 }

@@ -19,9 +19,9 @@ public class NativesExtractor {
     private final File mDestinationDir;
     private final String mLibraryLocation;
 
-    public NativesExtractor(File mDestinationDir) {
-        this.mDestinationDir = mDestinationDir;
-        this.mLibraryLocation = "jni/" + getAarArchitectureName() + "/";
+    public NativesExtractor(File destinationDir) {
+        mDestinationDir = destinationDir;
+        mLibraryLocation = "jni/" + getAarArchitectureName() + "/";
     }
 
     /**

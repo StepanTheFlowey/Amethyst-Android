@@ -154,7 +154,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
             assert mApplyButton != null;
 
             // Setup the expendable list behavior
-            mSelectVersionButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), true, (id, snapshot)-> mSelectedVersion.setText(id)));
+            mSelectVersionButton.setOnClickListener(v -> VersionSelectorDialog.open(v.getContext(), true, (id, snapshot) -> mSelectedVersion.setText(id)));
 
             // Apply visually all the current settings
             mSelectedVersion.setText(mSearchFilters.mcVersion);

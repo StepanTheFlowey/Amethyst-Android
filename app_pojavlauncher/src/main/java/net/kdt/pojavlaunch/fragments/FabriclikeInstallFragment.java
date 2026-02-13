@@ -153,7 +153,7 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
 
     @Override
     public void onDownloadError(Exception e) {
-        Tools.runOnUiThread(()-> {
+        Tools.runOnUiThread(() -> {
             Context context = requireContext();
             getListenerProxy().detachListener();
             setListenerProxy(null);

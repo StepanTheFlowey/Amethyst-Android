@@ -14,8 +14,6 @@ import androidx.annotation.Nullable;
 
 import net.kdt.pojavlaunch.Tools;
 
-
-
 public class HueView extends View {
     private final Paint blackPaint = new Paint();
     private Bitmap mGamma;

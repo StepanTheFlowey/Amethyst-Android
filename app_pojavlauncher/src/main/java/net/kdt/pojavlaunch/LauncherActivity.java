@@ -48,7 +48,6 @@ import net.kdt.pojavlaunch.services.ProgressServiceKeeper;
 import net.kdt.pojavlaunch.tasks.AsyncMinecraftDownloader;
 import net.kdt.pojavlaunch.tasks.AsyncVersionList;
 import net.kdt.pojavlaunch.tasks.MinecraftDownloader;
-import net.kdt.pojavlaunch.utils.DateUtils;
 import net.kdt.pojavlaunch.utils.NotificationUtils;
 import net.kdt.pojavlaunch.value.launcherprofiles.LauncherProfiles;
 import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
@@ -56,7 +55,6 @@ import net.kdt.pojavlaunch.value.launcherprofiles.MinecraftProfile;
 import java.io.IOException;
 import java.lang.ref.WeakReference;
 import java.security.NoSuchAlgorithmException;
-import java.text.ParseException;
 
 public class LauncherActivity extends BaseActivity {
     public static final String SETTING_FRAGMENT_TAG = "SETTINGS_FRAGMENT";
@@ -237,7 +235,6 @@ public class LauncherActivity extends BaseActivity {
         ProgressKeeper.addTaskCountListener(mProgressLayout);
         ExtraCore.addExtraListener(ExtraConstants.BACK_PREFERENCE, mBackPreferenceListener);
         ExtraCore.addExtraListener(ExtraConstants.SELECT_AUTH_METHOD, mSelectAuthMethod);
-
         ExtraCore.addExtraListener(ExtraConstants.LAUNCH_GAME, mLaunchGameListener);
 
         new AsyncVersionList().getVersionList(versions -> ExtraCore.setValue(ExtraConstants.RELEASE_TABLE, versions), false);
@@ -346,7 +343,7 @@ public class LauncherActivity extends BaseActivity {
                 .setTitle(R.string.notification_permission_dialog_title)
                 .setMessage(R.string.notification_permission_dialog_text)
                 .setPositiveButton(android.R.string.ok, (d, w) -> askForNotificationPermission(null))
-                .setNegativeButton(android.R.string.cancel, (d, w)-> handleNoNotificationPermission())
+                .setNegativeButton(android.R.string.cancel, (d, w) -> handleNoNotificationPermission())
                 .show();
     }
 

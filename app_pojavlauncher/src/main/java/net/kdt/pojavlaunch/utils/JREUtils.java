@@ -345,7 +345,7 @@ public class JREUtils {
         if (exitCode != 0) {
             LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder)->
                     builder.setMessage(activity.getString(R.string.mcn_exit_title, exitCode))
-                    .setPositiveButton(R.string.main_share_logs, (dialogInterface, which)-> shareLog(activity));
+                    .setPositiveButton(R.string.main_share_logs, (dialogInterface, which) -> shareLog(activity));
 
             LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator);
         }

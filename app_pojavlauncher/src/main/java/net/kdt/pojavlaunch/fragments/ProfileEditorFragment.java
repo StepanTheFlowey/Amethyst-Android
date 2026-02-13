@@ -154,7 +154,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     }
 
     private View.OnClickListener getVersionSelectListener() {
-        return v -> VersionSelectorDialog.open(v.getContext(), false, (id, snapshot)-> {
+        return v -> VersionSelectorDialog.open(v.getContext(), false, (id, snapshot) -> {
             mTempProfile.lastVersionId = id;
             mDefaultVersion.setText(id);
         });

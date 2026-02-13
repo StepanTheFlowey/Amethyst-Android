@@ -29,8 +29,7 @@ public class ForgeVersionListHandler extends DefaultHandler {
     @Override
     public void endElement(String uri, String localName, String qName) throws SAXException {
         if (qName.equals("version")) {
-            String version = mCurrentVersion.toString();
-            mForgeVersions.add(version);
+            mForgeVersions.add(mCurrentVersion.toString());
             mCurrentVersion = null;
         }
     }

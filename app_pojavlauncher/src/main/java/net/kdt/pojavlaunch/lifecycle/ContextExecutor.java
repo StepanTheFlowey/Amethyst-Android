@@ -11,7 +11,6 @@ public class ContextExecutor {
     private static WeakReference<Application> sApplication;
     private static WeakReference<Activity> sActivity;
 
-
     /**
      * Schedules a ContextExecutorTask to be executed. For more info on tasks, please read
      * ContextExecutorTask.java
@@ -67,6 +66,4 @@ public class ContextExecutor {
         if(sApplication != null)
             sApplication.clear();
     }
-
-
 }

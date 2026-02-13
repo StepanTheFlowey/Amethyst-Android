@@ -79,7 +79,7 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
                 mProgressBar.setVisibility(View.GONE);
             });
         }catch (IOException e) {
-            Tools.runOnUiThread(()-> {
+            Tools.runOnUiThread(() -> {
                 if (getContext() != null) {
                     Tools.showError(getContext(), e);
                     mRetryView.setVisibility(View.VISIBLE);

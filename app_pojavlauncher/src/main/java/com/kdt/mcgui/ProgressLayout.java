@@ -139,7 +139,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
         }
         @Override
         public void onProgressStarted() {
-            post(()-> {
+            post(() -> {
                 Log.i("ProgressLayout", "onProgressStarted");
                 mLinearLayout.addView(textView, params);
             });
@@ -147,7 +147,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
 
         @Override
         public void onProgressUpdated(int progress, int resid, Object... va) {
-            post(()-> {
+            post(() -> {
                 textView.setProgress(progress);
                 if(resid != -1) textView.setText(getContext().getString(resid, va));
                 else if(va.length > 0 && va[0] != null)textView.setText((String)va[0]);
@@ -157,7 +157,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
 
         @Override
         public void onProgressEnded() {
-            post(()-> {
+            post(() -> {
                 mLinearLayout.removeView(textView);
             });
         }
