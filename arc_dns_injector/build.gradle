@@ -1,20 +1,18 @@
 plugins {
-    id 'java-library'
+	id 'java-library'
 }
 
 java {
-    sourceCompatibility = JavaVersion.VERSION_1_8
-    targetCompatibility = JavaVersion.VERSION_1_8
+	sourceCompatibility = JavaVersion.VERSION_1_8
+	targetCompatibility = JavaVersion.VERSION_1_8
 }
 
 jar {
-    manifest {
-        attributes("Manifest-Version": "1.0",
-                "PreMain-Class": "git.artdeell.arcdns.ArcDNSInjectorAgent")
-    }
-    if (gitUsed()){
-      File versionFile = file("../app_pojavlauncher/src/main/assets/components/arc_dns_injector/version")
-      versionFile.write(getGitHash(project.projectDir))
-    }
-    destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/components/arc_dns_injector/"))
+	manifest {
+		attributes("Manifest-Version": "1.0", "PreMain-Class": "git.artdeell.arcdns.ArcDNSInjectorAgent")
+	}
+	if (gitUsed()) {
+		file("../app_pojavlauncher/src/main/assets/components/arc_dns_injector/version").write(getGitHash(project.projectDir))
+	}
+	destinationDirectory.set(file("../app_pojavlauncher/src/main/assets/components/arc_dns_injector/"))
 }
