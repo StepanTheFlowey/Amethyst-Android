@@ -1,14 +1,14 @@
 package org.angelauramc.lwjgl2_methods_injector;
 
+import java.lang.instrument.ClassFileTransformer;
+import java.lang.instrument.Instrumentation;
+import java.security.ProtectionDomain;
+
 import org.objectweb.asm.ClassReader;
 import org.objectweb.asm.ClassVisitor;
 import org.objectweb.asm.ClassWriter;
 import org.objectweb.asm.MethodVisitor;
 import org.objectweb.asm.Opcodes;
-
-import java.lang.instrument.ClassFileTransformer;
-import java.lang.instrument.Instrumentation;
-import java.security.ProtectionDomain;
 
 /**
  * Used to forcibly run asm 5.0.4 without any pesky detection scheme stopping us.
@@ -30,9 +30,9 @@ public class ASM5OverrideInjector extends ClassVisitor {
                     try { // Minecraft makes it ugly if we use println
                         System.out.print("Amethyst-Android: Modifying ASM classes for ASM4 comaptibility...\n");
                     } catch (Exception ignored) {}
-                    ClassReader cr = new ClassReader(b);
-                    ClassWriter cw = new ClassWriter(cr, 0);
-                    ClassVisitor cv = new disableApiVersionDetection(cw);
+                    final ClassReader cr = new ClassReader(b);
+                    final ClassWriter cw = new ClassWriter(cr, 0);
+                    final ClassVisitor cv = new disableApiVersionDetection(cw);
                     cr.accept(cv, 0);
                     return cw.toByteArray();
                 } else return null;
@@ -48,6 +48,7 @@ public class ASM5OverrideInjector extends ClassVisitor {
         public disableApiVersionDetection(ClassVisitor cv) {
             super(Opcodes.ASM4, cv);
         }
+
         @Override
         public MethodVisitor visitMethod(int access, String name, String desc, String signature, String[] exceptions) {
             MethodVisitor mv = super.visitMethod(access, name, desc, signature, exceptions);
@@ -56,6 +57,7 @@ public class ASM5OverrideInjector extends ClassVisitor {
             }
             return mv;
         }
+
         private MethodVisitor getMethodVisitor(MethodVisitor mv) {
             return new MethodVisitor(this.api, mv) {
                 @Override
@@ -66,6 +68,7 @@ public class ASM5OverrideInjector extends ClassVisitor {
                         super.visitTypeInsn(opcode, type);
                     }
                 }
+
                 @Override
                 public void visitMethodInsn(int opcode, String owner, String name, String desc, boolean itf) {
                     if (opcode == Opcodes.INVOKESPECIAL && "java/lang/IllegalArgumentException".equals(owner) && "<init>".equals(name)) {
@@ -74,6 +77,7 @@ public class ASM5OverrideInjector extends ClassVisitor {
                         super.visitMethodInsn(opcode, owner, name, desc, itf);
                     }
                 }
+
                 @Override
                 public void visitInsn(int opcode) {
                     if (opcode == Opcodes.ATHROW || opcode == Opcodes.DUP) {
