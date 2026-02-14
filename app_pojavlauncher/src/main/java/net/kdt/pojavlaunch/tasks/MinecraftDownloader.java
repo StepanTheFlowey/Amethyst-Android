@@ -3,9 +3,6 @@ package net.kdt.pojavlaunch.tasks;
 import static net.kdt.pojavlaunch.PojavApplication.sExecutorService;
 
 import android.app.Activity;
-import android.content.Context;
-import android.net.ConnectivityManager;
-import android.net.NetworkInfo;
 import android.util.Log;
 
 import androidx.annotation.NonNull;
