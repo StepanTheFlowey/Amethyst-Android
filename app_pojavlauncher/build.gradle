@@ -115,7 +115,9 @@ android {
 		externalNativeBuild {
 			ndkBuild {
 				arguments "APP_SHORT_COMMANDS=true" // Fix for Windows command line length limit
-				arguments "-j8"
+
+				final int cores = Runtime.getRuntime().availableProcessors();
+				arguments "-j$cores"
 			}
 		}
 	}
