@@ -15,7 +15,7 @@ import java.util.concurrent.ConcurrentLinkedQueue;
 @SuppressWarnings({"rawtypes", "unchecked"})
 public final class ExtraCore {
     // No unwanted instantiation
-    private ExtraCore(){}
+    private ExtraCore() {}
 
     // Singleton instance
     private static volatile ExtraCore sExtraCoreSingleton = null;
@@ -99,7 +99,7 @@ public final class ExtraCore {
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
 
         // Look for new sets
-        if(listenerList == null){
+        if(listenerList == null) {
             listenerList = new ConcurrentLinkedQueue<>();
             getInstance().mListenerMap.put(key, listenerList);
         }
@@ -114,20 +114,20 @@ public final class ExtraCore {
      * @param key The value key to ignore now
      * @param listener The ExtraListener to unlink
      */
-    public static void removeExtraListenerFromValue(String key, ExtraListener listener){
+    public static void removeExtraListenerFromValue(String key, ExtraListener listener) {
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
 
         // Look for new sets
-        if(listenerList == null){
+        if(listenerList == null) {
             listenerList = new ConcurrentLinkedQueue<>();
             getInstance().mListenerMap.put(key, listenerList);
         }
 
         // Removes all occurrences of ExtraListener and all null references
-        for(WeakReference<ExtraListener> listenerWeakReference : listenerList){
+        for(WeakReference<ExtraListener> listenerWeakReference : listenerList) {
             ExtraListener actualListener = listenerWeakReference.get();
 
-            if(actualListener == null || actualListener == listener){
+            if(actualListener == null || actualListener == listener) {
                 listenerList.remove(listenerWeakReference);
             }
         }
@@ -137,11 +137,11 @@ public final class ExtraCore {
      * Unlink all ExtraListeners from a value
      * @param key The key to which ExtraListener are linked
      */
-    public static void removeAllExtraListenersFromValue(String key){
+    public static void removeAllExtraListenersFromValue(String key) {
         ConcurrentLinkedQueue<WeakReference<ExtraListener>> listenerList = getInstance().mListenerMap.get(key);
 
         // Look for new sets
-        if(listenerList == null){
+        if(listenerList == null) {
             listenerList = new ConcurrentLinkedQueue<>();
             getInstance().mListenerMap.put(key, listenerList);
         }
@@ -152,7 +152,7 @@ public final class ExtraCore {
     /**
      * Remove all ExtraListeners from listening to any value
      */
-    public static void removeAllExtraListeners(){
+    public static void removeAllExtraListeners() {
         getInstance().mListenerMap.clear();
     }
 }

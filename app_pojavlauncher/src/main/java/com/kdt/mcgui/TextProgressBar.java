@@ -30,7 +30,7 @@ public class TextProgressBar extends ProgressBar {
     private Paint mTextPaint;
     private String mText = "";
 
-    private void init(){
+    private void init() {
         setProgressDrawable(ResourcesCompat.getDrawable(getResources(), R.drawable.view_text_progressbar, null));
         setProgress(35);
         mTextPaint = new Paint();
@@ -54,12 +54,12 @@ public class TextProgressBar extends ProgressBar {
         setText(getContext().getResources().getText(resid).toString());
     }
 
-    public final void setText(String text){
+    public final void setText(String text) {
         mText = text;
         invalidate();
     }
 
-    public final void setTextPadding(int padding){
+    public final void setTextPadding(int padding) {
         mTextPadding = padding;
     }
 }

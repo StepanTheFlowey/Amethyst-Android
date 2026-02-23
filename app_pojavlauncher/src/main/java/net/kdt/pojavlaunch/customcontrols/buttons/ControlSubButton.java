@@ -20,7 +20,7 @@ public class ControlSubButton extends ControlButton {
         filterProperties();
     }
 
-    private void filterProperties(){
+    private void filterProperties() {
         if (parentDrawer != null && parentDrawer.drawerData.orientation != ControlDrawerData.Orientation.FREE) {
             mProperties.setHeight(parentDrawer.getProperties().getHeight());
             mProperties.setWidth(parentDrawer.getProperties().getWidth());
@@ -42,7 +42,7 @@ public class ControlSubButton extends ControlButton {
 
     @Override
     public void setLayoutParams(ViewGroup.LayoutParams params) {
-        if(parentDrawer != null && parentDrawer.drawerData.orientation != ControlDrawerData.Orientation.FREE){
+        if(parentDrawer != null && parentDrawer.drawerData.orientation != ControlDrawerData.Orientation.FREE) {
             params.width = (int)parentDrawer.mProperties.getWidth();
             params.height = (int)parentDrawer.mProperties.getHeight();
         }
@@ -52,7 +52,7 @@ public class ControlSubButton extends ControlButton {
     @SuppressLint("ClickableViewAccessibility")
     @Override
     public boolean onTouchEvent(MotionEvent event) {
-        if(!getControlLayoutParent().getModifiable() || parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE){
+        if(!getControlLayoutParent().getModifiable() || parentDrawer.drawerData.orientation == ControlDrawerData.Orientation.FREE) {
             return super.onTouchEvent(event);
         }
 

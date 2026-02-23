@@ -48,7 +48,7 @@ public class ShowErrorActivity extends Activity {
         public void executeWithActivity(Activity activity) {
             if(mThrowable instanceof ContextExecutorTask) {
                 ((ContextExecutorTask)mThrowable).executeWithActivity(activity);
-            }else {
+            } else {
                 Tools.showError(activity, mRolledMsg, mThrowable, activity instanceof ShowErrorActivity);
             }
         }

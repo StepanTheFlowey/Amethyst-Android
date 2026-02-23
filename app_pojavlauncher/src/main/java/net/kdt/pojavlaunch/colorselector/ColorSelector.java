@@ -149,16 +149,16 @@ public class ColorSelector extends SideDialogView implements HueSelectionListene
             }catch (NumberFormatException exception) {
                 mTextView.setTextColor(Color.RED);
             }
-        }else{
+        } else {
             mWatch = true;
         }
     }
 
-    public void setColorSelectionListener(ColorSelectionListener listener){
+    public void setColorSelectionListener(ColorSelectionListener listener) {
         mColorSelectionListener = listener;
     }
 
-    public void setAlphaEnabled(boolean alphaEnabled){
+    public void setAlphaEnabled(boolean alphaEnabled) {
         mAlphaEnabled = alphaEnabled;
         if(mAlphaView != null) {
             mAlphaView.setVisibility(alphaEnabled ? View.VISIBLE : View.GONE);
@@ -166,7 +166,7 @@ public class ColorSelector extends SideDialogView implements HueSelectionListene
         }
     }
 
-    private void notifyColorSelector(int color){
+    private void notifyColorSelector(int color) {
         if(mColorSelectionListener != null)
             mColorSelectionListener.onColorSelected(color);
     }

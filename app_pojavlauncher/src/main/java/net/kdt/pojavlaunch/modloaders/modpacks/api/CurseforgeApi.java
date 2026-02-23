@@ -167,7 +167,7 @@ public class CurseforgeApi implements ModpackApi{
     }
 
     private ModLoader installCurseforgeZip(File zipFile, File instanceDestination) throws IOException {
-        try (ZipFile modpackZipFile = new ZipFile(zipFile)){
+        try (ZipFile modpackZipFile = new ZipFile(zipFile)) {
             CurseManifest curseManifest = Tools.GLOBAL_GSON.fromJson(
                     Tools.read(ZipUtils.getEntryStream(modpackZipFile, "manifest.json")),
                     CurseManifest.class);
@@ -179,7 +179,7 @@ public class CurseforgeApi implements ModpackApi{
             int fileCount = curseManifest.files.length;
             for(int i = 0; i < fileCount; i++) {
                 final CurseManifest.CurseFile curseFile = curseManifest.files[i];
-                modDownloader.submitDownload(()->{
+                modDownloader.submitDownload(() -> {
                     String url = getDownloadUrl(curseFile.projectID, curseFile.fileID);
                     if(url == null && curseFile.required)
                         throw new IOException("Failed to obtain download URL for "+curseFile.projectID+" "+curseFile.fileID);
@@ -237,7 +237,7 @@ public class CurseforgeApi implements ModpackApi{
 
         // Otherwise, fallback to building an edge link
         JsonObject fallbackResponse = mApiHandler.get(String.format("mods/%s/files/%s", projectID, fileID), JsonObject.class);
-        if (fallbackResponse != null && !fallbackResponse.get("data").isJsonNull()){
+        if (fallbackResponse != null && !fallbackResponse.get("data").isJsonNull()) {
             JsonObject modData = fallbackResponse.get("data").getAsJsonObject();
             int id = modData.get("id").getAsInt();
             return String.format("https://edge.forgecdn.net/files/%s/%s/%s", id/1000, id % 1000, modData.get("fileName").getAsString());

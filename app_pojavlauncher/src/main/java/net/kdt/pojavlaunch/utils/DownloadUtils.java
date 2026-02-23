@@ -134,7 +134,7 @@ public class DownloadUtils {
     private static <T> T downloadFile(Callable<T> downloadFunction) throws IOException{
         try {
             return downloadFunction.call();
-        } catch (IOException e){
+        } catch (IOException e) {
             throw e;
         }
         catch (Exception e) {
@@ -157,7 +157,7 @@ public class DownloadUtils {
         int attempts = 0;
         boolean fileOkay = verifyFile(outputFile, sha1);
         T result = null;
-        while (attempts < 5 && !fileOkay){
+        while (attempts < 5 && !fileOkay) {
             attempts++;
             downloadFile(downloadFunction);
             fileOkay = verifyFile(outputFile, sha1);

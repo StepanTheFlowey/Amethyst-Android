@@ -37,7 +37,7 @@ public class TapDetector {
      * @param tapNumberToDetect How many taps are needed before onTouchEvent returns True.
      * @param detectionMethod Method used to detect touches. See DETECTION_METHOD constants above.
      */
-    public TapDetector(int tapNumberToDetect, int detectionMethod){
+    public TapDetector(int tapNumberToDetect, int detectionMethod) {
         this.mDetectionMethod = detectionMethod;
         //We expect both ACTION_DOWN and ACTION_UP for the DETECTION_METHOD_BOTH
         this.mTapNumberToDetect = detectBothTouch() ? 2*tapNumberToDetect : tapNumberToDetect;
@@ -48,16 +48,16 @@ public class TapDetector {
      * @param e The MotionEvent to inspect
      * @return whether or not a X-tap happened for a pointer
      */
-    public boolean onTouchEvent(MotionEvent e){
+    public boolean onTouchEvent(MotionEvent e) {
         int eventAction = e.getActionMasked();
         int pointerIndex = -1;
 
         //Get the event to look forward
-        if(detectDownTouch()){
+        if(detectDownTouch()) {
             if(eventAction == ACTION_DOWN) pointerIndex = 0;
             else if(eventAction == ACTION_POINTER_DOWN) pointerIndex = e.getActionIndex();
         }
-        if(detectUpTouch()){
+        if(detectUpTouch()) {
             if(eventAction == ACTION_UP) pointerIndex = 0;
             else if(eventAction == ACTION_POINTER_UP) pointerIndex = e.getActionIndex();
         }
@@ -80,7 +80,7 @@ public class TapDetector {
         mLastY = eventY;
 
         //Check for high enough speed and precision
-        if(mCurrentTapNumber > 0){
+        if(mCurrentTapNumber > 0) {
             if  ((deltaTime < TAP_MIN_DELTA_MS || deltaTime > TAP_MAX_DELTA_MS) ||
                 ((deltaX*deltaX + deltaY*deltaY) > TAP_SLOP_SQUARE_PX)) {
                 if (mDetectionMethod == DETECTION_METHOD_BOTH && (eventAction == ACTION_UP || eventAction == ACTION_POINTER_UP)) {
@@ -96,7 +96,7 @@ public class TapDetector {
 
         //A worthy tap happened
         mCurrentTapNumber += 1;
-        if(mCurrentTapNumber >= mTapNumberToDetect){
+        if(mCurrentTapNumber >= mTapNumberToDetect) {
            resetTapDetectionState();
            return true;
         }
@@ -108,22 +108,22 @@ public class TapDetector {
     /**
      * Reset the double tap values.
      */
-   private void resetTapDetectionState(){
+   private void resetTapDetectionState() {
        mCurrentTapNumber = 0;
        mLastEventTime = 0;
        mLastX = 9999;
        mLastY = 9999;
    }
 
-   private boolean detectDownTouch(){
+   private boolean detectDownTouch() {
        return (mDetectionMethod & DETECTION_METHOD_DOWN) == DETECTION_METHOD_DOWN;
    }
 
-   private boolean detectUpTouch(){
+   private boolean detectUpTouch() {
        return (mDetectionMethod & DETECTION_METHOD_UP) == DETECTION_METHOD_UP;
    }
 
-   private boolean detectBothTouch(){
+   private boolean detectBothTouch() {
        return mDetectionMethod == DETECTION_METHOD_BOTH;
    }
 }

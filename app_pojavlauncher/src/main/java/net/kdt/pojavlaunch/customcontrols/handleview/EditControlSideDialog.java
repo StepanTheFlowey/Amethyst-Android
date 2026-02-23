@@ -247,7 +247,7 @@ public class EditControlSideDialog extends SideDialogView {
         loadValues(data);
 
         // Size linked to the parent drawer depending on the drawer settings
-        if(drawerOrientation != ControlDrawerData.Orientation.FREE){
+        if(drawerOrientation != ControlDrawerData.Orientation.FREE) {
             mSizeTextview.setVisibility(GONE);
             mSizeXTextView.setVisibility(GONE);
             mWidthEditText.setVisibility(GONE);
@@ -386,13 +386,13 @@ public class EditControlSideDialog extends SideDialogView {
         });
         mForwardLockSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (internalChanges) return;
-            if(mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData){
+            if(mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData) {
                 ((ControlJoystickData) mCurrentlyEditedButton.getProperties()).forwardLock = isChecked;
             }
         });
         mAbsoluteTrackingSwitch.setOnCheckedChangeListener((buttonView, isChecked) -> {
             if (internalChanges) return;
-            if(mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData){
+            if(mCurrentlyEditedButton.getProperties() instanceof ControlJoystickData) {
                 ((ControlJoystickData) mCurrentlyEditedButton.getProperties()).absolute = isChecked;
             }
         });

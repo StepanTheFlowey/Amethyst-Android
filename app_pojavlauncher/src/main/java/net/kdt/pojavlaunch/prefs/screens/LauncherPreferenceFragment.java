@@ -49,7 +49,7 @@ public class LauncherPreferenceFragment extends PreferenceFragmentCompat impleme
                 launcherActivity.askForMicrophonePermission(()->mMicrophonePermissionPreference.setVisible(false));
                 return true;
             });
-        }else{
+        } else {
             mRequestNotificationPermissionPreference.setVisible(false);
         }
     }

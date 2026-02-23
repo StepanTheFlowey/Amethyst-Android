@@ -60,7 +60,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
 
     private List<String> mRenderNames;
 
-    public ProfileEditorFragment(){
+    public ProfileEditorFragment() {
         super(R.layout.fragment_profile_editor);
     }
 
@@ -69,10 +69,10 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         // Paths, which can be changed
         String value = (String) ExtraCore.consumeValue(ExtraConstants.FILE_SELECTOR);
-        if(value != null){
-            if(mValueToConsume.equals(FileSelectorFragment.BUNDLE_SELECT_FOLDER)){
+        if(value != null) {
+            if(mValueToConsume.equals(FileSelectorFragment.BUNDLE_SELECT_FOLDER)) {
                 mTempProfile.gameDir = value;
-            }else{
+            } else {
                 mTempProfile.controlFile = value;
             }
         }
@@ -98,7 +98,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         });
 
         mDeleteButton.setOnClickListener(v -> {
-            if(LauncherProfiles.mainProfileJson.profiles.size() > 1){
+            if(LauncherProfiles.mainProfileJson.profiles.size() > 1) {
                 ProfileIconCache.dropIcon(mProfileKey);
                 LauncherProfiles.mainProfileJson.profiles.remove(mProfileKey);
                 LauncherProfiles.write();
@@ -161,8 +161,8 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     }
 
 
-    private void loadValues(@NonNull String profile, @NonNull Context context){
-        if(mTempProfile == null){
+    private void loadValues(@NonNull String profile, @NonNull Context context) {
+        if(mTempProfile == null) {
             mTempProfile = getProfile(profile);
         }
         // TODO: Remove this jank when it's not relevant anymore
@@ -199,7 +199,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         mDefaultControl.setText(mTempProfile.controlFile == null ? "" : mTempProfile.controlFile);
     }
 
-    private MinecraftProfile getProfile(@NonNull String profile){
+    private MinecraftProfile getProfile(@NonNull String profile) {
         MinecraftProfile minecraftProfile;
         if(getArguments() == null) {
             // EDGE CASE: User leaves Pojav in background. Pojav gets terminated in the background.
@@ -215,7 +215,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
             if(originalProfile != null) minecraftProfile = new MinecraftProfile(originalProfile);
             else minecraftProfile = MinecraftProfile.createTemplate();
             mProfileKey = profile;
-        }else{
+        } else {
             minecraftProfile = MinecraftProfile.createTemplate();
             mProfileKey = LauncherProfiles.getFreeProfileKey();
         }
@@ -223,7 +223,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
     }
 
 
-    private void bindViews(@NonNull View view){
+    private void bindViews(@NonNull View view) {
         mDefaultControl = view.findViewById(R.id.vprof_editor_ctrl_spinner);
         mDefaultRuntime = view.findViewById(R.id.vprof_editor_spinner_runtime);
         mDefaultRenderer = view.findViewById(R.id.vprof_editor_profile_renderer);
@@ -241,7 +241,7 @@ public class ProfileEditorFragment extends Fragment implements CropperUtils.Crop
         mProfileIcon = view.findViewById(R.id.vprof_editor_profile_icon);
     }
 
-    private void save(){
+    private void save() {
         //First, check for potential issues in the inputs
         mTempProfile.lastVersionId = mDefaultVersion.getText().toString();
         mTempProfile.controlFile = mDefaultControl.getText().toString();

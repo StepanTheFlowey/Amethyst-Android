@@ -59,7 +59,7 @@ public class AndroidPointerCapture implements ViewTreeObserver.OnWindowFocusChan
     // It's only here so the side-dialog changes it live
     @Override
     public void onSharedPreferenceChanged(SharedPreferences sharedPreferences, @Nullable String key) {
-        if (sharedPreferences.getBoolean("always_grab_mouse", true)){
+        if (sharedPreferences.getBoolean("always_grab_mouse", true)) {
             enableTouchpadIfNecessary();
         } else mTouchpad.disable();
         handleAutomaticCapture();
@@ -96,12 +96,12 @@ public class AndroidPointerCapture implements ViewTreeObserver.OnWindowFocusChan
                 // a trackball, we will at least have semi-valid relative positions
                 mVector[0] = event.getAxisValue(MotionEvent.AXIS_RELATIVE_X);
                 mVector[1] = event.getAxisValue(MotionEvent.AXIS_RELATIVE_Y);
-            }else {
+            } else {
                 // Otherwise trust the OS, i guess??
                 mVector[0] = event.getX();
                 mVector[1] = event.getY();
             }
-        }else {
+        } else {
             // If it's not a trackball, it's likely a touchpad and needs tracking like a touchscreen.
             mPointerTracker.trackEvent(event);
             // The relative position will already be written down into the mVector variable.

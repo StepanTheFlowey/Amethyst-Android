@@ -19,9 +19,9 @@ public class LayoutSanitizer {
     private static ControlData getControlData(Object dataEntry) {
         if(dataEntry instanceof ControlData) {
             return (ControlData) dataEntry;
-        }else if(dataEntry instanceof ControlDrawerData) {
+        } else if(dataEntry instanceof ControlDrawerData) {
             return ((ControlDrawerData) dataEntry).properties;
-        }else throw new RuntimeException("Encountered wrong type during ControlData sanitization");
+        } else throw new RuntimeException("Encountered wrong type during ControlData sanitization");
     }
 
     private static boolean sanitizeList(List<?> controlDataList) {

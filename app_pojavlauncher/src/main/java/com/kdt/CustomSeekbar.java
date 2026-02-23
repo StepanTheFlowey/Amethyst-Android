@@ -116,8 +116,6 @@ public class CustomSeekbar extends SeekBar {
         //todo perform something to update the progress ?
     }
 
-
-
     /**
      * Wrapper to allow for a listener to be set around the internal listener
      */

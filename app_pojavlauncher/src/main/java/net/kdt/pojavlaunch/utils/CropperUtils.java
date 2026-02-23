@@ -31,7 +31,7 @@ import java.io.InputStream;
 
 public class CropperUtils {
     public static ActivityResultLauncher<?> registerCropper(Fragment fragment, final CropperListener cropperListener) {
-        return fragment.registerForActivityResult(new ActivityResultContracts.OpenDocument(), (result)->{
+        return fragment.registerForActivityResult(new ActivityResultContracts.OpenDocument(), (result) -> {
             Context context = fragment.getContext();
             if(context == null) return;
             if (result == null) {
@@ -62,7 +62,7 @@ public class CropperUtils {
             // (which has a typical screen density of 395 dpi)
             cropperListener.onCropped(cropImageView.crop((int) Tools.dpToPx(70)));
         });
-        PojavApplication.sExecutorService.execute(()->{
+        PojavApplication.sExecutorService.execute(() -> {
             CropperBehaviour cropperBehaviour = null;
             try {
                  cropperBehaviour = createBehaviour(cropImageView, contentResolver, selectedUri);
@@ -93,7 +93,7 @@ public class CropperUtils {
         progressBar.setVisibility(View.GONE);
         cropImageView.setCropperBehaviour(cropperBehaviour);
         cropperBehaviour.applyImage();
-        cropImageView.post(()->{
+        cropImageView.post(() -> {
             fixDialogHeight(dialog);
             cropImageView.requestLayout();
         });

@@ -19,7 +19,6 @@ import net.kdt.pojavlaunch.prefs.LauncherPreferences;
 
 import java.io.IOException;
 
-
 public class CustomControlsActivity extends BaseActivity implements EditorExitable {
 	private DrawerLayout mDrawerLayout;
 	private ListView mDrawerNavigationView;

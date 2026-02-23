@@ -41,11 +41,11 @@ public class MinecraftAccount {
         }
     }
 
-    public boolean isLocal(){
+    public boolean isLocal() {
         return accessToken.equals("0") && !username.startsWith("Demo.");
     }
 
-    public boolean isDemo(){
+    public boolean isDemo() {
         return username.startsWith("Demo.");
     }
 
@@ -95,7 +95,7 @@ public class MinecraftAccount {
         }
     }
 
-    public Bitmap getSkinFace(){
+    public Bitmap getSkinFace() {
         if(isLocal()) return null;
 
         File skinFaceFile = getSkinFaceFile(username);
@@ -121,7 +121,7 @@ public class MinecraftAccount {
         return new File(Tools.DIR_CACHE, username + ".png");
     }
 
-    private static boolean accountExists(String username){
+    private static boolean accountExists(String username) {
         return new File(Tools.DIR_ACCOUNT_NEW + "/" + username + ".json").exists();
     }
 }

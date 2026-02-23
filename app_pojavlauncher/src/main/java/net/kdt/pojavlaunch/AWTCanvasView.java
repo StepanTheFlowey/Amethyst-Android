@@ -18,7 +18,7 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     private final TextPaint mFpsPaint;
 
     // Temporary count fps https://stackoverflow.com/a/13729241
-    private final LinkedList<Long> mTimes = new LinkedList<Long>(){{add(System.nanoTime());}};
+    private final LinkedList<Long> mTimes = new LinkedList<Long>() {{add(System.nanoTime());}};
 
     public AWTCanvasView(Context ctx) {
         this(ctx, null);
@@ -101,16 +101,15 @@ public class AWTCanvasView extends TextureView implements TextureView.SurfaceTex
     }
 
     /** Make the view fit the proper aspect ratio of the surface */
-    private void refreshSize(){
+    private void refreshSize() {
         ViewGroup.LayoutParams layoutParams = getLayoutParams();
 
-        if(getHeight() < getWidth()){
+        if(getHeight() < getWidth()) {
             layoutParams.width = AWT_CANVAS_WIDTH * getHeight() / AWT_CANVAS_HEIGHT;
-        }else{
+        } else {
             layoutParams.height = AWT_CANVAS_HEIGHT * getWidth() / AWT_CANVAS_WIDTH;
         }
 
         setLayoutParams(layoutParams);
     }
-
 }

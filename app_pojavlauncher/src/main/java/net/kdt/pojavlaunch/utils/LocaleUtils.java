@@ -27,20 +27,20 @@ public class LocaleUtils extends ContextWrapper {
             PREF_FORCE_ENGLISH = DEFAULT_PREF.getBoolean("force_english", false);
         }
 
-        if(PREF_FORCE_ENGLISH){
+        if(PREF_FORCE_ENGLISH) {
             Resources resources = context.getResources();
             Configuration configuration = resources.getConfiguration();
 
             configuration.setLocale(Locale.ENGLISH);
             Locale.setDefault(Locale.ENGLISH);
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N) {
                 LocaleList localeList = new LocaleList(Locale.ENGLISH);
                 LocaleList.setDefault(localeList);
                 configuration.setLocales(localeList);
             }
 
             resources.updateConfiguration(configuration, resources.getDisplayMetrics());
-            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1){
+            if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.N_MR1) {
                 context = context.createConfigurationContext(configuration);
             }
         }

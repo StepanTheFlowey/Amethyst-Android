@@ -13,7 +13,7 @@ import net.kdt.pojavlaunch.Tools;
 public class SelectAuthFragment extends Fragment {
     public static final String TAG = "AUTH_SELECT_FRAGMENT";
 
-    public SelectAuthFragment(){
+    public SelectAuthFragment() {
         super(R.layout.fragment_select_auth_method);
     }
 

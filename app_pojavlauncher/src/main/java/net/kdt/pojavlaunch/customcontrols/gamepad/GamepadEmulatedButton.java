@@ -15,8 +15,8 @@ public class GamepadEmulatedButton {
         update(isKeyDown);
     }
 
-    public void update(boolean isKeyDown){
-        if(isKeyDown != mIsDown){
+    public void update(boolean isKeyDown) {
+        if(isKeyDown != mIsDown) {
             mIsDown = isKeyDown;
             onDownStateChanged(mIsDown);
         }

@@ -112,7 +112,7 @@ public class CustomSeekBarPreference extends SeekBarPreference {
      * @param min The minimum value
      * @param max The maximum value
      */
-    public void setRange(int min, int max){
+    public void setRange(int min, int max) {
         setMin(min);
         setMaxKeepIncrement(max);
     }
@@ -123,8 +123,8 @@ public class CustomSeekBarPreference extends SeekBarPreference {
     }
 
 
-    private void updateTextViewWithSuffix(){
-        if(!mTextView.getText().toString().endsWith(mSuffix)){
+    private void updateTextViewWithSuffix() {
+        if(!mTextView.getText().toString().endsWith(mSuffix)) {
             mTextView.setText(String.format("%s%s", mTextView.getText(), mSuffix));
         }
     }

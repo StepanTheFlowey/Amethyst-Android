@@ -24,15 +24,15 @@ import java.io.IOException;
 /** Class getting the version list, and that's all really */
 public class AsyncVersionList {
 
-    public void getVersionList(@Nullable VersionDoneListener listener, boolean secondPass){
+    public void getVersionList(@Nullable VersionDoneListener listener, boolean secondPass) {
         sExecutorService.execute(() -> {
             File versionFile = new File(Tools.DIR_CACHE + "/version_list.json");
             JMinecraftVersionList versionList = null;
             try{
-                if(!versionFile.exists() || (System.currentTimeMillis() > versionFile.lastModified() + 86400000 )){
+                if(!versionFile.exists() || (System.currentTimeMillis() > versionFile.lastModified() + 86400000 )) {
                     versionList = downloadVersionList(LauncherPreferences.PREF_VERSION_REPOS);
                 }
-            }catch (Exception e){
+            }catch (Exception e) {
                 Log.e("AsyncVersionList", "Refreshing version list failed :" + e);
                 e.printStackTrace();
             }
@@ -57,7 +57,7 @@ public class AsyncVersionList {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private JMinecraftVersionList downloadVersionList(String mirror){
+    private JMinecraftVersionList downloadVersionList(String mirror) {
         JMinecraftVersionList list = null;
         try{
             Log.i("ExtVL", "Syncing to external: " + mirror);
@@ -70,7 +70,7 @@ public class AsyncVersionList {
             FileOutputStream fos = new FileOutputStream(Tools.DIR_CACHE + "/version_list.json");
             fos.write(jsonString.getBytes());
             fos.close();
-        }catch (IOException e){
+        }catch (IOException e) {
             Log.e("AsyncVersionList", e.toString());
         }
         return list;

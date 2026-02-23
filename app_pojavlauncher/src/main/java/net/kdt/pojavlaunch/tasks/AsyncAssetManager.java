@@ -57,7 +57,7 @@ public class AsyncAssetManager {
     }
 
     /** Unpack single files, with no regard to version tracking */
-    public static void unpackSingleFiles(Context ctx){
+    public static void unpackSingleFiles(Context ctx) {
         ProgressLayout.setProgress(ProgressLayout.EXTRACT_SINGLE_FILES, 0);
         sExecutorService.execute(() -> {
             try {
@@ -73,7 +73,7 @@ public class AsyncAssetManager {
         });
     }
 
-    public static void unpackComponents(Context ctx){
+    public static void unpackComponents(Context ctx) {
         ProgressLayout.setProgress(ProgressLayout.EXTRACT_COMPONENTS, 0);
         sExecutorService.execute(() -> {
             try {

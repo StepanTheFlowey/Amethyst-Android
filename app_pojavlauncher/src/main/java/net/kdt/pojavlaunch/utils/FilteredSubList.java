@@ -18,19 +18,18 @@ import java.util.ListIterator;
  * @param <E>
  */
 public class FilteredSubList<E> extends AbstractList<E> implements List<E> {
-
     private final ArrayList<E> mArrayList;
 
-    public FilteredSubList(E[] motherList, BasicPredicate<E> filter){
+    public FilteredSubList(E[] motherList, BasicPredicate<E> filter) {
         mArrayList = new ArrayList<>();
         refresh(motherList, filter);
     }
 
-    public void refresh(E[] motherArray, BasicPredicate<E> filter){
+    public void refresh(E[] motherArray, BasicPredicate<E> filter) {
         if(!mArrayList.isEmpty()) mArrayList.clear();
 
-        for(E item : motherArray){
-            if(filter.test(item)){
+        for(E item : motherArray) {
+            if(filter.test(item)) {
                 mArrayList.add(item);
             }
         }
@@ -96,8 +95,6 @@ public class FilteredSubList<E> extends AbstractList<E> implements List<E> {
     public List<E> subList(int fromIndex, int toIndex) {
         return mArrayList.subList(fromIndex, toIndex);
     }
-
-
 
     // Predicate is API 24+, so micro backport
     public interface BasicPredicate<E> {

@@ -16,7 +16,7 @@ public class MultiRTConfigDialog {
     private RecyclerView mDialogView;
 
     /** Show the dialog, refreshes the adapter data before showing it */
-    public void show(){
+    public void show() {
         refresh();
         mDialog.show();
     }

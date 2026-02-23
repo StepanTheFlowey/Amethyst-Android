@@ -56,7 +56,7 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
         if(!downloadMinecraft(minecraftVersion)) {
             if(mDownloaderThrowable instanceof Exception) {
                 mListener.onDownloadError((Exception) mDownloaderThrowable);
-            }else {
+            } else {
                 Exception exception = new Exception(mDownloaderThrowable);
                 mListener.onDownloadError(exception);
             }
@@ -86,7 +86,7 @@ public class OptiFineDownloadTask implements Runnable, Tools.DownloaderFeedback,
                 mcVersionBuilder.append(thirdGroup);
             }
             return mcVersionBuilder.toString();
-        }else{
+        } else {
             mListener.onDataNotAvailable();
             return null;
         }

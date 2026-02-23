@@ -41,7 +41,7 @@ public class ImportControlActivity extends Activity {
         super.onCreate(savedInstanceState);
         if(Tools.checkStorageInteractive(this)) {
             Tools.initStorageConstants(getApplicationContext());
-        }else {
+        } else {
             // Return early, no initialization needed.
             return;
         }
@@ -112,11 +112,11 @@ public class ImportControlActivity extends Activity {
     public void startImport(View view) {
         String fileName = trimFileName(mEditText.getText().toString());
         //Step 1 check for suffixes.
-        if(!isFileNameValid(fileName)){
+        if(!isFileNameValid(fileName)) {
             Toast.makeText(this, getText(R.string.import_control_invalid_name), Toast.LENGTH_SHORT).show();
             return;
         }
-        if(!mIsFileVerified){
+        if(!mIsFileVerified) {
             Toast.makeText(this, getText(R.string.import_control_verifying_file), Toast.LENGTH_LONG).show();
             return;
         }
@@ -129,7 +129,7 @@ public class ImportControlActivity extends Activity {
     /**
      * Copy a the file from the Intent data with a provided name into the controlmap folder.
      */
-    private void importControlFile(){
+    private void importControlFile() {
         InputStream is;
         try {
             is = getContentResolver().openInputStream(mUriData);
@@ -148,7 +148,7 @@ public class ImportControlActivity extends Activity {
      * @param fileName the string to test
      * @return whether the filename is valid
      */
-    private static boolean isFileNameValid(String fileName){
+    private static boolean isFileNameValid(String fileName) {
         fileName = trimFileName(fileName);
 
         if(fileName.isEmpty()) return false;
@@ -160,7 +160,7 @@ public class ImportControlActivity extends Activity {
      * @param fileName The string to trim
      * @return The trimmed string
      */
-    private static String trimFileName(String fileName){
+    private static String trimFileName(String fileName) {
         return fileName
                 .replace(".json", "")
                 .replaceAll("%..", "/")
@@ -172,19 +172,19 @@ public class ImportControlActivity extends Activity {
     /**
      * Tries to get an Uri from the various sources
      */
-    private void getUriData(){
+    private void getUriData() {
         mUriData = getIntent().getData();
         if(mUriData != null) return;
         try {
             mUriData = getIntent().getClipData().getItemAt(0).getUri();
-        }catch (Exception ignored){}
+        }catch (Exception ignored) {}
     }
 
     /**
      * Verify if the control file is valid
      * @return Whether the control file is valid
      */
-    private static boolean verify(){
+    private static boolean verify() {
         try{
             String jsonLayoutData = Tools.read(Tools.CTRLMAP_PATH + "/TMP_IMPORT_FILE.json");
             JSONObject layoutJobj = new JSONObject(jsonLayoutData);

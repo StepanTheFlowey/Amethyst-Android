@@ -27,7 +27,7 @@ import java.util.zip.ZipFile;
 
 public class ModrinthApi implements ModpackApi{
     private final ApiHandler mApiHandler;
-    public ModrinthApi(){
+    public ModrinthApi() {
         mApiHandler = new ApiHandler("https://api.modrinth.com/v2");
     }
 
@@ -66,7 +66,7 @@ public class ModrinthApi implements ModpackApi{
         if(responseHits == null) return null;
 
         ModItem[] items = new ModItem[responseHits.size()];
-        for(int i=0; i<responseHits.size(); ++i){
+        for(int i=0; i<responseHits.size(); ++i) {
             JsonObject hit = responseHits.get(i).getAsJsonObject();
             items[i] = new ModItem(
                     Constants.SOURCE_MODRINTH,
@@ -103,7 +103,7 @@ public class ModrinthApi implements ModpackApi{
             // Assume there may not be hashes, in case the API changes
             JsonObject hashesMap = version.getAsJsonArray("files").get(0).getAsJsonObject()
                     .get("hashes").getAsJsonObject();
-            if(hashesMap == null || hashesMap.get("sha1") == null){
+            if(hashesMap == null || hashesMap.get("sha1") == null) {
                 hashes[i] = null;
                 continue;
             }
@@ -147,7 +147,7 @@ public class ModrinthApi implements ModpackApi{
     }
 
     private ModLoader installMrpack(File mrpackFile, File instanceDestination) throws IOException {
-        try (ZipFile modpackZipFile = new ZipFile(mrpackFile)){
+        try (ZipFile modpackZipFile = new ZipFile(mrpackFile)) {
             ModrinthIndex modrinthIndex = Tools.GLOBAL_GSON.fromJson(
                     Tools.read(ZipUtils.getEntryStream(modpackZipFile, "modrinth.index.json")),
                     ModrinthIndex.class);

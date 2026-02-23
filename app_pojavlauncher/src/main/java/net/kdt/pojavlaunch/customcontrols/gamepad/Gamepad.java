@@ -89,7 +89,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
 
     private boolean mRemoved = false;
 
-    public Gamepad(View contextView, InputDevice inputDevice, GamepadDataProvider mapProvider, boolean showCursor){
+    public Gamepad(View contextView, InputDevice inputDevice, GamepadDataProvider mapProvider, boolean showCursor) {
 
         Settings.setDeadzoneScale(PREF_DEADZONE_SCALE);
 
@@ -148,12 +148,12 @@ public class Gamepad implements GrabListener, GamepadHandler {
         onGrabState(currentGrab);
     }
 
-    public void updateJoysticks(){
+    public void updateJoysticks() {
         updateDirectionalJoystick();
         updateMouseJoystick();
     }
 
-    public void notifyGUISizeChange(int newSize){
+    public void notifyGUISizeChange(int newSize) {
         //Change the pointer size to match UI
         int size = (int) ((22 * newSize) / PREF_SCALE_FACTOR);
         mPointerImageView.post(() -> mPointerImageView.setLayoutParams(new FrameLayout.LayoutParams(size, size)));
@@ -161,9 +161,9 @@ public class Gamepad implements GrabListener, GamepadHandler {
     }
 
 
-    public static void sendInput(short[] keycodes, boolean isDown){
-        for(short keycode : keycodes){
-            switch (keycode){
+    public static void sendInput(short[] keycodes, boolean isDown) {
+        for(short keycode : keycodes) {
+            switch (keycode) {
                 case GamepadMap.MOUSE_SCROLL_DOWN:
                     if(isDown) CallbackBridge.sendScroll(0, -1);
                     break;
@@ -191,11 +191,11 @@ public class Gamepad implements GrabListener, GamepadHandler {
 
     }
 
-    public static boolean isGamepadEvent(MotionEvent event){
+    public static boolean isGamepadEvent(MotionEvent event) {
         return isJoystickEvent(event);
     }
 
-    public static boolean isGamepadEvent(KeyEvent event){
+    public static boolean isGamepadEvent(KeyEvent event) {
         boolean isGamepad = ((event.getSource() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD)
                 || ((event.getDevice() != null) && ((event.getDevice().getSources() & InputDevice.SOURCE_GAMEPAD) == InputDevice.SOURCE_GAMEPAD));
 
@@ -206,10 +206,10 @@ public class Gamepad implements GrabListener, GamepadHandler {
      * Send the new mouse position, computing the delta
      * @param frameTimeNanos The time to render the frame, used to compute mouse delta
      */
-    private void tick(long frameTimeNanos){
+    private void tick(long frameTimeNanos) {
         //update mouse position
         long newFrameTime = System.nanoTime();
-        if(mLastHorizontalValue != 0 || mLastVerticalValue != 0){
+        if(mLastHorizontalValue != 0 || mLastVerticalValue != 0) {
 
             double acceleration = Math.pow(mMouseMagnitude, MOUSE_MAX_ACCELERATION);
             if(acceleration > 1) acceleration = 1;
@@ -225,7 +225,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
             CallbackBridge.mouseX += deltaX;
             CallbackBridge.mouseY -= deltaY;
 
-            if(!isGrabbing){
+            if(!isGrabbing) {
                 CallbackBridge.mouseX = MathUtils.clamp(CallbackBridge.mouseX, 0, CallbackBridge.windowWidth);
                 CallbackBridge.mouseY = MathUtils.clamp(CallbackBridge.mouseY, 0, CallbackBridge.windowHeight);
                 placePointerView((int) (CallbackBridge.mouseX / PREF_SCALE_FACTOR), (int) (CallbackBridge.mouseY/ PREF_SCALE_FACTOR));
@@ -239,11 +239,11 @@ public class Gamepad implements GrabListener, GamepadHandler {
         mLastFrameTime = newFrameTime;
     }
 
-    private void updateMouseJoystick(){
+    private void updateMouseJoystick() {
         GamepadJoystick currentJoystick = isGrabbing ? mRightJoystick : mLeftJoystick;
         float horizontalValue = currentJoystick.getHorizontalAxis();
         float verticalValue = currentJoystick.getVerticalAxis();
-        if(horizontalValue != mLastHorizontalValue || verticalValue != mLastVerticalValue){
+        if(horizontalValue != mLastHorizontalValue || verticalValue != mLastVerticalValue) {
             mLastHorizontalValue = horizontalValue;
             mLastVerticalValue = verticalValue;
 
@@ -261,7 +261,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
 
     }
 
-    private void updateDirectionalJoystick(){
+    private void updateDirectionalJoystick() {
         GamepadJoystick currentJoystick = isGrabbing ? mLeftJoystick : mRightJoystick;
 
         int lastJoystickDirection = mCurrentJoystickDirection;
@@ -274,12 +274,12 @@ public class Gamepad implements GrabListener, GamepadHandler {
     }
 
 
-    private GamepadMap getCurrentMap(){
+    private GamepadMap getCurrentMap() {
         return mCurrentMap;
     }
 
-    private static void sendDirectionalKeycode(int direction, boolean isDown, GamepadMap map){
-        switch (direction){
+    private static void sendDirectionalKeycode(int direction, boolean isDown, GamepadMap map) {
+        switch (direction) {
             case DIRECTION_NORTH:
                 map.DIRECTION_FORWARD.update(isDown);
                 break;
@@ -312,7 +312,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
     }
 
     /** Place the pointer on the screen, offsetting the image size */
-    private void placePointerView(int x, int y){
+    private void placePointerView(int x, int y) {
         mPointerImageView.setX(x - mPointerImageView.getWidth()/2f);
         mPointerImageView.setY(y - mPointerImageView.getHeight()/2f);
     }
@@ -326,7 +326,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
 
         // Switch grabbing state then
         mCurrentMap.resetPressedState();
-        if(isGrabbing){
+        if(isGrabbing) {
             mCurrentMap = mGameMap;
             mPointerImageView.setVisibility(View.INVISIBLE);
             mMouseSensitivity = 18;
@@ -346,7 +346,7 @@ public class Gamepad implements GrabListener, GamepadHandler {
     @Override
     public void handleGamepadInput(int keycode, float value) {
         boolean isKeyEventDown = value == 1f;
-        switch (keycode){
+        switch (keycode) {
             case KeyEvent.KEYCODE_BUTTON_A:
                 getCurrentMap().BUTTON_A.update(isKeyEventDown);
                 break;

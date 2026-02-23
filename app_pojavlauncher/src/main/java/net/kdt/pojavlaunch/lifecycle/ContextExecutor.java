@@ -29,7 +29,7 @@ public class ContextExecutor {
         Application application = Tools.getWeakReference(sApplication);
         if(application != null) {
             contextExecutorTask.executeWithApplication(application);
-        }else {
+        } else {
             throw new RuntimeException("ContextExecutor.execute() called before Application.onCreate!");
         }
     }

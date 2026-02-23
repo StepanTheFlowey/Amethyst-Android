@@ -86,7 +86,7 @@ public class BTAUtils {
             // versions if some of them end up getting removed.
             if(BTA_TESTED_VERSIONS.contains(version)) {
                 testedVersions.add(version);
-            }else {
+            } else {
                 untestedVersions.add(version);
             }
         }

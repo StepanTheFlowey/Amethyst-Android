@@ -108,7 +108,7 @@ public abstract class LifecycleAwareAlertDialog implements LifecycleEventObserve
                 @Override
                 protected void dialogHidden(boolean lifecycleEnded) {
                     hasLifecycleEnded.set(lifecycleEnded);
-                    synchronized(waitLock){waitLock.notifyAll();}
+                    synchronized(waitLock) {waitLock.notifyAll();}
                 }
             };
             lifecycleAwareDialog.show(lifecycle, context, dialogCreator);

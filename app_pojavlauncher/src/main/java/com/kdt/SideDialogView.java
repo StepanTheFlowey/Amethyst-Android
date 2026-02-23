@@ -29,7 +29,6 @@ import net.kdt.pojavlaunch.Tools;
  * A side dialog is a dialog appearing from one side of the screen
  */
 public abstract class SideDialogView {
-
     private final ViewGroup mParent;
     private final @LayoutRes int mLayoutId;
     private ViewGroup mDialogLayout;
@@ -50,7 +49,6 @@ public abstract class SideDialogView {
     /* Data to store when the UI element has yet to be inflated */
     private @StringRes int mStartButtonStringId, mEndButtonStringId, mTitleStringId;
     private View.OnClickListener mStartButtonListener, mEndButtonListener;
-
 
     public SideDialogView(Context context, ViewGroup parent, @LayoutRes int layoutId) {
         mMargin = context.getResources().getDimensionPixelOffset(R.dimen._20sdp);
@@ -84,7 +82,6 @@ public abstract class SideDialogView {
         button.setOnClickListener(listener);
         button.setVisibility(View.VISIBLE);
     }
-
 
     private void inflateLayout() {
         if(mIsInstantiated) {
@@ -147,7 +144,6 @@ public abstract class SideDialogView {
         mStartButton = null;
         mEndButton = null;
     }
-
 
     /**
      * Slide the layout into the visible screen area
@@ -224,7 +220,7 @@ public abstract class SideDialogView {
     }
 
     /** @return Whether the dialog is currently displaying */
-    public final boolean isDisplaying(){
+    public final boolean isDisplaying() {
         return mDisplaying;
     }
 
@@ -248,6 +244,4 @@ public abstract class SideDialogView {
      * Ideal for cleaning up resources
      */
     protected void onDestroy() {}
-
-
 }

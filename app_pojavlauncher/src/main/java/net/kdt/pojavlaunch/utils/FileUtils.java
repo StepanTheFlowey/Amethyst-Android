@@ -9,7 +9,7 @@ public class FileUtils {
      * @param filePath the path to check
      * @return whether it exists (same as File.exists()
      */
-    public static boolean exists(String filePath){
+    public static boolean exists(String filePath) {
         return new File(filePath).exists();
     }
 
@@ -67,7 +67,7 @@ public class FileUtils {
         if(targetFile.isFile()) throw new IOException("Target directory is a file");
         if(targetFile.exists()) {
             if(!targetFile.canWrite()) throw new IOException("Target directory is not writable");
-        }else if(!targetFile.mkdirs()) throw new IOException("Unable to create target directory");
+        } else if(!targetFile.mkdirs()) throw new IOException("Unable to create target directory");
     }
 
     /**

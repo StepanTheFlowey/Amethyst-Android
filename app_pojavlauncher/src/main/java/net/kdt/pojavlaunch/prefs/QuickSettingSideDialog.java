@@ -182,7 +182,7 @@ public abstract class QuickSettingSideDialog extends com.kdt.SideDialogView {
         target.setText(target.getContext().getString(format, value));
     }
 
-    private void updateMouseGrabVisibility(){
+    private void updateMouseGrabVisibility() {
         mMouseGrabSwitch.setVisibility(Tools.isPointerDeviceConnected()? View.VISIBLE : View.GONE);
     }
 

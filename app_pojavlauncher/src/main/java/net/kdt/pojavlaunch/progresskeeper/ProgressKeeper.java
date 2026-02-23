@@ -17,7 +17,7 @@ public class ProgressKeeper {
             shouldCallStarted = false;
             sProgressStates.remove(progressRecord);
             updateTaskCount();
-        }else if(shouldCallStarted){
+        } else if(shouldCallStarted) {
             sProgressStates.put(progressRecord, (progressState = new ProgressState()));
             updateTaskCount();
         }
@@ -48,7 +48,7 @@ public class ProgressKeeper {
         if(state != null && (state.resid != -1 || state.progress != -1)) {
             listener.onProgressStarted();
             listener.onProgressUpdated(state.progress, state.resid, state.varArg);
-        }else{
+        } else {
             listener.onProgressEnded();
         }
         List<ProgressListener> listenerWeakReferenceList = sProgressListeners.get(progressRecord);

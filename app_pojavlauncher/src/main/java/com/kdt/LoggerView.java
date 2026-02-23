@@ -25,7 +25,6 @@ public class LoggerView extends ConstraintLayout {
     private DefocusableScrollView mScrollView;
     private TextView mLogTextView;
 
-
     public LoggerView(@NonNull Context context) {
         this(context, null);
     }
@@ -45,7 +44,7 @@ public class LoggerView extends ConstraintLayout {
     /**
      * Inflate the layout, and add component behaviors
      */
-    private void init(){
+    private void init() {
         inflate(getContext(), R.layout.view_logger, this);
         mLogTextView = findViewById(R.id.content_log_view);
         mLogTextView.setTypeface(Typeface.MONOSPACE);
@@ -93,8 +92,6 @@ public class LoggerView extends ConstraintLayout {
                 mLogTextView.append(text + '\n');
                 if(mScrollView.isKeepFocusing()) mScrollView.fullScroll(View.FOCUS_DOWN);
             });
-
         };
     }
-
 }

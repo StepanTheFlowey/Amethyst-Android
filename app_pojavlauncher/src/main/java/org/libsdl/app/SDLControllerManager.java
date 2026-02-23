@@ -236,7 +236,7 @@ class SDLJoystickHandler_API16 extends SDLJoystickHandler {
     public void pollInputDevices() {
         if (!firstPollDone) {
             MinecraftGLSurface.sdlEnabled = true;
-            if (sDirectGamepadEnableHandler != null){
+            if (sDirectGamepadEnableHandler != null) {
                 sDirectGamepadEnableHandler.onDirectGamepadEnabled();
             }
             Log.i("SDL", "SDL detected! Enabling..");

@@ -44,7 +44,7 @@ public class ProfileTypeSelectFragment extends Fragment {
                 tryInstall(BTAInstallFragment.class, BTAInstallFragment.TAG));
     }
 
-    private void tryInstall(Class<? extends Fragment> fragmentClass, String tag){
+    private void tryInstall(Class<? extends Fragment> fragmentClass, String tag) {
         Tools.swapFragment(requireActivity(), fragmentClass, tag, null);
     }
 }

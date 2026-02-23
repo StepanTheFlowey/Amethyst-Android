@@ -31,7 +31,7 @@ public class ProgressService extends Service implements TaskCountListener {
     private NotificationManagerCompat notificationManagerCompat;
 
     /** Simple wrapper to start the service */
-    public static void startService(Context context){
+    public static void startService(Context context) {
         Intent intent = new Intent(context, ProgressService.class);
         ContextCompat.startForegroundService(context, intent);
     }
@@ -90,11 +90,11 @@ public class ProgressService extends Service implements TaskCountListener {
 
     @Override
     public void onUpdateTaskCount(int taskCount) {
-        Tools.MAIN_HANDLER.post(()->{
+        Tools.MAIN_HANDLER.post(() -> {
             if(taskCount > 0) {
                 mNotificationBuilder.setContentText(getString(R.string.progresslayout_tasks_in_progress, taskCount));
                 notificationManagerCompat.notify(1, mNotificationBuilder.build());
-            }else{
+            } else {
                 stopSelf();
             }
         });

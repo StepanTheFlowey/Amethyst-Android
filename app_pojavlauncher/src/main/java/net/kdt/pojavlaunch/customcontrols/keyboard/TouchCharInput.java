@@ -61,13 +61,13 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     /**
      * Toggle on and off the soft keyboard, depending of the state
      */
-    public void switchKeyboardState(){
+    public void switchKeyboardState() {
         InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
         // Allow, regardless of whether or not a hardware keyboard is declared
-        if(hasFocus()){
+        if(hasFocus()) {
             clear();
             disable();
-        }else{
+        } else {
             enable();
             imm.showSoftInput(this, InputMethodManager.SHOW_IMPLICIT);
         }
@@ -78,7 +78,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
      * Clear the EditText from any leftover inputs
      * It does not affect the in-game input
      */
-    public void clear(){
+    public void clear() {
         mIsDoingInternalChanges = true;
         // Edit the Editable directly as it doesn't affect the state
         // of the TextView.
@@ -91,7 +91,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     }
 
     /** Regain ability to exist, take focus and have some text being input */
-    public void enable(){
+    public void enable() {
         setEnabled(true);
         setFocusable(true);
         setVisibility(VISIBLE);
@@ -99,7 +99,7 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     }
 
     /** Lose ability to exist, take focus and have some text being input */
-    public void disable(){
+    public void disable() {
         clear();
         setVisibility(GONE);
         clearFocus();
@@ -108,18 +108,18 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
     }
 
     /** Send the enter key. */
-    private void sendEnter(){
+    private void sendEnter() {
         mCharacterSender.sendEnter();
         clear();
     }
 
     /** Just sets the char sender that should be used. */
-    public void setCharacterSender(CharacterSenderStrategy characterSender){
+    public void setCharacterSender(CharacterSenderStrategy characterSender) {
         mCharacterSender = characterSender;
     }
 
     /** This function deals with anything that has to be executed when the constructor is called */
-    private void setup(){
+    private void setup() {
         // Using TextWatcher instead of overriding onTextChanged because some Huawei firmware
         // calls setText in constructor, causing havoc for our listener
         addTextChangedListener(new InputTextWatcher());
@@ -146,12 +146,12 @@ public class TouchCharInput extends androidx.appcompat.widget.AppCompatEditText 
         @Override
         public void onTextChanged(CharSequence text, int start, int lengthBefore, int lengthAfter) {
             if(mIsDoingInternalChanges) return;
-            if(mCharacterSender != null){
-                for(int i=0; i < lengthBefore; ++i){
+            if(mCharacterSender != null) {
+                for(int i=0; i < lengthBefore; ++i) {
                     mCharacterSender.sendBackspace();
                 }
 
-                for(int i=start, count = 0; count < lengthAfter; ++i){
+                for(int i=start, count = 0; count < lengthAfter; ++i) {
                     mCharacterSender.sendChar(text.charAt(i));
                     ++count;
                 }

@@ -32,7 +32,7 @@ public class Architecture {
 	 * Tell us if the device supports 64 bits architecture
 	 * @return If the device supports 64 bits architecture
 	 */
-	public static boolean is64BitsDevice(){
+	public static boolean is64BitsDevice() {
 		return Build.SUPPORTED_64_BIT_ABIS.length != 0;
 	}
 
@@ -41,7 +41,7 @@ public class Architecture {
 	 * Note, that a 64 bits device won't be reported as supporting 32 bits.
 	 * @return If the device supports 32 bits architecture
 	 */
-	public static boolean is32BitsDevice(){
+	public static boolean is32BitsDevice() {
 		return !is64BitsDevice();
 	}
 
@@ -51,8 +51,8 @@ public class Architecture {
 	 *
 	 * @return ARCH_ARM || ARCH_ARM64 || ARCH_X86 || ARCH_86_64
 	 */
-	public static int getDeviceArchitecture(){
-		if(isx86Device()){
+	public static int getDeviceArchitecture() {
+		if(isx86Device()) {
 			return is64BitsDevice() ? ARCH_X86_64 : ARCH_X86;
 		}
 		return is64BitsDevice() ? ARCH_ARM64 : ARCH_ARM;
@@ -63,7 +63,7 @@ public class Architecture {
 	 * It doesn't tell if the device is 64 or 32 bits.
 	 * @return Whether or not the device is x86 based.
 	 */
-	public static boolean isx86Device(){
+	public static boolean isx86Device() {
 		//We check the whole range of supported ABIs,
 		//Since asus zenfones can place arm before their native instruction set.
 		String[] ABI = is64BitsDevice() ? Build.SUPPORTED_64_BIT_ABIS : Build.SUPPORTED_32_BIT_ABIS;
@@ -79,7 +79,7 @@ public class Architecture {
 	 * @param arch The architecture as a String
 	 * @return The architecture as an int, can be UNSUPPORTED_ARCH if unknown.
 	 */
-	public static int archAsInt(String arch){
+	public static int archAsInt(String arch) {
 		arch = arch.toLowerCase().trim().replace(" ", "");
 		if(arch.contains("arm64") || arch.equals("aarch64")) return ARCH_ARM64;
 		if(arch.contains("arm") || arch.equals("aarch32")) return ARCH_ARM;
@@ -94,7 +94,7 @@ public class Architecture {
 	 * @param arch The architecture as an int.
 	 * @return "arm64" || "arm" || "x86_64" || "x86" || "UNSUPPORTED_ARCH"
 	 */
-	public static String archAsString(int arch){
+	public static String archAsString(int arch) {
 		if(arch == ARCH_ARM64) return "arm64";
 		if(arch == ARCH_ARM) return "arm";
 		if(arch == ARCH_X86_64) return "x86_64";

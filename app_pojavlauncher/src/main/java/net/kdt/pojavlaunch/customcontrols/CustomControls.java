@@ -18,8 +18,6 @@ public class CustomControls {
 		this(new ArrayList<>(), new ArrayList<>(), new ArrayList<>());
 	}
 
-
-
 	public CustomControls(List<ControlData> mControlDataList, List<ControlDrawerData> mDrawerDataList, List<ControlJoystickData> mJoystickDataList) {
 		this.mControlDataList = mControlDataList;
 		this.mDrawerDataList = mDrawerDataList;

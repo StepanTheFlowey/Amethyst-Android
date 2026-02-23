@@ -256,7 +256,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     }
 
                     runCraft(finalVersion, mVersionInfo);
-                }catch (Throwable e){
+                }catch (Throwable e) {
                     Tools.showErrorRemote(e);
                 }
             });
@@ -290,14 +290,14 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     public void onAttachedToWindow() {
         // Post to get the correct display dimensions after layout.
         LauncherPreferences.computeNotchSize(this);
-        mControlLayout.post(()->{
+        mControlLayout.post(() -> {
             Tools.getDisplayMetrics(this);
             loadControls();
         });
     }
 
     /** Boilerplate binding */
-    private void bindValues(){
+    private void bindValues() {
         mControlLayout = findViewById(R.id.main_control_layout);
         minecraftGLView = findViewById(R.id.main_game_render_view);
         touchpad = findViewById(R.id.main_touchpad);
@@ -320,7 +320,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
     @Override
     protected void onPause() {
         mGyroControl.disable();
-        if (CallbackBridge.isGrabbing()){
+        if (CallbackBridge.isGrabbing()) {
             sendKeyPress(LwjglGlfwKeycode.GLFW_KEY_ESCAPE);
         }
         if(mQuickSettingSideDialog != null) {
@@ -359,7 +359,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
         // does not implicitly start a layout. So, request a layout and expect the screen dimensions to be valid after the]
         // post.
         mControlLayout.requestLayout();
-        mControlLayout.post(()->{
+        mControlLayout.post(() -> {
             // Child of mControlLayout, so refreshing size here is correct
             minecraftGLView.refreshSize();
             Tools.updateWindowSize(this);
@@ -413,7 +413,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     Tools.showErrorRemote(new RuntimeException(getString(R.string.error_vanilla_json_corrupt)));
                 assetVersion = version.assets;
             }
-       } catch (RuntimeException ignored){
+       } catch (RuntimeException ignored) {
             assetVersion = "legacy";
        } // If this fails.. oh well.
 
@@ -552,7 +552,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
                     if(link.startsWith("file://")) truncLength = 7;
                     String path = link.substring(truncLength);
                     Tools.openPath(ctx, new File(path), false);
-                }else {
+                } else {
                     Intent intent = new Intent(Intent.ACTION_VIEW);
                     intent.setDataAndType(Uri.parse(link), "*/*");
                     ctx.startActivity(intent);
@@ -577,7 +577,7 @@ public class MainActivity extends BaseActivity implements ControlButtonMenuListe
 
     @Keep
     public static void querySystemClipboard() {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
             ClipData clipData = GLOBAL_CLIPBOARD.getPrimaryClip();
             if(clipData == null) {
                 AWTInputBridge.nativeClipboardReceived(null, null);

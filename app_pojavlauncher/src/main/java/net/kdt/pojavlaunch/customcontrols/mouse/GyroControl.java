@@ -91,7 +91,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
         SensorManager.getRotationMatrixFromVector(mCurrentRotation, sensorEvent.values);
 
 
-        if(mWarmup > 0){  // Setup initial position
+        if(mWarmup > 0) {  // Setup initial position
             mWarmup--;
             return;
         }
@@ -111,7 +111,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
             mStoredY = 0;
             updatePosition = true;
         } else {
-            if(Math.abs(mStoredX) > SINGLE_AXIS_LOW_PASS_THRESHOLD){
+            if(Math.abs(mStoredX) > SINGLE_AXIS_LOW_PASS_THRESHOLD) {
                 CallbackBridge.mouseX -= ((mSwapXY ? mStoredY : mStoredX) * xFactor);
                 mStoredX = 0;
                 updatePosition = true;
@@ -124,16 +124,16 @@ public class GyroControl implements SensorEventListener, GrabListener {
             }
         }
 
-        if(updatePosition){
+        if(updatePosition) {
             CallbackBridge.sendCursorPos(CallbackBridge.mouseX, CallbackBridge.mouseY);
         }
     }
 
     /** Update the axis mapping in accordance to activity rotation, used for initial rotation */
-    public void updateOrientation(){
+    public void updateOrientation() {
         int rotation = mWindowManager.getDefaultDisplay().getRotation();
         mSurfaceRotation = rotation;
-        switch (rotation){
+        switch (rotation) {
             case Surface.ROTATION_0:
                 mSwapXY = true;
                 xFactor = 1;
@@ -174,7 +174,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
      * Compute the moving average of the gyroscope to reduce jitter
      * @param newAngleDifference The new angle difference
      */
-    private void damperValue(float[] newAngleDifference){
+    private void damperValue(float[] newAngleDifference) {
         mHistoryIndex ++;
         if(mHistoryIndex >= mAngleBuffer.length) mHistoryIndex = 0;
 
@@ -192,19 +192,18 @@ public class GyroControl implements SensorEventListener, GrabListener {
     }
 
     /** Reset the moving average data */
-    private void resetDamper(){
+    private void resetDamper() {
         mHistoryIndex = -1;
         xTotal = 0;
         yTotal = 0;
         xAverage = 0;
         yAverage = 0;
-        for(float[] oldAngle : mAngleBuffer){
+        for(float[] oldAngle : mAngleBuffer) {
             Arrays.fill(oldAngle, 0);
         }
     }
 
     class OrientationCorrectionListener extends OrientationEventListener {
-
         public OrientationCorrectionListener(Context context) {
             super(context, SensorManager.SENSOR_DELAY_NORMAL);
         }
@@ -219,16 +218,14 @@ public class GyroControl implements SensorEventListener, GrabListener {
                 return; //change nothing
             }
 
-
-
-            switch (mSurfaceRotation){
+            switch (mSurfaceRotation) {
                 case Surface.ROTATION_90:
                 case Surface.ROTATION_270:
                     mSwapXY = false;
                     if(225 <  i && i < 315) {
                         xFactor = -1;
                         yFactor = 1;
-                    }else if(45 < i && i < 135) {
+                    } else if(45 < i && i < 135) {
                         xFactor = 1;
                         yFactor = -1;
                     }
@@ -240,7 +237,7 @@ public class GyroControl implements SensorEventListener, GrabListener {
                     if((315 < i && i <= 360) || (i < 45) ) {
                         xFactor = 1;
                         yFactor = 1;
-                    }else if(135 < i && i < 225) {
+                    } else if(135 < i && i < 225) {
                         xFactor = -1;
                         yFactor = -1;
                     }

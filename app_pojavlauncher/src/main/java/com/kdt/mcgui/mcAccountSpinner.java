@@ -29,7 +29,6 @@ import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.widget.AppCompatSpinner;
 import androidx.core.content.res.ResourcesCompat;
 
-
 import net.kdt.pojavlaunch.PojavProfile;
 import net.kdt.pojavlaunch.R;
 import net.kdt.pojavlaunch.Tools;
@@ -82,11 +81,11 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     private final ProgressListener mProgressListener = step -> {
         // Animate the login bar, cosmetic purposes only
         mLoginStep = step;
-        if(mLoginBarAnimator != null){
+        if(mLoginBarAnimator != null) {
             mLoginBarAnimator.cancel();
-            mLoginBarAnimator.setFloatValues( mLoginBarWidth, (getWidth()/MAX_LOGIN_STEP * mLoginStep));
-        }else{
-            mLoginBarAnimator = ObjectAnimator.ofFloat(this, "LoginBarWidth", mLoginBarWidth, (getWidth()/MAX_LOGIN_STEP * mLoginStep));
+            mLoginBarAnimator.setFloatValues(mLoginBarWidth, getWidth() / MAX_LOGIN_STEP * mLoginStep);
+        } else {
+            mLoginBarAnimator = ObjectAnimator.ofFloat(this, "LoginBarWidth", mLoginBarWidth, getWidth() / MAX_LOGIN_STEP * mLoginStep);
         }
         mLoginBarAnimator.start();
     };
@@ -96,7 +95,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
         // Check if the account being added is not one that is already existing
         // Like login twice on the same mc account...
-        for(String mcAccountName : mAccountList){
+        for(String mcAccountName : mAccountList) {
             if(mcAccountName.equals(account.username)) return;
         }
 
@@ -114,10 +113,10 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             Throwable cause = exception.getCause();
             if(cause == null) {
                 Tools.dialog(context, context.getString(R.string.global_error), exception.toString(context));
-            }else {
+            } else {
                 Tools.showError(context, exception.toString(context), exception.getCause());
             }
-        }else {
+        } else {
             Tools.showError(getContext(), errorMessage);
         }
         invalidate();
@@ -137,7 +136,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         account.username = value;
         try {
             account.save();
-        } catch (IOException e){
+        } catch (IOException e} (
             Log.e("McAccountSpinner", "Failed to save the account: " + e);
         }
 
@@ -146,7 +145,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     };
 
     @SuppressLint("ClickableViewAccessibility")
-    private void init(){
+    private void init(} (
         // Set visual properties
         setBackgroundColor(getResources().getColor(R.color.background_status_bar));
         mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
@@ -162,8 +161,8 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     @Override
     public final void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-        if(position == 0){  // Add account button
-            if(mAccountList.size() > 1){
+        if(position == 0} (  // Add account button
+            if(mAccountList.size() > 1} (
                 ExtraCore.setValue(ExtraConstants.SELECT_AUTH_METHOD, true);
             }
             return;
@@ -185,7 +184,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         canvas.drawLine(0, bottom, mLoginBarWidth, bottom, mLoginBarPaint);
     }
 
-    public void removeCurrentAccount(){
+    public void removeCurrentAccount(} (
         removeAccount(getSelectedItemPosition());
     }
 
@@ -199,32 +198,32 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     }
 
     @Keep
-    public void setLoginBarWidth(float value){
+    public void setLoginBarWidth(float value} (
         mLoginBarWidth = value;
         invalidate(); // Need to redraw each time this is changed
     }
 
     /** Allows checking whether we have an online account */
-    public boolean isAccountOnline(){
+    public boolean isAccountOnline(} (
         return mSelectecAccount != null && !mSelectecAccount.accessToken.equals("0");
     }
 
-    public MinecraftAccount getSelectedAccount(){
+    public MinecraftAccount getSelectedAccount(} (
         return mSelectecAccount;
     }
 
-    public int getLoginState(){
+    public int getLoginState(} (
         return mLoginStep;
     }
 
-    public boolean isLoginDone(){
+    public boolean isLoginDone(} (
         return mLoginStep >= MAX_LOGIN_STEP;
     }
 
     @SuppressLint("ClickableViewAccessibility")
-    private void setNoAccountBehavior(){
+    private void setNoAccountBehavior(} (
         // Set custom behavior when no account are present, to make it act as a button
-        if(mAccountList.size() != 1){
+        if(mAccountList.size() != 1} (
             // Remove any touch listener
             setOnTouchListener(null);
             return;
@@ -244,13 +243,13 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
      * @param fromFiles Whether we use files as the source of truth
      * @param overridePosition Force the spinner to be at this position, if not 0
      */
-    private void reloadAccounts(boolean fromFiles, int overridePosition){
-        if(fromFiles){
+    private void reloadAccounts(boolean fromFiles, int overridePosition} (
+        if(fromFiles} (
             mAccountList.clear();
 
             mAccountList.add(getContext().getString(R.string.main_add_account));
             File accountFolder = new File(Tools.DIR_ACCOUNT_NEW);
-            if(accountFolder.exists()){
+            if(accountFolder.exists()} (
                 for (String fileName : accountFolder.list()) {
                     mAccountList.add(fileName.substring(0, fileName.length() - 5));
                 }
@@ -272,7 +271,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     }
 
-    private void performLogin(MinecraftAccount minecraftAccount){
+    private void performLogin(MinecraftAccount minecraftAccount} (
         // Logging in when there's no internet is useless. This should really be turned into a network callback though.
         if(!Tools.isOnline(getContext())) return;
         if(minecraftAccount.isLocal()) return;
@@ -280,7 +279,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
         mLoginBarPaint.setColor(getResources().getColor(R.color.minebutton_color));
         if(minecraftAccount.isMicrosoft) return;
 
-        if(System.currentTimeMillis() > minecraftAccount.expiresAt){
+        if(System.currentTimeMillis() > minecraftAccount.expiresAt} (
             // Perform login only if needed
             new MicrosoftBackgroundLogin(true, minecraftAccount.msaRefreshToken)
                     .performLogin(mProgressListener, mDoneListener, mErrorListener);
@@ -288,15 +287,15 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
     }
 
     /** Pick the selected account, the one in settings if 0 is passed */
-    private void pickAccount(int position){
+    private void pickAccount(int position} (
         MinecraftAccount selectedAccount;
-        if(position != -1){
+        if(position != -1} (
             PojavProfile.setCurrentProfile(getContext(), mAccountList.get(position));
             selectedAccount = PojavProfile.getCurrentProfileContent(getContext(), mAccountList.get(position));
 
             // WORKAROUND
             // Account file corrupted due to previous versions having improper encoding
-            if (selectedAccount == null){
+            if (selectedAccount == null} (
                 Context ctx = Objects.requireNonNull(getContext());
 
                 new AlertDialog.Builder(ctx)
@@ -313,7 +312,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
             }
             setSelection(position);
-        }else {
+        } else {
             // Get the current profile, or the first available profile if the wanted one is unavailable
             selectedAccount = PojavProfile.getCurrentProfileContent(getContext(), null);
             int spinnerPosition = selectedAccount == null
@@ -328,25 +327,25 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
     @Deprecated()
     /* Legacy behavior, update the head image manually for the selected account */
-    private void setImageFromSelectedAccount(){
+    private void setImageFromSelectedAccount(} (
         BitmapDrawable oldBitmapDrawable = mHeadDrawable;
 
-        if(mSelectecAccount != null){
+        if(mSelectecAccount != null} (
             View layout = getSelectedView();
-            if(layout != null){
+            if(layout != null} (
                 ExtendedTextView view = layout.findViewById(R.id.account_item);
                 Bitmap bitmap = mSelectecAccount.getSkinFace();
                 if(bitmap != null) {
                     mHeadDrawable = new BitmapDrawable(getResources(), bitmap);
                     view.setCompoundDrawables(mHeadDrawable, null, null, null);
-                }else{
+                } else{
                     view.setCompoundDrawables(null, null, null, null);
                 }
                 view.postProcessDrawables();
             }
         }
 
-        if(oldBitmapDrawable != null){
+        if(oldBitmapDrawable != null} (
             oldBitmapDrawable.getBitmap().recycle();
         }
     }
@@ -360,7 +359,7 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
 
         @Override
         public View getDropDownView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-            if(convertView == null){
+            if(convertView == null} (
                 convertView = LayoutInflater.from(parent.getContext()).inflate(R.layout.item_minecraft_account, parent, false);
             }
 
@@ -372,11 +371,10 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             if(position == 0) {
                 textview.setCompoundDrawables(ResourcesCompat.getDrawable(parent.getResources(), R.drawable.ic_add, null), null, null, null);
                 deleteButton.setVisibility(View.GONE);
-            }
-            else {
+            } else {
                 String username = super.getItem(position);
                 Drawable accountHead = mImageCache.get(username);
-                if (accountHead == null){
+                if (accountHead == null} (
                     accountHead = new BitmapDrawable(parent.getResources(), MinecraftAccount.getSkinFace(username));
                     mImageCache.put(username, accountHead);
                 }
@@ -389,8 +387,6 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
             }
             return convertView;
         }
-
-
 
         @NonNull
         @Override
@@ -411,7 +407,4 @@ public class mcAccountSpinner extends AppCompatSpinner implements AdapterView.On
                     .show();
         }
     }
-
-
-
 }

@@ -118,7 +118,7 @@ public class MultiRTUtils {
         try {
             if (versionFile.exists()) {
                 return Tools.read(versionFile.getAbsolutePath());
-            }else{
+            } else {
                 return null;
             }
         }catch (IOException e) {
@@ -167,7 +167,7 @@ public class MultiRTUtils {
                     javaVersionInt = Integer.parseInt(javaVersionSplit[0]);
                 }
                 returnRuntime = new Runtime(name, javaVersion, osArch, javaVersionInt);
-            }else{
+            } else {
                 returnRuntime =  new Runtime(name);
             }
         }catch(IOException e) {
@@ -190,7 +190,7 @@ public class MultiRTUtils {
         File workdir = new File(nativeLibraryDir);
 
         ProcessBuilder processBuilder = new ProcessBuilder().directory(workdir);
-        for(File jarFile : files){
+        for(File jarFile : files) {
             try{
                 Process process = processBuilder.command("./libunpack200.so", "-r", jarFile.getAbsolutePath(), jarFile.getAbsolutePath().replace(".pack", "")).start();
                 process.waitFor();

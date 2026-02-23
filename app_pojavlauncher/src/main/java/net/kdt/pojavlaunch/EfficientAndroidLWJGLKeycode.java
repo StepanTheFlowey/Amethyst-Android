@@ -162,14 +162,14 @@ public class EfficientAndroidLWJGLKeycode {
 
     }
 
-    public static boolean containsIndex(int index){
+    public static boolean containsIndex(int index) {
         return index >= 0;
     }
 
     public static String[] generateKeyName() {
         if (androidKeyNameArray == null) {
             androidKeyNameArray = new String[sAndroidKeycodes.length];
-            for(int i=0; i < androidKeyNameArray.length; ++i){
+            for(int i=0; i < androidKeyNameArray.length; ++i) {
                 androidKeyNameArray[i] = KeyEvent.keyCodeToString(sAndroidKeycodes[i]).replace("KEYCODE_", "");
             }
         }
@@ -194,7 +194,7 @@ public class EfficientAndroidLWJGLKeycode {
                 keyEvent.getAction() == KeyEvent.ACTION_DOWN);
     }
 
-    public static void execKeyIndex(int index){
+    public static void execKeyIndex(int index) {
         //Send a quick key press.
         sendKeyPress(getValueByIndex(index));
     }
@@ -206,7 +206,7 @@ public class EfficientAndroidLWJGLKeycode {
      *
      * @param lwjglGlfwKeycode A GLFW key code macro (e.g., {@link LwjglGlfwKeycode#GLFW_KEY_W}).
      */
-    public static char getLwjglChar(int lwjglGlfwKeycode){
+    public static char getLwjglChar(int lwjglGlfwKeycode) {
         int androidKeycode = sAndroidKeycodes[sLwjglKeycodesReversed[lwjglGlfwKeycode]];
         KeyEvent key = new KeyEvent(KeyEvent.ACTION_UP, androidKeycode);
         char charToSend;
@@ -215,7 +215,7 @@ public class EfficientAndroidLWJGLKeycode {
         if (Character.isLetter(charToSend) && (
         ((currentMods & LwjglGlfwKeycode.GLFW_MOD_SHIFT) != 0) ^
         ((currentMods & LwjglGlfwKeycode.GLFW_MOD_CAPS_LOCK) != 0))
-        ){
+        ) {
             charToSend = Character.toUpperCase(charToSend);
         }
         return charToSend;
@@ -225,7 +225,7 @@ public class EfficientAndroidLWJGLKeycode {
         return sLwjglKeycodes[index];
     }
 
-    public static int getIndexByKey(int key){
+    public static int getIndexByKey(int key) {
         return Arrays.binarySearch(sAndroidKeycodes, key);
     }
 
@@ -238,7 +238,7 @@ public class EfficientAndroidLWJGLKeycode {
         return 0;
     }
 
-    private static void add(int androidKeycode, short LWJGLKeycode){
+    private static void add(int androidKeycode, short LWJGLKeycode) {
         sAndroidKeycodes[mTmpCount] = androidKeycode;
         sLwjglKeycodes[mTmpCount] = LWJGLKeycode;
         sLwjglKeycodesReversed[LWJGLKeycode] = mTmpCount;

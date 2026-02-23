@@ -19,7 +19,7 @@ public class LauncherProfiles {
     private static final File launcherProfilesFile = new File(Tools.GAME_PROFILES_FILE);
 
     /** Reload the profile from the file, creating a default one if necessary */
-    public static void load(){
+    public static void load() {
         if (launcherProfilesFile.exists()) {
             try {
                 mainProfileJson = Tools.GLOBAL_GSON.fromJson(Tools.read(launcherProfilesFile.getAbsolutePath()), MinecraftLauncherProfiles.class);
@@ -36,7 +36,7 @@ public class LauncherProfiles {
             mainProfileJson.profiles.put(UUID.randomUUID().toString(), MinecraftProfile.getDefaultProfile());
 
         // Normalize profile names from mod installers
-        if(normalizeProfileIds(mainProfileJson)){
+        if(normalizeProfileIds(mainProfileJson)) {
             write();
             load();
         }
@@ -84,22 +84,22 @@ public class LauncherProfiles {
      * This avoids certain profiles to be erased by the installer
      * @return Whether some profiles have been normalized
      */
-    private static boolean normalizeProfileIds(MinecraftLauncherProfiles launcherProfiles){
+    private static boolean normalizeProfileIds(MinecraftLauncherProfiles launcherProfiles) {
         boolean hasNormalized = false;
         ArrayList<String> keys = new ArrayList<>();
 
         // Detect denormalized keys
-        for(String profileKey : launcherProfiles.profiles.keySet()){
+        for(String profileKey : launcherProfiles.profiles.keySet()) {
             try{
                 if(!UUID.fromString(profileKey).toString().equals(profileKey)) keys.add(profileKey);
-            }catch (IllegalArgumentException exception){
+            }catch (IllegalArgumentException exception) {
                 keys.add(profileKey);
                 Log.w(LauncherProfiles.class.toString(), "Illegal profile uuid: " + profileKey);
             }
         }
 
         // Swap the new keys
-        for(String profileKey : keys){
+        for(String profileKey : keys) {
             MinecraftProfile currentProfile = launcherProfiles.profiles.get(profileKey);
             insertMinecraftProfile(currentProfile);
             launcherProfiles.profiles.remove(profileKey);

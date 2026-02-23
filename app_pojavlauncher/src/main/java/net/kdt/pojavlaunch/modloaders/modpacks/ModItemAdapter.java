@@ -134,7 +134,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
 
     @Override
     public void onUpdateTaskCount(int taskCount) {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
             mTasksRunning = taskCount != 0;
             for(ViewHolder viewHolder : mViewHolderSet) {
                 viewHolder.updateInstallButtonState();
@@ -168,7 +168,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             super(view);
             mViewHolderSet.add(this);
             view.setOnClickListener(v -> {
-                if(!hasExtended()){
+                if(!hasExtended()) {
                     // Inflate the ViewStub
                     mExtendedLayout = ((ViewStub)v.findViewById(R.id.mod_limited_state_stub)).inflate();
                     mExtendedButton = mExtendedLayout.findViewById(R.id.mod_extended_select_version_button);
@@ -261,7 +261,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mTitle.setText(item.title);
             mDescription.setText(item.description);
 
-            if(hasExtended()){
+            if(hasExtended()) {
                 closeDetailedView();
             }
         }
@@ -293,7 +293,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             mExtendedLayout.setLayoutParams(params);
         }
 
-        private void closeDetailedView(){
+        private void closeDetailedView() {
             mExtendedLayout.setVisibility(View.GONE);
             mDescription.setMaxLines(3);
         }
@@ -305,11 +305,11 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
             openDetailedView();
         }
 
-        private boolean hasExtended(){
+        private boolean hasExtended() {
             return mExtendedLayout != null;
         }
 
-        private boolean isExtended(){
+        private boolean isExtended() {
             return hasExtended() && mExtendedLayout.getVisibility() == View.VISIBLE;
         }
 
@@ -370,7 +370,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                 mTaskInProgress = null;
                 if(finalModItems == null) {
                     mSearchResultCallback.onSearchError(SearchResultCallback.ERROR_INTERNAL);
-                }else if(finalModItems.length == 0) {
+                } else if(finalModItems.length == 0) {
                     if(mPreviousResult != null) {
                         mLastPage = true;
                         notifyItemChanged(mModItems.length);
@@ -378,7 +378,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                         return;
                     }
                     mSearchResultCallback.onSearchError(SearchResultCallback.ERROR_NO_RESULTS);
-                }else{
+                } else {
                     mSearchResultCallback.onSearchFinished();
                 }
                 mCurrentResult = result;
@@ -392,7 +392,7 @@ public class ModItemAdapter extends RecyclerView.Adapter<RecyclerView.ViewHolder
                     mModItems = finalModItems;
                     notifyItemChanged(prevLength);
                     notifyItemRangeInserted(prevLength+1, mModItems.length);
-                }else {
+                } else {
                     mModItems = finalModItems;
                     notifyDataSetChanged();
                 }

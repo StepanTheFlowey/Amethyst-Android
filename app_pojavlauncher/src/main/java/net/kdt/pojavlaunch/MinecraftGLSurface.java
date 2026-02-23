@@ -117,14 +117,14 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
      * @param touchpad the optional cursor-emulating touchpad, used for touch event processing
      *                 when the cursor is not grabbed
      */
-    public void start(boolean isAlreadyRunning, AbstractTouchpad touchpad){
+    public void start(boolean isAlreadyRunning, AbstractTouchpad touchpad) {
         if(Tools.isAndroid8OrHigher()) setUpPointerCapture(touchpad);
         mInGUIProcessor.setAbstractTouchpad(touchpad);
         // Kopper Zink has orientation issues on SurfaceView
         try {
             useSurfaceView = useSurfaceView && !LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper");
-        } catch (NullPointerException ignored){}
-        if(useSurfaceView){
+        } catch (NullPointerException ignored) {}
+        if(useSurfaceView) {
             SurfaceView surfaceView = new SurfaceView(getContext());
             mSurface = surfaceView;
 
@@ -151,7 +151,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             });
 
             ((ViewGroup)getParent()).addView(surfaceView);
-        }else{
+        } else {
             TextureView textureView = new TextureView(getContext());
             textureView.setOpaque(true);
             textureView.setAlpha(1.0f);
@@ -217,7 +217,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
                     mPointerCapture.handleAutomaticCapture();
                     return true;
                 }
-            }else if(toolType != MotionEvent.TOOL_TYPE_STYLUS) continue;
+            } else if(toolType != MotionEvent.TOOL_TYPE_STYLUS) continue;
 
             // Mouse found
             if(CallbackBridge.isGrabbing()) return false;
@@ -232,9 +232,9 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     private void createGamepad(View contextView, InputDevice inputDevice) {
         if(CallbackBridge.sGamepadDirectInput && !sdlEnabled) {
             mGamepadHandler = new DirectGamepad();
-        }else if(!sdlEnabled) {
+        } else if(!sdlEnabled) {
             mGamepadHandler = new Gamepad(contextView, inputDevice, DefaultDataProvider.INSTANCE, true);
-        }else mGamepadHandler = (code, value) -> {}; // Ensure it isn't null while also not processing the events.
+        } else mGamepadHandler = (code, value) -> {}; // Ensure it isn't null while also not processing the events.
     }
 
     /**
@@ -245,7 +245,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     public boolean dispatchGenericMotionEvent(MotionEvent event) {
         if(sdlEnabled && Gamepad.isGamepadEvent(event)) {
             final MotionEvent copy = MotionEvent.obtain(event);
-            PojavApplication.sExecutorService.execute(()->{
+            PojavApplication.sExecutorService.execute(() -> {
                 try {
                     MainActivity.motionListener.onGenericMotion(this, copy);
                     copy.recycle();
@@ -258,7 +258,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         super.dispatchGenericMotionEvent(event);
         int mouseCursorIndex = -1;
 
-        if(!sdlEnabled && Gamepad.isGamepadEvent(event)){
+        if(!sdlEnabled && Gamepad.isGamepadEvent(event)) {
             if(mGamepadHandler == null) createGamepad(this, event.getDevice());
 
             mInputManager.handleMotionEventInput(getContext(), event, mGamepadHandler);
@@ -313,7 +313,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
         //Sometimes, key events comes from SOME keys of the software keyboard
         //Even weirder, is is unknown why a key or another is selected to trigger a keyEvent
-        if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD){
+        if((event.getFlags() & KeyEvent.FLAG_SOFT_KEYBOARD) == KeyEvent.FLAG_SOFT_KEYBOARD) {
             if(eventKeycode == KeyEvent.KEYCODE_ENTER) return true; //We already listen to it.
             touchCharInput.dispatchKeyEvent(event);
             return true;
@@ -322,9 +322,9 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         //Sometimes, key events may come from the mouse
         if(event.getDevice() != null
                 && ( (event.getSource() & InputDevice.SOURCE_MOUSE_RELATIVE) == InputDevice.SOURCE_MOUSE_RELATIVE
-                ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ){
+                ||   (event.getSource() & InputDevice.SOURCE_MOUSE) == InputDevice.SOURCE_MOUSE)  ) {
 
-            if(eventKeycode == KeyEvent.KEYCODE_BACK){
+            if(eventKeycode == KeyEvent.KEYCODE_BACK) {
                 sendMouseButton(LwjglGlfwKeycode.GLFW_MOUSE_BUTTON_RIGHT, event.getAction() == KeyEvent.ACTION_DOWN);
                 return true;
             }
@@ -343,7 +343,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
             });
             return true;
         }
-        if(!sdlEnabled && isGamepadEvent){
+        if(!sdlEnabled && isGamepadEvent) {
             if(mGamepadHandler == null) createGamepad(this, event.getDevice());
 
             mInputManager.handleKeyEventInput(getContext(), event, mGamepadHandler);
@@ -382,7 +382,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
     }
 
     /** Called when the size need to be set at any point during the surface lifecycle **/
-    public void refreshSize(){
+    public void refreshSize() {
         refreshSize(false);
     }
 
@@ -403,18 +403,18 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         }
         windowWidth = newWidth;
         windowHeight = newHeight;
-        if(mSurface == null){
+        if(mSurface == null) {
             Log.w("MGLSurface", "Attempt to refresh size on null surface");
             return;
         }
-        if(useSurfaceView){
+        if(useSurfaceView) {
             SurfaceView view = (SurfaceView) mSurface;
-            if(view.getHolder() != null){
+            if(view.getHolder() != null) {
                 view.getHolder().setFixedSize(windowWidth, windowHeight);
             }
-        }else{
+        } else {
             TextureView view = (TextureView)mSurface;
-            if(view.getSurfaceTexture() != null){
+            if(view.getSurfaceTexture() != null) {
                 view.getSurfaceTexture().setDefaultBufferSize(windowWidth, windowHeight);
             }
         }
@@ -423,7 +423,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
     }
 
-    private void realStart(Surface surface){
+    private void realStart(Surface surface) {
         // Initial size set. Request immedate refresh, otherwise the initial width and height for the game
         // may be broken/unknown.
         refreshSize(true);
@@ -478,7 +478,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
 
     @Override
     public void onDirectGamepadEnabled() {
-        post(()->{
+        post(() -> {
             if(mGamepadHandler != null && mGamepadHandler instanceof Gamepad) {
                 ((Gamepad)mGamepadHandler).removeSelf();
             }
@@ -492,7 +492,7 @@ public class MinecraftGLSurface extends View implements GrabListener, DirectGame
         void isReady();
     }
 
-    public void setSurfaceReadyListener(SurfaceReadyListener listener){
+    public void setSurfaceReadyListener(SurfaceReadyListener listener) {
         synchronized (mSurfaceReadyListenerLock) {
             mSurfaceReadyListener = listener;
             mSurfaceReadyListenerLock.notifyAll();

@@ -62,7 +62,7 @@ public class MicrosoftBackgroundLogin {
     public boolean doesOwnGame;
     public long expiresAt;
 
-    public MicrosoftBackgroundLogin(boolean isRefresh, String authCode){
+    public MicrosoftBackgroundLogin(boolean isRefresh, String authCode) {
         mIsRefresh = isRefresh;
         mAuthCode = authCode;
     }
@@ -70,7 +70,7 @@ public class MicrosoftBackgroundLogin {
     /** Performs a full login, calling back listeners appropriately  */
     public void performLogin(@Nullable final ProgressListener progressListener,
                              @Nullable final DoneListener doneListener,
-                             @Nullable final ErrorListener errorListener){
+                             @Nullable final ErrorListener errorListener) {
         sExecutorService.execute(() -> {
             try {
                 notifyProgress(progressListener, 1);
@@ -103,7 +103,7 @@ public class MicrosoftBackgroundLogin {
                     Tools.runOnUiThread(() -> doneListener.onLoginDone(finalAcc));
                 }
 
-            }catch (Exception e){
+            }catch (Exception e) {
                 Log.e("MicroAuth", "Exception thrown during authentication", e);
                 if(errorListener != null)
                     Tools.runOnUiThread(() -> errorListener.onLoginError(e));
@@ -146,7 +146,7 @@ public class MicrosoftBackgroundLogin {
             Log.i("MicrosoftLogin","Acess Token = " + jo.getString("access_token"));
             return jo.getString("access_token");
             //acquireXBLToken(jo.getString("access_token"));
-        }else{
+        } else {
             throw getResponseThrowable(conn);
         }
     }
@@ -177,7 +177,7 @@ public class MicrosoftBackgroundLogin {
             Log.i("MicrosoftLogin","Xbl Token = "+jo.getString("Token"));
             return jo.getString("Token");
             //acquireXsts(jo.getString("Token"));
-        }else{
+        } else {
             throw getResponseThrowable(conn);
         }
     }
@@ -213,7 +213,7 @@ public class MicrosoftBackgroundLogin {
             Log.i("MicrosoftLogin","Xbl Xsts = " + token + "; Uhs = " + uhs);
             return new String[]{uhs, token};
             //acquireMinecraftToken(uhs,jo.getString("Token"));
-        }else if(conn.getResponseCode() == 401) {
+        } else if(conn.getResponseCode() == 401) {
             String responseContents = Tools.read(conn.getErrorStream());
             JSONObject jo = new JSONObject(responseContents);
             long xerr = jo.optLong("XErr", -1);
@@ -222,7 +222,7 @@ public class MicrosoftBackgroundLogin {
                 throw new PresentedException(new RuntimeException(responseContents), locale_id);
             }
             throw new PresentedException(new RuntimeException(responseContents), R.string.xerr_unknown, xerr);
-        }else{
+        } else {
             throw getResponseThrowable(conn);
         }
     }
@@ -250,7 +250,7 @@ public class MicrosoftBackgroundLogin {
             mcToken = jo.getString("access_token");
             //checkMcProfile(jo.getString("access_token"));
             return jo.getString("access_token");
-        }else{
+        } else {
             throw getResponseThrowable(conn);
         }
     }
@@ -293,7 +293,7 @@ public class MicrosoftBackgroundLogin {
             Log.i("MicrosoftLogin","Uuid Minecraft = " + uuidDashes);
             mcName=name;
             mcUuid=uuidDashes;
-        }else{
+        } else {
             Log.i("MicrosoftLogin","It seems that this Microsoft Account does not own the game.");
             doesOwnGame = false;
             mcName = "Demo.Player";
@@ -304,8 +304,8 @@ public class MicrosoftBackgroundLogin {
     }
 
     /** Wrapper to ease notifying the listener */
-    private void notifyProgress(@Nullable ProgressListener listener, int step){
-        if(listener != null){
+    private void notifyProgress(@Nullable ProgressListener listener, int step) {
+        if(listener != null) {
             Tools.runOnUiThread(() -> listener.onLoginProgress(step));
         }
         ProgressLayout.setProgress(ProgressLayout.AUTHENTICATE_MICROSOFT, step*20);
@@ -334,7 +334,7 @@ public class MicrosoftBackgroundLogin {
      */
     private static String convertToFormData(String... data) throws UnsupportedEncodingException {
         StringBuilder builder = new StringBuilder();
-        for(int i=0; i<data.length; i+=2){
+        for(int i=0; i<data.length; i+=2) {
             if (builder.length() > 0) builder.append("&");
             builder.append(URLEncoder.encode(data[i], "UTF-8"))
                     .append("=")

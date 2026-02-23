@@ -164,9 +164,9 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             if(extras.getBoolean("openLogOutput", false)) openLogOutput(null);
             if (javaArgs != null) {
                 startModInstaller(null, javaArgs);
-            }else if(resourceUri != null) {
+            } else if(resourceUri != null) {
                 ProgressDialog barrierDialog = Tools.getWaitingDialog(this, R.string.multirt_progress_caching);
-                PojavApplication.sExecutorService.execute(()->{
+                PojavApplication.sExecutorService.execute(() -> {
                     startModInstallerWithUri(resourceUri);
                     runOnUiThread(barrierDialog::dismiss);
                 });
@@ -247,7 +247,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             if(selectedMod == null || DEFAULT_PREF.getBoolean("disable_autojre_select", false)) {
                 // If we are unable to find out the path to the mod or the user explicitly desires so, we use the default runtime
                 selectedRuntime = MultiRTUtils.forceReread(LauncherPreferences.PREF_DEFAULT_RUNTIME);
-            }else {
+            } else {
                 // Autoselect it properly in the other case.
                 selectedRuntime = selectRuntime(selectedMod);
                 // If the selection failed, just return. The autoselect function has already shown the dialog.
@@ -273,8 +273,6 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
         final View decorView = getWindow().getDecorView();
         decorView.setSystemUiVisibility(uiOptions);
     }
-
-
 
     @SuppressLint("ClickableViewAccessibility")
     @Override
@@ -326,7 +324,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     @SuppressWarnings("SuspiciousNameCombination")
-    void sendScaledMousePosition(float x, float y){
+    void sendScaledMousePosition(float x, float y) {
         // Clamp positions to the borders of the usable view, then scale them
         x = androidx.core.math.MathUtils.clamp(x, mTextureView.getX(), mTextureView.getX() + mTextureView.getWidth());
         y = androidx.core.math.MathUtils.clamp(y, mTextureView.getY(), mTextureView.getY() + mTextureView.getHeight());
@@ -387,6 +385,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     public void toggleKeyboard(View view) {
         mTouchCharInput.switchKeyboardState();
     }
+
     public void performCopy(View view) {
         AWTInputBridge.sendKey(' ', AWTInputEvent.VK_CONTROL, 1);
         AWTInputBridge.sendKey(' ', AWTInputEvent.VK_C);
@@ -400,7 +399,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
     }
 
     public int getJavaVersion(File modFile) {
-        try (ZipFile zipFile = new ZipFile(modFile)){
+        try (ZipFile zipFile = new ZipFile(modFile)) {
             ZipEntry manifest = zipFile.getEntry("META-INF/MANIFEST.MF");
             if(manifest == null) return -1;
 
@@ -429,6 +428,7 @@ public class JavaGUILauncherActivity extends BaseActivity implements View.OnTouc
             return -1;
         }
     }
+
     public static int classVersionToJavaVersion(int majorVersion) {
         if(majorVersion < 46) return 2; // there isn't even an arm64 port of jre 1.1 (or anything before 1.8 in fact)
         return majorVersion - 44;

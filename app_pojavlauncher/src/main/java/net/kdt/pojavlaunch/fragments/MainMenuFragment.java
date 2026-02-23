@@ -37,7 +37,7 @@ public class MainMenuFragment extends Fragment {
 
     private mcVersionSpinner mVersionSpinner;
 
-    public MainMenuFragment(){
+    public MainMenuFragment() {
         super(R.layout.fragment_launcher);
     }
 
@@ -84,7 +84,7 @@ public class MainMenuFragment extends Fragment {
             openPath(v.getContext(), getCurrentProfileDirectory(), false);
         });
 
-        mNewsButton.setOnLongClickListener((v)->{
+        mNewsButton.setOnLongClickListener((v) -> {
             Tools.swapFragment(requireActivity(), GamepadMapperFragment.class, GamepadMapperFragment.TAG, null);
             return true;
         });

@@ -66,7 +66,7 @@ public class mcVersionSpinner extends ExtendedTextView {
 
 
     /** Set the selection AND saves it as a shared preference */
-    public void setProfileSelection(int position){
+    public void setProfileSelection(int position) {
         setSelection(position);
         LauncherPreferences.DEFAULT_PREF.edit()
                 .putString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,
@@ -74,7 +74,7 @@ public class mcVersionSpinner extends ExtendedTextView {
                 .apply();
     }
 
-    public void setSelection(int position){
+    public void setSelection(int position) {
         if(mListView != null) mListView.setSelection(position);
         mProfileAdapter.setView(this, mProfileAdapter.getItem(position), false);
         mSelectedIndex = position;
@@ -90,12 +90,12 @@ public class mcVersionSpinner extends ExtendedTextView {
     }
 
     /** Reload profiles from the file, forcing the spinner to consider the new data */
-    public void reloadProfiles(){
+    public void reloadProfiles() {
         mProfileAdapter.reloadProfiles();
     }
 
     /** Initialize various behaviors */
-    private void init(){
+    private void init() {
         // Setup various attributes
         setTextSize(TypedValue.COMPLEX_UNIT_PX, getResources().getDimensionPixelSize(R.dimen._12ssp));
         setGravity(Gravity.CENTER_VERTICAL);
@@ -106,7 +106,7 @@ public class mcVersionSpinner extends ExtendedTextView {
 
         int profileIndex;
         String extra_value = (String) ExtraCore.consumeValue(ExtraConstants.REFRESH_VERSION_SPINNER);
-        if(extra_value != null){
+        if(extra_value != null) {
             profileIndex = extra_value.equals(DELETED_PROFILE) ? 0
                     : getProfileAdapter().resolveProfileIndex(extra_value);
         }else
@@ -122,7 +122,7 @@ public class mcVersionSpinner extends ExtendedTextView {
             public void onClick(View v) {
                 if(mPopupWindow == null) getPopupWindow();
 
-                if(mPopupWindow.isShowing()){
+                if(mPopupWindow.isShowing()) {
                     mPopupWindow.dismiss();
                     return;
                 }
@@ -144,7 +144,7 @@ public class mcVersionSpinner extends ExtendedTextView {
 
     /** Create the listView and popup window for the interface, and set up the click behavior */
     @SuppressLint("ClickableViewAccessibility")
-    private void getPopupWindow(){
+    private void getPopupWindow() {
         mListView = (ListView) inflate(getContext(), R.layout.spinner_mc_version, null);
         mListView.setAdapter(mProfileAdapter);
         mListView.setOnItemClickListener((parent, view, position, id) -> {
@@ -166,7 +166,7 @@ public class mcVersionSpinner extends ExtendedTextView {
         mPopupWindow.setOutsideTouchable(true);
         mPopupWindow.setFocusable(true);
         mPopupWindow.setTouchInterceptor((v, event) -> {
-            if(event.getAction() == MotionEvent.ACTION_OUTSIDE){
+            if(event.getAction() == MotionEvent.ACTION_OUTSIDE) {
                 mPopupWindow.dismiss();
                 return true;
             }
@@ -175,7 +175,7 @@ public class mcVersionSpinner extends ExtendedTextView {
 
 
         // Custom animation, nice slide in
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M){
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             mPopupAnimation = new Slide(Gravity.BOTTOM);
             mPopupWindow.setEnterTransition((Transition) mPopupAnimation);
             mPopupWindow.setExitTransition((Transition) mPopupAnimation);

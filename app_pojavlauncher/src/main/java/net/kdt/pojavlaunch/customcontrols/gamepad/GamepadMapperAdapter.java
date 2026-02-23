@@ -202,7 +202,7 @@ public class GamepadMapperAdapter extends RecyclerView.Adapter<GamepadMapperAdap
             if(realButton instanceof GamepadButton) {
                 mToggleableSwitch.setChecked(((GamepadButton)realButton).isToggleable);
                 mToggleableSwitch.setVisibility(View.VISIBLE);
-            }else {
+            } else {
                 mToggleableSwitch.setVisibility(View.GONE);
             }
 

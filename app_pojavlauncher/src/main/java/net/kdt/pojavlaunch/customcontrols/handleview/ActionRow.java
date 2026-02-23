@@ -36,7 +36,7 @@ public class ActionRow extends LinearLayout {
     public final ViewTreeObserver.OnPreDrawListener mFollowedViewListener = new ViewTreeObserver.OnPreDrawListener() {
         @Override
         public boolean onPreDraw() {
-            if(mFollowedView == null || !mFollowedView.isShown()){
+            if(mFollowedView == null || !mFollowedView.isShown()) {
                 hide();
                 return true;
             }
@@ -50,7 +50,7 @@ public class ActionRow extends LinearLayout {
     private final int mSide = SIDE_AUTO;
 
     /** Add action buttons and configure them */
-    private void init(){
+    private void init() {
         setTranslationZ(11);
         setVisibility(GONE);
         setOrientation(HORIZONTAL);
@@ -64,7 +64,7 @@ public class ActionRow extends LinearLayout {
         actionButtons[2] = new AddSubButton(getContext());
 
         // This is not pretty code, don't do this.
-        for(ActionButtonInterface buttonInterface: actionButtons){
+        for(ActionButtonInterface buttonInterface: actionButtons) {
             View button = ((View)(buttonInterface));
             addView(button, new LinearLayout.LayoutParams(0, ViewGroup.LayoutParams.MATCH_PARENT, 1F));
         }
@@ -72,11 +72,11 @@ public class ActionRow extends LinearLayout {
         setElevation(5F);
     }
 
-    public void setFollowedButton(ControlInterface controlInterface){
+    public void setFollowedButton(ControlInterface controlInterface) {
         if(mFollowedView != null)
             mFollowedView.getViewTreeObserver().removeOnPreDrawListener(mFollowedViewListener);
 
-        for(ActionButtonInterface buttonInterface: actionButtons){
+        for(ActionButtonInterface buttonInterface: actionButtons) {
             buttonInterface.setFollowedView(controlInterface);
             ((View)(buttonInterface)).setVisibility(buttonInterface.shouldBeVisible() ? VISIBLE : GONE);
         }
@@ -87,27 +87,27 @@ public class ActionRow extends LinearLayout {
             mFollowedView.getViewTreeObserver().addOnPreDrawListener(mFollowedViewListener);
     }
 
-    private float getXPosition(int side){
-        if(side == SIDE_LEFT){
+    private float getXPosition(int side) {
+        if(side == SIDE_LEFT) {
             return mFollowedView.getX() - getWidth();
-        }else if(side == SIDE_RIGHT){
+        } else if(side == SIDE_RIGHT) {
             return mFollowedView.getX() + mFollowedView.getWidth();
-        }else{
+        } else {
             return mFollowedView.getX() + mFollowedView.getWidth()/2f - getWidth()/2f;
         }
     }
 
-    private float getYPosition(int side){
-        if(side == SIDE_TOP){
+    private float getYPosition(int side) {
+        if(side == SIDE_TOP) {
             return mFollowedView.getY() - getHeight();
-        } else if(side == SIDE_BOTTOM){
+        } else if(side == SIDE_BOTTOM) {
             return mFollowedView.getY() + mFollowedView.getHeight();
-        }else{
+        } else {
             return mFollowedView.getY() + mFollowedView.getHeight()/2f - getHeight()/2f;
         }
     }
 
-    private void setNewPosition(){
+    private void setNewPosition() {
         if(mFollowedView == null) return;
         int side = pickSide();
 
@@ -115,7 +115,7 @@ public class ActionRow extends LinearLayout {
         setY(getYPosition(side));
     }
 
-    private int pickSide(){
+    private int pickSide() {
         if(mFollowedView == null) return mSide; //Value should not matter
 
         if(mSide != SIDE_AUTO) return mSide;
@@ -125,16 +125,16 @@ public class ActionRow extends LinearLayout {
 
         int side = SIDE_TOP;
         float futurePos = getYPosition(side);
-        if(futurePos + getHeight() > (parent.getHeight() + getHeight()/2f)){
+        if(futurePos + getHeight() > (parent.getHeight() + getHeight()/2f)) {
             side = SIDE_TOP;
-        }else if (futurePos < -getHeight()/2f){
+        } else if (futurePos < -getHeight()/2f) {
             side = SIDE_BOTTOM;
         }
 
         return side;
     }
 
-    public void hide(){
+    public void hide() {
         if(mFollowedView != null)
             mFollowedView.getViewTreeObserver().removeOnPreDrawListener(mFollowedViewListener);
         setVisibility(GONE);

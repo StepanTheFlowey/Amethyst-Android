@@ -70,7 +70,7 @@ public class MinecraftDownloader {
     public void start(@Nullable Activity activity, @Nullable JMinecraftVersionList.Version version,
                       @NonNull String realVersion,
                       @NonNull AsyncMinecraftDownloader.DoneListener listener) {
-        if(activity != null){
+        if(activity != null) {
             isOnline = Tools.isOnline(activity);
             Tools.switchDemo(Tools.isDemoProfile(activity));
         } else {
@@ -93,7 +93,7 @@ public class MinecraftDownloader {
                         versionMessage = providedJson.inheritsFrom != null ? providedJson.inheritsFrom : versionMessage;
 
                         // Ensure they're both not some 0 byte corrupted json
-                        if (providedJsonFile.length() == 0 || vanillaJsonFile.exists() && vanillaJsonFile.length() == 0){
+                        if (providedJsonFile.length() == 0 || vanillaJsonFile.exists() && vanillaJsonFile.length() == 0) {
                             throw new RuntimeException("Minecraft "+versionMessage+ " is needed by " +realVersion); }
 
                         listener.onDownloadDone();
@@ -101,7 +101,7 @@ public class MinecraftDownloader {
                         String tryagain = !isOnline ? "Please ensure you have an internet connection" : "Please try again on your Microsoft Account";
                         Tools.showErrorRemote(versionMessage + " is not currently installed. " + tryagain, e);
                     }
-                }else {
+                } else {
                     downloadGame(activity, version, realVersion);
                     listener.onDownloadDone();
                 }
@@ -316,7 +316,7 @@ public class MinecraftDownloader {
             throw new IOException("Unable to read Version JSON for version " + versionName);
         }
 
-        if(activity != null && !NewJREUtil.installNewJreIfNeeded(activity, verInfo)){
+        if(activity != null && !NewJREUtil.installNewJreIfNeeded(activity, verInfo)) {
             return false;
         }
 
@@ -356,7 +356,7 @@ public class MinecraftDownloader {
             size = 0;
             mUseFileCounter = true;
             Log.i("MinecraftDownloader", "Failed to determine size of "+targetFile.getName()+", switching to file counter");
-        }else {
+        } else {
             mTotalSize += size;
         }
         mScheduledDownloadTasks.add(
@@ -602,7 +602,7 @@ public class MinecraftDownloader {
             }
             if(Tools.isValidString(mTargetSha1)) {
                 verifyFileSha1();
-            }else {
+            } else {
                 mTargetSha1 = null; // Nullify SHA1 as DownloadUtils.ensureSha1 only checks for null,
                                     // not for string validity
                 if(mTargetPath.exists()) finishWithoutDownloading();

@@ -38,18 +38,18 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
     }
 
     /** Enable the touchpad */
-    private void _enable(){
+    private void _enable() {
         setVisibility(VISIBLE);
         placeMouseAt(currentDisplayMetrics.widthPixels / 2f, currentDisplayMetrics.heightPixels / 2f);
     }
 
     /** Disable the touchpad and hides the mouse */
-    private void _disable(){
+    private void _disable() {
         setVisibility(GONE);
     }
 
     /** @return The new state, enabled or disabled */
-    public boolean switchState(){
+    public boolean switchState() {
         mDisplayState = !mDisplayState;
         if(!CallbackBridge.isGrabbing()) {
             if(mDisplayState) _enable();
@@ -82,7 +82,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
         mMousePointerDrawable.draw(canvas);
     }
 
-    private void init(){
+    private void init() {
         // Setup mouse pointer
         mMousePointerDrawable = ResourcesCompat.getDrawable(getResources(), R.drawable.ic_mouse_pointer, getContext().getTheme());
         // For some reason it's annotated as Nullable even though it doesn't seem to actually
@@ -111,7 +111,7 @@ public class Touchpad extends View implements GrabListener, AbstractTouchpad {
         if(!isGrabbing) {
             if(mDisplayState && getVisibility() != VISIBLE) _enable();
             if(!mDisplayState && getVisibility() == VISIBLE) _disable();
-        }else{
+        } else {
             if(getVisibility() != View.GONE) _disable();
         }
     }

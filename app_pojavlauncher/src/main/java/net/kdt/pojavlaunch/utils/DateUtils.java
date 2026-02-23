@@ -47,7 +47,7 @@ public class DateUtils {
     public static Date getOriginalReleaseDate(JMinecraftVersionList.Version gameVersion) throws ParseException {
         if(Tools.isValidString(gameVersion.inheritsFrom)) {
             gameVersion = Tools.getVersionInfo(gameVersion.inheritsFrom, true);
-        }else {
+        } else {
             // The launcher's inheritor mutilates the version object, causing it to have the original
             // version's ID but modded version's dates. Work around it by re-reading the version without
             // inheriting.

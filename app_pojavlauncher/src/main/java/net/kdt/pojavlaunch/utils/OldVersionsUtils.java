@@ -15,10 +15,10 @@ public class OldVersionsUtils {
     /** Lower minecraft versions fare better with opengl 1
      * @param version The version about to be launched
      */
-    public static void selectOpenGlVersion(JMinecraftVersionList.Version version){
+    public static void selectOpenGlVersion(JMinecraftVersionList.Version version) {
         // 1309989600 is 2011-07-07  2011-07-07T22:00:00+00:00
         String creationTime = version.time;
-        if(!Tools.isValidString(creationTime)){
+        if(!Tools.isValidString(creationTime)) {
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
             return;
         }
@@ -33,7 +33,7 @@ public class OldVersionsUtils {
             String openGlVersion =  DateUtils.dateBefore(creationDate, 2011, 6, 8) ? "1" : "2";
             Log.i("GL_SELECT", openGlVersion);
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, openGlVersion);
-        }catch (ParseException exception){
+        }catch (ParseException exception) {
             Log.e("GL_SELECT", exception.toString());
             ExtraCore.setValue(ExtraConstants.OPEN_GL_VERSION, "2");
         }

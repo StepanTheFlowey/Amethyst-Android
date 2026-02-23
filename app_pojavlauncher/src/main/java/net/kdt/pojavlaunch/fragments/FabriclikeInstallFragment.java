@@ -123,7 +123,7 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
 
     @Override
     public void onDownloadFinished(File downloadedFile) {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
 
             getListenerProxy().detachListener();
             setListenerProxy(null);
@@ -140,7 +140,7 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
 
     @Override
     public void onDataNotAvailable() {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
             Context context = requireContext();
             getListenerProxy().detachListener();
             setListenerProxy(null);
@@ -186,7 +186,7 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
     }
 
     private void onException(Future<?> myFuture, Exception e) {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
             if(myFuture.isCancelled()) return;
             stopLoading();
             if(e != null) Tools.showError(requireContext(), e);
@@ -228,7 +228,7 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
             }
         }
         private void onFinished(Future<?> myFuture) {
-            Tools.runOnUiThread(()->{
+            Tools.runOnUiThread(() -> {
                 if(myFuture.isCancelled()) return;
                 stopLoading();
                 updateLoaderSpinner();
@@ -275,7 +275,7 @@ public abstract class FabriclikeInstallFragment extends Fragment implements Modl
             }
         }
         private void onFinished(Future<?> myFuture) {
-            Tools.runOnUiThread(()->{
+            Tools.runOnUiThread(() -> {
                 if(myFuture.isCancelled()) return;
                 stopLoading();
                 updateGameSpinner();

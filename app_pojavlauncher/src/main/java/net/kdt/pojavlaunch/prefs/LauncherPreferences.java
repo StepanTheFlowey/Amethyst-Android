@@ -132,7 +132,7 @@ public class LauncherPreferences {
         }
         if(DEFAULT_PREF.contains("defaultRuntime")) {
             PREF_DEFAULT_RUNTIME = DEFAULT_PREF.getString("defaultRuntime","");
-        }else{
+        } else {
             if(MultiRTUtils.getRuntimes().isEmpty()) {
                 PREF_DEFAULT_RUNTIME = "";
                 return;
@@ -151,7 +151,7 @@ public class LauncherPreferences {
      * @param ctx Context needed to get the total memory of the device.
      * @return The best default value found.
      */
-    private static int findBestRAMAllocation(Context ctx){
+    private static int findBestRAMAllocation(Context ctx) {
         int deviceRam = Tools.getTotalDeviceMemory(ctx);
         if (deviceRam < 1024) return 296;
         if (deviceRam < 1536) return 448;
@@ -210,7 +210,7 @@ public class LauncherPreferences {
         if (Build.VERSION.SDK_INT < P) return;
         try {
             final Rect cutout;
-            if(SDK_INT >= Build.VERSION_CODES.S){
+            if(SDK_INT >= Build.VERSION_CODES.S) {
                 cutout = activity.getWindowManager().getCurrentWindowMetrics().getWindowInsets().getDisplayCutout().getBoundingRects().get(0);
             } else {
                 cutout = activity.getWindow().getDecorView().getRootWindowInsets().getDisplayCutout().getBoundingRects().get(0);
@@ -222,7 +222,7 @@ public class LauncherPreferences {
             else if (orientation == Configuration.ORIENTATION_LANDSCAPE) LauncherPreferences.PREF_NOTCH_SIZE = cutout.width();
             else LauncherPreferences.PREF_NOTCH_SIZE = Math.min(cutout.width(), cutout.height());
 
-        }catch (Exception e){
+        }catch (Exception e) {
             Log.i("NOTCH DETECTION", "No notch detected, or the device if in split screen mode");
             LauncherPreferences.PREF_NOTCH_SIZE = -1;
         }

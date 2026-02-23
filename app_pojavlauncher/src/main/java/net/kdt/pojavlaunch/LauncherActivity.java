@@ -60,11 +60,11 @@ public class LauncherActivity extends BaseActivity {
     public static final String SETTING_FRAGMENT_TAG = "SETTINGS_FRAGMENT";
 
     public final ActivityResultLauncher<Object> modInstallerLauncher =
-            registerForActivityResult(new OpenDocumentWithExtension("jar"), (data)->{
+            registerForActivityResult(new OpenDocumentWithExtension("jar"), (data) -> {
                 if(data != null) Tools.launchModInstaller(this, data);
             });
     public final ActivityResultLauncher<Object> modpackImportLauncher =
-            registerForActivityResult(new OpenDocumentWithExtension(new String[]{"zip", "mrpack"}), (data)->{
+            registerForActivityResult(new OpenDocumentWithExtension(new String[]{"zip", "mrpack"}), (data) -> {
                 if(data != null) {
                     PojavApplication.sExecutorService.execute(() -> {
                         try {
@@ -121,7 +121,7 @@ public class LauncherActivity extends BaseActivity {
         Fragment fragment = getSupportFragmentManager().findFragmentById(mFragmentView.getId());
         if(fragment instanceof MainMenuFragment) {
             Tools.swapFragment(this, LauncherPreferenceFragment.class, SETTING_FRAGMENT_TAG, null);
-        } else{
+        } else {
             // The setting button doubles as a home button now
             Tools.backToMainMenu(this);
         }
@@ -286,15 +286,15 @@ public class LauncherActivity extends BaseActivity {
     @Override
     public void onBackPressed() {
         MicrosoftLoginFragment fragment = (MicrosoftLoginFragment) getVisibleFragment(MicrosoftLoginFragment.TAG);
-        if(fragment != null){
-            if(fragment.canGoBack()){
+        if(fragment != null) {
+            if(fragment.canGoBack()) {
                 fragment.goBack();
                 return;
             }
         }
 
         // Check if we are at the root then
-        if(getVisibleFragment("ROOT") != null){
+        if(getVisibleFragment("ROOT") != null) {
             finish();
         }
 
@@ -307,7 +307,7 @@ public class LauncherActivity extends BaseActivity {
     }
 
     @SuppressWarnings("SameParameterValue")
-    private Fragment getVisibleFragment(String tag){
+    private Fragment getVisibleFragment(String tag) {
         Fragment fragment = getSupportFragmentManager().findFragmentByTag(tag);
         if(fragment != null && fragment.isVisible()) {
             return fragment;
@@ -316,7 +316,7 @@ public class LauncherActivity extends BaseActivity {
     }
 
     @SuppressWarnings("unused")
-    private Fragment getVisibleFragment(int id){
+    private Fragment getVisibleFragment(int id) {
         Fragment fragment = getSupportFragmentManager().findFragmentById(id);
         if(fragment != null && fragment.isVisible()) {
             return fragment;
@@ -383,7 +383,7 @@ public class LauncherActivity extends BaseActivity {
     }
 
     /** Stuff all the view boilerplate here */
-    private void bindViews(){
+    private void bindViews() {
         mFragmentView = findViewById(R.id.container_fragment);
         mSettingsButton = findViewById(R.id.setting_button);
         mAccountSpinner = findViewById(R.id.account_spinner);

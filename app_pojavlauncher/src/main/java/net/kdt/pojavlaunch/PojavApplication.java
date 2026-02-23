@@ -58,7 +58,7 @@ public class PojavApplication extends Application {
 
 		try {
 			super.onCreate();
-			if(Tools.checkStorageRoot(this)){
+			if(Tools.checkStorageRoot(this)) {
 				// Implicitly initializes early constants and storage constants.
 				// Required to run the main activity properly.
 				LauncherPreferences.loadPreferences(this);
@@ -69,7 +69,7 @@ public class PojavApplication extends Application {
 			}
 			Tools.DEVICE_ARCHITECTURE = Architecture.getDeviceArchitecture();
 			//Force x86 lib directory for Asus x86 based zenfones
-			if(Architecture.isx86Device() && Architecture.is32BitsDevice()){
+			if(Architecture.isx86Device() && Architecture.is32BitsDevice()) {
 				String originalJNIDirectory = getApplicationInfo().nativeLibraryDir;
 				getApplicationInfo().nativeLibraryDir = originalJNIDirectory.substring(0,
 												originalJNIDirectory.lastIndexOf("/"))

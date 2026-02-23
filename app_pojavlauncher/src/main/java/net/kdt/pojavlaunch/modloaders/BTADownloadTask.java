@@ -43,7 +43,7 @@ public class BTADownloadTask implements Runnable {
 
     private String tryDownloadIcon() {
         ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-        try (Base64OutputStream base64OutputStream = new Base64OutputStream(byteArrayOutputStream, Base64.DEFAULT)){
+        try (Base64OutputStream base64OutputStream = new Base64OutputStream(byteArrayOutputStream, Base64.DEFAULT)) {
             // Instead of appending and wasting memory with a StringBuilder, just write the prefix
             // to the stream before the base64 icon data.
             byteArrayOutputStream.write("data:image/png;base64,".getBytes(StandardCharsets.US_ASCII));

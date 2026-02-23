@@ -16,7 +16,7 @@ public class ModloaderListenerProxy implements ModloaderDownloadListener {
     public synchronized void onDownloadFinished(File downloadedFile) {
         if(mDestinationListener != null) {
             mDestinationListener.onDownloadFinished(downloadedFile);
-        }else{
+        } else {
             mProxyResult = PROXY_RESULT_FINISHED;
             mProxyResultObject = downloadedFile;
         }
@@ -26,7 +26,7 @@ public class ModloaderListenerProxy implements ModloaderDownloadListener {
     public synchronized void onDataNotAvailable() {
         if(mDestinationListener != null) {
             mDestinationListener.onDataNotAvailable();
-        }else{
+        } else {
             mProxyResult = PROXY_RESULT_NOT_AVAILABLE;
             mProxyResultObject = null;
         }
@@ -36,7 +36,7 @@ public class ModloaderListenerProxy implements ModloaderDownloadListener {
     public synchronized void onDownloadError(Exception e) {
         if(mDestinationListener != null) {
             mDestinationListener.onDownloadError(e);
-        }else {
+        } else {
             mProxyResult = PROXY_RESULT_ERROR;
             mProxyResultObject = e;
         }

@@ -48,7 +48,7 @@ public class FabriclikeUtils {
             final String urlEncodedGameVersion = URLEncoder.encode(gameVersion, "UTF-8");
             return DownloadUtils.downloadStringCached(String.format(LOADER_METADATA_URL, mApiUrl, urlEncodedGameVersion),
                     mCachePrefix + "_loader_versions." + urlEncodedGameVersion,
-                    (input)->{ try {
+                    (input) -> { try {
                         return deserializeLoaderVersions(input);
                     }catch (JSONException e) {
                         throw new DownloadUtils.ParseException(e);

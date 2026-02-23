@@ -93,7 +93,7 @@ public class ForgeVersionListAdapter extends BaseExpandableListAdapter implement
         return mGameVersions.get(i);
     }
 
-    private String getForgeVersion(int i, int i1){
+    private String getForgeVersion(int i, int i1) {
         return mForgeVersions.get(i).get(i1);
     }
 

@@ -70,10 +70,10 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
     public void run() {
         try {
             T versions = loadVersionList();
-            Tools.runOnUiThread(()->{
+            Tools.runOnUiThread(() -> {
                 if(versions != null) {
                     mExpandableListView.setAdapter(createAdapter(versions, mInflater));
-                }else{
+                } else {
                     mRetryView.setVisibility(View.VISIBLE);
                 }
                 mProgressBar.setVisibility(View.GONE);
@@ -114,7 +114,7 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
 
     @Override
     public void onDownloadFinished(File downloadedFile) {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
             Context context = requireContext();
             getTaskProxy().detachListener();
             deleteTaskProxy();
@@ -127,7 +127,7 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
 
     @Override
     public void onDataNotAvailable() {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
             Context context = requireContext();
             getTaskProxy().detachListener();
             deleteTaskProxy();
@@ -140,7 +140,7 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
 
     @Override
     public void onDownloadError(Exception e) {
-        Tools.runOnUiThread(()->{
+        Tools.runOnUiThread(() -> {
             Context context = requireContext();
             getTaskProxy().detachListener();
             deleteTaskProxy();
@@ -152,7 +152,7 @@ public abstract class ModVersionListFragment<T> extends Fragment implements Runn
     private void setTaskProxyValue(ModloaderListenerProxy proxy) {
         ExtraCore.setValue(mExtraTag, proxy);
     }
-    private void deleteTaskProxy(){
+    private void deleteTaskProxy() {
         ExtraCore.removeValue(mExtraTag);
     }
 

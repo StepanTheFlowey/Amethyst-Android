@@ -24,13 +24,13 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
     private final Matrix mDecoderPrescaleMatrix = new Matrix();
     private final Handler mHiresLoadHandler = new Handler(Looper.getMainLooper());
     private Future<?> mDecodeFuture;
-    private final Runnable mHiresLoadRunnable = ()->{
+    private final Runnable mHiresLoadRunnable = () -> {
         RectF subsectionRect = new RectF(0,0, mHostView.getWidth(), mHostView.getHeight());
         RectF overlayDst = new RectF();
         discardDecodeFuture();
         mDecodeFuture = new SelfReferencingFuture(myFuture -> {
             Bitmap overlayBitmap = decodeRegionBitmap(overlayDst, subsectionRect);
-            mHiresLoadHandler.post(()->{
+            mHiresLoadHandler.post(() -> {
                 if(myFuture.isCancelled()) return;
                 mOverlayBitmap = overlayBitmap;
                 mOverlayDst.set(overlayDst);
@@ -156,7 +156,7 @@ public class RegionDecoderCropBehaviour extends BitmapCropBehaviour {
             ratio = 1 / ratio;
             options.inSampleSize = (int)Math.floor(ratio);
             mRequiresOverlayBitmap = true;
-        }else {
+        } else {
             mRequiresOverlayBitmap = false;
         }
         mOriginalBitmap = mBitmapDecoder.decodeRegion(

@@ -22,23 +22,23 @@ public class MinecraftProfile {
 	public String controlFile;
 	public MinecraftResolution[] resolution;
 
-	public static MinecraftProfile createTemplate(){
+	public static MinecraftProfile createTemplate() {
 		MinecraftProfile TEMPLATE = new MinecraftProfile();
 		TEMPLATE.name = "";
 		TEMPLATE.lastVersionId = LATEST_RELEASE;
 		return TEMPLATE;
 	}
 
-	public static MinecraftProfile getDefaultProfile(){
+	public static MinecraftProfile getDefaultProfile() {
 		MinecraftProfile defaultProfile = new MinecraftProfile();
 		defaultProfile.name = "1.7.10";
 		defaultProfile.lastVersionId = "1.7.10";
 		return defaultProfile;
 	}
 
-	public MinecraftProfile(){}
+	public MinecraftProfile() {}
 
-	public MinecraftProfile(MinecraftProfile profile){
+	public MinecraftProfile(MinecraftProfile profile) {
 		name = profile.name;
 		type = profile.type;
 		created = profile.created;

@@ -59,9 +59,9 @@ public class RTSpinnerAdapter implements SpinnerAdapter {
                 LayoutInflater.from(mContext).inflate(R.layout.item_simple_list_1, parent,false);
 
         Runtime runtime = mRuntimes.get(position);
-        if(position == mRuntimes.size() - 1 ){
+        if(position == mRuntimes.size() - 1 ) {
             ((TextView) view).setText(runtime.name);
-        }else{
+        } else {
             ((TextView) view).setText(String.format("%s - %s",
                     runtime.name.replace(".tar.xz", ""),
                     runtime.versionString == null ? view.getResources().getString(R.string.multirt_runtime_corrupt) : runtime.versionString));

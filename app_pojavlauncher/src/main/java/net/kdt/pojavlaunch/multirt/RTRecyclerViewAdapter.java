@@ -52,7 +52,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
     }
 
     @SuppressLint("NotifyDataSetChanged") //not a problem, given the typical size of the list
-    public void setDefault(Runtime rt){
+    public void setDefault(Runtime rt) {
         LauncherPreferences.PREF_DEFAULT_RUNTIME = rt.name;
         LauncherPreferences.DEFAULT_PREF.edit().putString("defaultRuntime",LauncherPreferences.PREF_DEFAULT_RUNTIME).apply();
         notifyDataSetChanged();
@@ -64,7 +64,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         notifyDataSetChanged();
     }
 
-    public boolean getIsEditing(){
+    public boolean getIsEditing() {
         return mIsDeleting;
     }
 
@@ -93,7 +93,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
         }
 
         @SuppressLint("NotifyDataSetChanged") // same as all the other ones
-        private void setupOnClickListeners(){
+        private void setupOnClickListeners() {
             mSetDefaultButton.setOnClickListener(v -> {
                 if(mCurrentRuntime != null) {
                     setDefault(mCurrentRuntime);
@@ -149,9 +149,9 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
 
             // Problematic runtime moment, force propose deletion
             mDeleteButton.setVisibility(View.VISIBLE);
-            if(runtime.versionString == null){
+            if(runtime.versionString == null) {
                 mFullJavaVersionTextView.setText(R.string.multirt_runtime_corrupt);
-            }else{
+            } else {
                 mFullJavaVersionTextView.setText(mContext.getString(R.string.multirt_runtime_incompatiblearch, runtime.arch));
             }
             mJavaVersionTextView.setText(runtime.name);
@@ -159,7 +159,7 @@ public class RTRecyclerViewAdapter extends RecyclerView.Adapter<RTRecyclerViewAd
             mSetDefaultButton.setVisibility(View.GONE);
         }
 
-        private void updateButtonsVisibility(){
+        private void updateButtonsVisibility() {
             mSetDefaultButton.setVisibility(mIsDeleting ? View.GONE : View.VISIBLE);
             mDeleteButton.setVisibility(mIsDeleting ? View.VISIBLE : View.GONE);
         }

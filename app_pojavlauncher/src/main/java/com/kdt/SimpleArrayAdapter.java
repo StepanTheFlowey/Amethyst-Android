@@ -23,13 +23,13 @@ public class SimpleArrayAdapter<T> extends BaseAdapter {
     }
 
     public void setObjects(@Nullable List<T> objects) {
-        if(objects == null){
+        if(objects == null) {
             if(mObjects != Collections.emptyList()) {
                 mObjects = Collections.emptyList();
                 notifyDataSetChanged();
             }
         } else {
-            if(objects != mObjects){
+            if(objects != mObjects) {
                 mObjects = objects;
                 notifyDataSetChanged();
             }
@@ -54,7 +54,7 @@ public class SimpleArrayAdapter<T> extends BaseAdapter {
     @NonNull
     @Override
     public View getView(int position, @Nullable View convertView, @NonNull ViewGroup parent) {
-        if(convertView == null){
+        if(convertView == null) {
             convertView = LayoutInflater.from(parent.getContext()).inflate(android.R.layout.simple_list_item_1, parent, false);
         }
 

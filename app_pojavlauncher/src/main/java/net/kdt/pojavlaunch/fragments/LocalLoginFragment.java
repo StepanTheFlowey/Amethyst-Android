@@ -24,7 +24,7 @@ public class LocalLoginFragment extends Fragment {
     private final Pattern mUsernameValidationPattern;
     private EditText mUsernameEditText;
 
-    public LocalLoginFragment(){
+    public LocalLoginFragment() {
         super(R.layout.fragment_local_login);
         mUsernameValidationPattern = Pattern.compile("^[a-zA-Z0-9_]*$");
     }
@@ -45,7 +45,7 @@ public class LocalLoginFragment extends Fragment {
     }
 
     /** @return Whether the mail (and password) text are eligible to make an auth request  */
-    private boolean checkEditText(){
+    private boolean checkEditText() {
         final String text = mUsernameEditText.getText().toString();
         final Matcher matcher = mUsernameValidationPattern.matcher(text);
         return !(text.isEmpty()

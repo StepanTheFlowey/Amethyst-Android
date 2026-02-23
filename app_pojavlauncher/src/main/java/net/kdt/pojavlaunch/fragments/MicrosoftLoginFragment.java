@@ -49,7 +49,7 @@ public class MicrosoftLoginFragment extends Fragment {
     }
 
     private void startNewSession() {
-        CookieManager.getInstance().removeAllCookies((b)->{
+        CookieManager.getInstance().removeAllCookies((b) -> {
             mWebview.clearHistory();
             mWebview.clearCache(true);
             mWebview.clearFormData();
@@ -94,8 +94,8 @@ public class MicrosoftLoginFragment extends Fragment {
     }
 
     /* Expose webview actions to others */
-    public boolean canGoBack(){ return mWebview.canGoBack();}
-    public void goBack(){ mWebview.goBack();}
+    public boolean canGoBack() { return mWebview.canGoBack();}
+    public void goBack() { mWebview.goBack();}
 
     /** Client to track when to sent the data to the launcher */
     class WebViewTrackClient extends WebViewClient {
@@ -112,7 +112,7 @@ public class MicrosoftLoginFragment extends Fragment {
             }
 
             // Sometimes, the user just clicked cancel
-            if(url.contains("res=cancel")){
+            if(url.contains("res=cancel")) {
                 requireActivity().onBackPressed();
                 return true;
             }

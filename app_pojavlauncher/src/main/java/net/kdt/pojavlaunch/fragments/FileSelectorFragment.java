@@ -42,7 +42,7 @@ public class FileSelectorFragment extends Fragment {
             : Environment.getExternalStorageDirectory().getAbsolutePath();
 
 
-    public FileSelectorFragment(){
+    public FileSelectorFragment() {
         super(R.layout.fragment_file_selector);
     }
 
@@ -68,9 +68,9 @@ public class FileSelectorFragment extends Fragment {
                     .setPositiveButton(R.string.folder_dialog_create, (dialog, which) -> {
                         File folder = new File(mFileListView.getFullPath(), editText.getText().toString());
                         boolean success = folder.mkdir();
-                        if(success){
+                        if(success) {
                             mFileListView.listFileAt(new File(mFileListView.getFullPath(),editText.getText().toString()));
-                        }else{
+                        } else {
                             mFileListView.refreshPath();
                         }
                     }).show();
@@ -90,11 +90,11 @@ public class FileSelectorFragment extends Fragment {
         });
     }
 
-    private String removeLockPath(String path){
+    private String removeLockPath(String path) {
         return path.replace(mRootPath, ".");
     }
 
-    private void parseBundle(){
+    private void parseBundle() {
         Bundle bundle = getArguments();
         if(bundle == null) return;
         mSelectFolder = bundle.getBoolean(BUNDLE_SELECT_FOLDER, mSelectFolder);
@@ -103,7 +103,7 @@ public class FileSelectorFragment extends Fragment {
         mRootPath = bundle.getString(BUNDLE_ROOT_PATH, mRootPath);
     }
 
-    private void bindViews(@NonNull View view){
+    private void bindViews(@NonNull View view) {
         mSelectFolderButton = view.findViewById(R.id.file_selector_select_folder);
         mCreateFolderButton = view.findViewById(R.id.file_selector_create_folder);
         mFileListView = view.findViewById(R.id.file_selector);

@@ -140,7 +140,7 @@ public class FolderProvider extends DocumentsProvider {
     public boolean onCreate() {
         if(Tools.checkStorageRoot(getContext())) {
             Tools.initStorageConstants(getContext());
-        }else {
+        } else {
             return false;
         }
         BASE_DIR = new File(Tools.DIR_GAME_HOME);
@@ -180,7 +180,7 @@ public class FolderProvider extends DocumentsProvider {
         File sourceParent = sourceFile.getParentFile();
         if(sourceParent == null) throw new FileNotFoundException("Cannot rename root");
         File targetFile = new File(getDocIdForFile(sourceParent) + "/" + displayName);
-        if(!sourceFile.renameTo(targetFile)){
+        if(!sourceFile.renameTo(targetFile)) {
             throw new FileNotFoundException("Couldn't rename the document with id" + documentId);
         }
         return getDocIdForFile(targetFile);
@@ -190,7 +190,7 @@ public class FolderProvider extends DocumentsProvider {
     public String moveDocument(String sourceDocumentId, String sourceParentDocumentId, String targetParentDocumentId) throws FileNotFoundException {
         File sourceFile = getFileForDocId(sourceParentDocumentId + sourceDocumentId);
         File targetFile = new File(targetParentDocumentId + sourceDocumentId);
-        if(!sourceFile.renameTo(targetFile)){
+        if(!sourceFile.renameTo(targetFile)) {
             throw new FileNotFoundException("Failed to move the document with id " + sourceFile.getPath());
         }
         return getDocIdForFile(targetFile);
@@ -204,13 +204,13 @@ public class FolderProvider extends DocumentsProvider {
     @Override
     public void deleteDocument(String documentId) throws FileNotFoundException {
         File file = getFileForDocId(documentId);
-        if(file.isDirectory()){
+        if(file.isDirectory()) {
             try {
                 FileUtils.deleteDirectory(file);
             } catch (IOException e) {
                 throw new FileNotFoundException("Failed to delete document with id " + documentId);
             }
-        }else{
+        } else {
             if (!file.delete()) {
                 throw new FileNotFoundException("Failed to delete document with id " + documentId);
             }

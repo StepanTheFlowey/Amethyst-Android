@@ -20,7 +20,7 @@ public class ModDetail extends ModItem {
         this.versionHashes = hashes;
 
         // Add the mc version to the version model
-        for (int i=0; i<versionNames.length; i++){
+        for (int i=0; i<versionNames.length; i++) {
             if (!versionNames[i].contains(mcVersionNames[i]))
                 versionNames[i] += " - " + mcVersionNames[i];
         }

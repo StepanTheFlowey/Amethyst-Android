@@ -150,7 +150,7 @@ public final class Tools {
     private static File getPojavStorageRoot(Context ctx) {
         if(SDK_INT >= 29) {
             return ctx.getExternalFilesDir(null);
-        }else{
+        } else {
             return new File(Environment.getExternalStorageDirectory(),"games/Amethyst");
         }
     }
@@ -201,7 +201,7 @@ public final class Tools {
      * Any value (in)directly dependent on DIR_GAME_HOME should be set only here.
      * You ABSOLUTELY MUST check for storage presence using checkStorageRoot() before calling this.
      */
-    public static void initStorageConstants(Context ctx){
+    public static void initStorageConstants(Context ctx) {
         initEarlyConstants(ctx);
         DIR_GAME_HOME = getPojavStorageRoot(ctx).getAbsolutePath();
         DIR_GAME_NEW = DIR_GAME_HOME + "/.minecraft";
@@ -223,7 +223,7 @@ public final class Tools {
         return (String) get.invoke(null, systemProperty);
     }
 
-    private static boolean isAdreno740(){
+    private static boolean isAdreno740() {
         try {
             BufferedReader br = new BufferedReader(
                     new FileReader("/sys/class/kgsl/kgsl-3d0/gpu_model")
@@ -394,7 +394,7 @@ public final class Tools {
             int finalDeviceMemory = freeDeviceMemory;
             LifecycleAwareAlertDialog.DialogCreator dialogCreator = (dialog, builder) ->
                 builder.setMessage(activity.getString(localeString, finalDeviceMemory, LauncherPreferences.PREF_RAM_ALLOCATION))
-                        .setPositiveButton(android.R.string.ok, (d, w)->{});
+                        .setPositiveButton(android.R.string.ok, (d, w) -> {});
 
             if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
                 return; // If the dialog's lifecycle has ended, return without
@@ -409,7 +409,7 @@ public final class Tools {
         if(affectedByLTWRenderDistanceIssue()) {
             LifecycleAwareAlertDialog.DialogCreator dialogCreator = ((alertDialog, dialogBuilder) ->
                     dialogBuilder.setMessage(activity.getString(R.string.ltw_render_distance_warning_msg))
-                            .setPositiveButton(android.R.string.ok, (d, w)->{}));
+                            .setPositiveButton(android.R.string.ok, (d, w) -> {}));
             if(LifecycleAwareAlertDialog.haltOnDialog(activity.getLifecycle(), activity, dialogCreator)) {
                 return;
             }
@@ -458,7 +458,7 @@ public final class Tools {
 
         javaArgList.addAll(Arrays.asList(getMinecraftJVMArgs(versionId, gamedir)));
         javaArgList.add("-cp");
-        if (launchClassPath.contains("bta-client-")){ // BTADownloadTask.BASE_JSON sets this. Jank.
+        if (launchClassPath.contains("bta-client-")) { // BTADownloadTask.BASE_JSON sets this. Jank.
             // BTA for some reason needs this to be last or else it uses the wrong lwjgl
             javaArgList.add(launchClassPath + ":" + getLWJGL3ClassPath());
         // Legacy Fabric needs this to be first or else it uses the wrong lwjgl
@@ -584,8 +584,8 @@ public final class Tools {
         }
     }
 
-    public static File getGameDirPath(@NonNull MinecraftProfile minecraftProfile){
-        if(minecraftProfile.gameDir != null){
+    public static File getGameDirPath(@NonNull MinecraftProfile minecraftProfile) {
+        if(minecraftProfile.gameDir != null) {
             if(minecraftProfile.gameDir.startsWith(Tools.LAUNCHERPROFILES_RTPREFIX))
                 return new File(minecraftProfile.gameDir.replace(Tools.LAUNCHERPROFILES_RTPREFIX,Tools.DIR_GAME_HOME+"/"));
             else
@@ -594,7 +594,7 @@ public final class Tools {
         return new File(Tools.DIR_GAME_NEW);
     }
 
-    public static void buildNotificationChannel(Context context){
+    public static void buildNotificationChannel(Context context) {
         if(Build.VERSION.SDK_INT < Build.VERSION_CODES.O) return;
         NotificationChannel channel = new NotificationChannel(
                 context.getString(R.string.notif_channel_id),
@@ -834,23 +834,19 @@ public final class Tools {
         return finalClasspath.toString();
     }
 
-
-
-
-
     public static DisplayMetrics getDisplayMetrics(Activity activity) {
         DisplayMetrics displayMetrics = new DisplayMetrics();
 
-        if(SDK_INT >= Build.VERSION_CODES.N && (activity.isInMultiWindowMode() || activity.isInPictureInPictureMode())){
+        if(SDK_INT >= Build.VERSION_CODES.N && (activity.isInMultiWindowMode() || activity.isInPictureInPictureMode())) {
             //For devices with free form/split screen, we need window size, not screen size.
             displayMetrics = activity.getResources().getDisplayMetrics();
-        }else{
+        } else {
             if (SDK_INT >= Build.VERSION_CODES.R) {
                 activity.getDisplay().getRealMetrics(displayMetrics);
             } else { // Removed the clause for devices with unofficial notch support, since it also ruins all devices with virtual nav bars before P
                 activity.getWindowManager().getDefaultDisplay().getRealMetrics(displayMetrics);
             }
-            if(!PREF_IGNORE_NOTCH){
+            if(!PREF_IGNORE_NOTCH) {
                 //Remove notch width when it isn't ignored.
                 if(activity.getResources().getConfiguration().orientation == Configuration.ORIENTATION_PORTRAIT)
                     displayMetrics.heightPixels -= PREF_NOTCH_SIZE;
@@ -868,7 +864,7 @@ public final class Tools {
             boolean multiWindowMode = SDK_INT >= 24 && activity.isInMultiWindowMode();
             // When in multi-window mode, asking for fullscreen makes no sense (cause the launcher runs in a window)
             // So, ignore the fullscreen setting when activity is in multi window mode
-            if(fullscreen && !multiWindowMode){
+            if(fullscreen && !multiWindowMode) {
                 if ((visibility & View.SYSTEM_UI_FLAG_FULLSCREEN) == 0) {
                     decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_LAYOUT_STABLE
                             | View.SYSTEM_UI_FLAG_FULLSCREEN
@@ -877,7 +873,7 @@ public final class Tools {
                             | View.SYSTEM_UI_FLAG_IMMERSIVE_STICKY
                             | View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN);
                 }
-            }else{
+            } else {
                 decorView.setSystemUiVisibility(View.SYSTEM_UI_FLAG_VISIBLE);
             }
 
@@ -901,7 +897,7 @@ public final class Tools {
                 CallbackBridge.physicalWidth = width;
                 CallbackBridge.physicalHeight = height;
                 return;
-            }else{
+            } else {
                 Log.e("Tools","Dimension tracker detected but dimensions out of date. Please check usage.", new Exception());
             }
         }
@@ -915,7 +911,7 @@ public final class Tools {
         return dp * currentDisplayMetrics.density;
     }
 
-    public static float pxToDp(float px){
+    public static float pxToDp(float px) {
         //Better hope for the currentDisplayMetrics to be good
         return px / currentDisplayMetrics.density;
     }
@@ -928,9 +924,9 @@ public final class Tools {
         File parentFolder = new File(output);
         FileUtils.ensureDirectory(parentFolder);
         File destinationFile = new File(output, outputName);
-        if(!destinationFile.exists() || overwrite){
+        if(!destinationFile.exists() || overwrite) {
             try(InputStream inputStream = ctx.getAssets().open(fileName)) {
-                try (OutputStream outputStream = new FileOutputStream(destinationFile)){
+                try (OutputStream outputStream = new FileOutputStream(destinationFile)) {
                     IOUtils.copy(inputStream, outputStream);
                 }
             }
@@ -1117,8 +1113,8 @@ public final class Tools {
             if(!checkRules(libItem.rules)) continue;
             libDir.add(Tools.DIR_HOME_LIBRARY + "/" + artifactToPath(libItem));
             // Mitigation: Babric doesn't use asm-all for some reason so it does a classpath conflict
-            if (libItem.name.startsWith("org.ow2.asm:asm") && !libItem.name.startsWith("org.ow2.asm:asm-all:")){
-                libDir.remove(Tools.DIR_HOME_LIBRARY + "/" + artifactToPath(new DependentLibrary(){{
+            if (libItem.name.startsWith("org.ow2.asm:asm") && !libItem.name.startsWith("org.ow2.asm:asm-all:")) {
+                libDir.remove(Tools.DIR_HOME_LIBRARY + "/" + artifactToPath(new DependentLibrary() {{
                     name = "org.ow2.asm:asm-all:5.0.4";
                 }}));
             }
@@ -1154,14 +1150,14 @@ public final class Tools {
                 // Go through the libraries, remove the ones overridden by the custom version
                 List<DependentLibrary> inheritLibraryList = new ArrayList<>(Arrays.asList(inheritsVer.libraries));
                 outer_loop:
-                for(DependentLibrary library : customVer.libraries){
+                for(DependentLibrary library : customVer.libraries) {
                     // Clean libraries overridden by the custom version
                     String libName = library.name.substring(0, library.name.lastIndexOf(":"));
 
                     for(DependentLibrary inheritLibrary : inheritLibraryList) {
                         String inheritLibName = inheritLibrary.name.substring(0, inheritLibrary.name.lastIndexOf(":"));
 
-                        if(libName.equals(inheritLibName)){
+                        if(libName.equals(inheritLibName)) {
                             Log.d(APP_NAME, "Library " + libName + ": Replaced version " +
                                     libName.substring(libName.lastIndexOf(":") + 1) + " with " +
                                     inheritLibName.substring(inheritLibName.lastIndexOf(":") + 1));
@@ -1302,7 +1298,7 @@ public final class Tools {
             }
             if(sourceSHA != null) {
                 return sha1_dst.equalsIgnoreCase(sourceSHA);
-            } else{
+            } else {
                 return true; // fake match
             }
         }catch (IOException e) {
@@ -1311,7 +1307,7 @@ public final class Tools {
         }
     }
 
-    public static void ignoreNotch(boolean shouldIgnore, Activity ctx){
+    public static void ignoreNotch(boolean shouldIgnore, Activity ctx) {
         if (SDK_INT >= P) {
             if (shouldIgnore) {
                 ctx.getWindow().getAttributes().layoutInDisplayCutoutMode = WindowManager.LayoutParams.LAYOUT_IN_DISPLAY_CUTOUT_MODE_SHORT_EDGES;
@@ -1323,14 +1319,14 @@ public final class Tools {
         }
     }
 
-    public static int getTotalDeviceMemory(Context ctx){
+    public static int getTotalDeviceMemory(Context ctx) {
         ActivityManager actManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         actManager.getMemoryInfo(memInfo);
         return (int) (memInfo.totalMem / 1048576L);
     }
 
-    public static int getFreeDeviceMemory(Context ctx){
+    public static int getFreeDeviceMemory(Context ctx) {
         ActivityManager actManager = (ActivityManager) ctx.getSystemService(Context.ACTIVITY_SERVICE);
         ActivityManager.MemoryInfo memInfo = new ActivityManager.MemoryInfo();
         actManager.getMemoryInfo(memInfo);
@@ -1349,13 +1345,13 @@ public final class Tools {
     public static int getMaxContinuousAddressSpaceSize() {
         try {
             return internalGetMaxContinuousAddressSpaceSize();
-        }catch (Exception e){
+        }catch (Exception e) {
             Log.w("Tools", "Failed to find the largest uninterrupted address space");
             return -1;
         }
     }
 
-    public static int getDisplayFriendlyRes(int displaySideRes, float scaling){
+    public static int getDisplayFriendlyRes(int displaySideRes, float scaling) {
         displaySideRes *= scaling;
         if(displaySideRes % 2 != 0) displaySideRes --;
         return displaySideRes;
@@ -1393,7 +1389,7 @@ public final class Tools {
     }
 
     /** Remove the current fragment */
-    public static void removeCurrentFragment(FragmentActivity fragmentActivity){
+    public static void removeCurrentFragment(FragmentActivity fragmentActivity) {
         fragmentActivity
             .getSupportFragmentManager()
             .popBackStack();
@@ -1405,7 +1401,7 @@ public final class Tools {
             return;
         }
 
-        if(!customJavaArgs){ // Launch the intent to get the jar file
+        if(!customJavaArgs) { // Launch the intent to get the jar file
             if(!(activity instanceof LauncherActivity))
                 throw new IllegalStateException("Cannot start Mod Installer without LauncherActivity");
             LauncherActivity launcherActivity = (LauncherActivity)activity;
@@ -1431,7 +1427,7 @@ public final class Tools {
     }
 
     /** Display and return a progress dialog, instructing to wait */
-    public static ProgressDialog getWaitingDialog(Context ctx, int message){
+    public static ProgressDialog getWaitingDialog(Context ctx, int message) {
         final ProgressDialog barrier = new ProgressDialog(ctx);
         barrier.setMessage(ctx.getString(message));
         barrier.setProgressStyle(ProgressDialog.STYLE_SPINNER);
@@ -1443,13 +1439,13 @@ public final class Tools {
     /** Launch the mod installer activity. The Uri must be from our own content provider or
      * from ACTION_OPEN_DOCUMENT
      */
-    public static void launchModInstaller(Activity activity, @NonNull Uri uri){
+    public static void launchModInstaller(Activity activity, @NonNull Uri uri) {
         Intent intent = new Intent(activity, JavaGUILauncherActivity.class);
         intent.putExtra("modUri", uri);
         activity.startActivity(intent);
     }
 
-    public static void installRuntimeFromUri(Context context, Uri uri){
+    public static void installRuntimeFromUri(Context context, Uri uri) {
         sExecutorService.execute(() -> {
             try {
                 String name = getFileName(context, uri);
@@ -1514,7 +1510,7 @@ public final class Tools {
     }
 
     /** Triggers the share intent chooser, with the latestlog file attached to it */
-    public static void shareLog(Context context){
+    public static void shareLog(Context context) {
         openPath(context, new File(Tools.DIR_GAME_HOME, "latestlog.txt"), true);
     }
 
@@ -1526,7 +1522,7 @@ public final class Tools {
     public static String getMimeType(File file) {
         if(file.isDirectory()) return DocumentsContract.Document.MIME_TYPE_DIR;
         String mimeType = null;
-        try (FileInputStream fileInputStream = new FileInputStream(file)){
+        try (FileInputStream fileInputStream = new FileInputStream(file)) {
             // Theoretically we don't even need the buffer since we don't care about the
             // contents of the file after the guess, but mark-supported streams
             // are a requirement of URLConnection.guessContentTypeFromStream()
@@ -1556,7 +1552,7 @@ public final class Tools {
             intent.setAction(Intent.ACTION_SEND);
             intent.setType(getMimeType(file));
             intent.putExtra(Intent.EXTRA_STREAM, contentUri);
-        }else {
+        } else {
             intent.setAction(Intent.ACTION_VIEW);
             intent.setDataAndType(contentUri, mimeType);
         }
@@ -1671,7 +1667,7 @@ public final class Tools {
                 }).show();
     }
 
-    public static void switchDemo(boolean isDemo){
+    public static void switchDemo(boolean isDemo) {
         if(isDemo) {
             DIR_GAME_NEW = DIR_DATA + "/demo/.minecraft";
         } else {
@@ -1694,12 +1690,12 @@ public final class Tools {
         return info.isConnected();
     }
 
-    public static boolean isDemoProfile(Context ctx){
+    public static boolean isDemoProfile(Context ctx) {
         final MinecraftAccount currentProfile = PojavProfile.getCurrentProfileContent(ctx, null);
         return currentProfile != null && currentProfile.isDemo();
     }
 
-    public static String getSelectedVanillaMcVer(){
+    public static String getSelectedVanillaMcVer() {
         String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE, "");
         MinecraftProfile selected = LauncherProfiles.mainProfileJson.profiles.get(selectedProfile);
         if (selected == null) { // This should NEVER happen.
@@ -1724,7 +1720,7 @@ public final class Tools {
         return vanillaVersion;
     }
 
-    public static Integer mcVersiontoInt(String mcVersion){
+    public static Integer mcVersiontoInt(String mcVersion) {
         String[] sVersionArray = mcVersion.split("\\.");
         String[] iVersionArray = new String[3];
 
@@ -1735,7 +1731,7 @@ public final class Tools {
                 sVersionArray[i] =  String.format("%3s", sVersionArray[i]).replace(' ', '0');
                 // Grab only the last 3, MCJE 999.999.999 isnt coming soon anyway
                 sVersionArray[i] = sVersionArray[i].substring(sVersionArray[i].length() - 3);
-            } catch (ArrayIndexOutOfBoundsException ignored){
+            } catch (ArrayIndexOutOfBoundsException ignored) {
                 // If we don't get 3 a third array, pad with 0s because it's probably 1.21 or something
                 iVersionArray[i] = "000";
                 continue;

@@ -94,7 +94,7 @@ public class BitmapCropBehaviour implements CropperBehaviour{
             float ratio = (float) targetMaxSide / targetMinDimension;
             targetWidth = (int) (targetRect.width() * ratio);
             targetHeight = (int) (targetRect.height() * ratio);
-        }else {
+        } else {
             targetWidth = targetRect.width();
             targetHeight = targetRect.height();
         }

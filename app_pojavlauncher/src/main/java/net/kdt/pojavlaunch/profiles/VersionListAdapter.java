@@ -27,7 +27,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
     private final boolean mHideCustomVersions;
     private final int mSnapshotListPosition;
 
-    public VersionListAdapter(JMinecraftVersionList.Version[] versionList, boolean hideCustomVersions, Context ctx){
+    public VersionListAdapter(JMinecraftVersionList.Version[] versionList, boolean hideCustomVersions, Context ctx) {
         mHideCustomVersions = hideCustomVersions;
         mLayoutInflater = (LayoutInflater) ctx.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
@@ -41,7 +41,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
         if(mInstalledVersions != null)
             Arrays.sort(mInstalledVersions);
 
-        if(!areInstalledVersionsAvailable()){
+        if(!areInstalledVersionsAvailable()) {
             mGroups = new String[]{
                     ctx.getString(R.string.mcl_setting_veroption_release),
                     ctx.getString(R.string.mcl_setting_veroption_snapshot),
@@ -50,7 +50,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
             };
             mData = new List[]{ releaseList, snapshotList, betaList, alphaList};
             mSnapshotListPosition = 1;
-        }else{
+        } else {
             mGroups = new String[]{
                     ctx.getString(R.string.mcl_setting_veroption_installed),
                     ctx.getString(R.string.mcl_setting_veroption_release),
@@ -80,7 +80,7 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
 
     @Override
     public String getChild(int groupPosition, int childPosition) {
-        if(isInstalledVersionSelected(groupPosition)){
+        if(isInstalledVersionSelected(groupPosition)) {
             return mInstalledVersions[childPosition];
         }
         return ((JMinecraftVersionList.Version)mData[groupPosition].get(childPosition)).id;
@@ -128,12 +128,12 @@ public class VersionListAdapter extends BaseExpandableListAdapter implements Exp
         return groupPosition == mSnapshotListPosition;
     }
 
-    private boolean areInstalledVersionsAvailable(){
+    private boolean areInstalledVersionsAvailable() {
         if(mHideCustomVersions) return false;
         return !(mInstalledVersions == null || mInstalledVersions.length == 0);
     }
 
-    private boolean isInstalledVersionSelected(int groupPosition){
+    private boolean isInstalledVersionSelected(int groupPosition) {
         return groupPosition == 0 && areInstalledVersionsAvailable();
     }
 }

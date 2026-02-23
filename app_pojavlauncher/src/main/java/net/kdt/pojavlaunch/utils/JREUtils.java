@@ -66,7 +66,7 @@ public class JREUtils {
             for(File f : list) {
                 if(f.isFile() && f.getName().endsWith(".so")) {
                     returnValue.add(f);
-                }else if(f.isDirectory()) {
+                } else if(f.isDirectory()) {
                     returnValue.addAll(locateLibs(f));
                 }
             }
@@ -76,7 +76,7 @@ public class JREUtils {
 
     public static void initJavaRuntime(String jreHome) {
         dlopen(findInLdLibPath("libjli.so"));
-        if(!dlopen("libjvm.so")){
+        if(!dlopen("libjvm.so")) {
             Log.w("DynamicLoader","Failed to load with no path, trying with full path");
             dlopen(jvmLibraryPath+"/libjvm.so");
         }
@@ -98,7 +98,7 @@ public class JREUtils {
     public static void redirectAndPrintJRELog() {
 
         Log.v("jrelog","Log starts here");
-        new Thread(new Runnable(){
+        new Thread(new Runnable() {
             int failTime = 0;
             ProcessBuilder logcatPb;
             @Override
@@ -143,7 +143,7 @@ public class JREUtils {
 
     public static void relocateLibPath(Runtime runtime, String jreHome) {
         String JRE_ARCHITECTURE = runtime.arch;
-        if (Architecture.archAsInt(JRE_ARCHITECTURE) == ARCH_X86){
+        if (Architecture.archAsInt(JRE_ARCHITECTURE) == ARCH_X86) {
             JRE_ARCHITECTURE = "i386/i486/i586";
         }
 
@@ -219,15 +219,15 @@ public class JREUtils {
                 envMap.put("LIBGL_ES", "3");
                 envMap.put("POJAVEXEC_EGL","libltw.so"); // Use ANGLE EGL
             }
-            if(LOCAL_RENDERER.equals("opengles_mobileglues")){
+            if(LOCAL_RENDERER.equals("opengles_mobileglues")) {
                 envMap.put("MG_DIR_PATH", Tools.DIR_DATA + "/MobileGlues");
                 envMap.put("POJAVEXEC_EGL","libmobileglues.so");
             }
-            if (LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper")){
+            if (LOCAL_RENDERER.equals("opengles3_desktopgl_zink_kopper")) {
                 envMap.put("POJAVEXEC_EGL","libEGL_mesa.so"); // Use Mesa EGL
                 if (Tools.shouldUseUBWC()) envMap.put("FD_DEV_FEATURES", "enable_tp_ubwc_flag_hint=1"); // Turnip fix for OneUI rendering issues
             }
-            if (LOCAL_RENDERER.toLowerCase().contains("zink")){
+            if (LOCAL_RENDERER.toLowerCase().contains("zink")) {
                 // This is sketch but it fixes a lot of things, if it causes problems we can just undo it.
                 envMap.put("MESA_GL_VERSION_OVERRIDE","4.6COMPAT");
                 envMap.put("MESA_GLSL_VERSION_OVERRIDE","460");
@@ -264,7 +264,7 @@ public class JREUtils {
             Logger.appendToLog("Added custom env: " + env.getKey() + "=" + env.getValue());
             try {
                 Os.setenv(env.getKey(), env.getValue(), true);
-            }catch (NullPointerException exception){
+            }catch (NullPointerException exception) {
                 Log.e("JREUtils", exception.toString());
             }
         }
@@ -424,21 +424,21 @@ public class JREUtils {
      * @param args The un-parsed argument list.
      * @return Parsed args as an ArrayList
      */
-    public static ArrayList<String> parseJavaArguments(String args){
+    public static ArrayList<String> parseJavaArguments(String args) {
         ArrayList<String> parsedArguments = new ArrayList<>(0);
         args = args.trim().replace(" ", "");
         //For each prefixes, we separate args.
         String[] separators = new String[]{"-XX:-","-XX:+", "-XX:","--", "-D", "-X", "-javaagent:", "-verbose"};
-        for(String prefix : separators){
-            while (true){
+        for(String prefix : separators) {
+            while (true) {
                 int start = args.indexOf(prefix);
                 if(start == -1) break;
                 //Get the end of the current argument by checking the nearest separator
                 int end = -1;
-                for(String separator: separators){
+                for(String separator: separators) {
                     int tempEnd = args.indexOf(separator, start + prefix.length());
                     if(tempEnd == -1) continue;
-                    if(end == -1){
+                    if(end == -1) {
                         end = tempEnd;
                         continue;
                     }
@@ -454,11 +454,11 @@ public class JREUtils {
                 //Check if two args aren't bundled together by mistake
                 if(parsedSubString.indexOf('=') == parsedSubString.lastIndexOf('=')) {
                     int arraySize = parsedArguments.size();
-                    if(arraySize > 0){
+                    if(arraySize > 0) {
                         String lastString = parsedArguments.get(arraySize - 1);
                         // Looking for list elements
                         if(lastString.charAt(lastString.length() - 1) == ',' ||
-                                parsedSubString.contains(",")){
+                                parsedSubString.contains(",")) {
                             parsedArguments.set(arraySize - 1, lastString + parsedSubString);
                             continue;
                         }
@@ -476,10 +476,10 @@ public class JREUtils {
      * It will fallback if it fails to load the library.
      * @return The name of the loaded library
      */
-    public static String loadGraphicsLibrary(){
+    public static String loadGraphicsLibrary() {
         if(LOCAL_RENDERER == null) return null;
         String renderLibrary;
-        switch (LOCAL_RENDERER){
+        switch (LOCAL_RENDERER) {
             case "opengles2":
             case "opengles2_5":
             case "opengles3":

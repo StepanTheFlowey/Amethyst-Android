@@ -35,6 +35,7 @@ public class ProfileAdapter extends BaseAdapter {
     public ProfileAdapter(ProfileAdapterExtra[] extraEntries) {
         reloadProfiles(extraEntries);
     }
+
     /*
      * Gets how much profiles are loaded in the adapter right now
      * @returns loaded profile count
@@ -43,6 +44,7 @@ public class ProfileAdapter extends BaseAdapter {
     public int getCount() {
         return mProfileList.size() + mExtraEntires.length;
     }
+
     /*
      * Gets the profile at a given index
      * @param position index to retreive
@@ -52,16 +54,14 @@ public class ProfileAdapter extends BaseAdapter {
     public Object getItem(int position) {
         int profileListSize = mProfileList.size();
         int extraPosition = position - profileListSize;
-        if(position < profileListSize){
+        if(position < profileListSize) {
             String profileName = mProfileList.get(position);
             if(mProfiles.containsKey(profileName)) return profileName;
-        }else if(extraPosition >= 0 && extraPosition < mExtraEntires.length) {
+        } else if(extraPosition >= 0 && extraPosition < mExtraEntires.length) {
             return mExtraEntires[extraPosition];
         }
         return null;
     }
-
-
 
     public int resolveProfileIndex(String name) {
         return mProfileList.indexOf(name);
@@ -112,10 +112,10 @@ public class ProfileAdapter extends BaseAdapter {
         else extendedTextView.setText(String.format("%s - %s", profileName, versionName));
 
         // Set selected background if needed
-        if(displaySelection){
+        if(displaySelection) {
             String selectedProfile = LauncherPreferences.DEFAULT_PREF.getString(LauncherPreferences.PREF_KEY_CURRENT_PROFILE,"");
             extendedTextView.setBackgroundColor(selectedProfile.equals(nm) ? ColorUtils.setAlphaComponent(Color.WHITE,60) : Color.TRANSPARENT);
-        }else extendedTextView.setBackgroundColor(Color.TRANSPARENT);
+        } else extendedTextView.setBackgroundColor(Color.TRANSPARENT);
     }
 
     public void setViewExtra(View v, ProfileAdapterExtra extra) {
@@ -128,13 +128,13 @@ public class ProfileAdapter extends BaseAdapter {
     public void setView(View v, Object object, boolean displaySelection) {
         if(object instanceof String) {
             setViewProfile(v, (String) object, displaySelection);
-        }else if(object instanceof ProfileAdapterExtra) {
+        } else if(object instanceof ProfileAdapterExtra) {
             setViewExtra(v, (ProfileAdapterExtra) object);
         }
     }
 
     /** Reload profiles from the file */
-    public void reloadProfiles(){
+    public void reloadProfiles() {
         LauncherProfiles.load();
         mProfiles = new HashMap<>(LauncherProfiles.mainProfileJson.profiles);
         mProfileList = new ArrayList<>(Arrays.asList(mProfiles.keySet().toArray(new String[0])));

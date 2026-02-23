@@ -52,7 +52,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
 
     private final SearchFilters mSearchFilters;
 
-    public SearchModFragment(){
+    public SearchModFragment() {
         super(R.layout.fragment_mod_search);
         mSearchFilters = new SearchFilters();
         mSearchFilters.isModpack = true;
@@ -91,7 +91,7 @@ public class SearchModFragment extends Fragment implements ModItemAdapter.Search
             return false;
         });
 
-        mOverlay.post(()->{
+        mOverlay.post(() -> {
            int overlayHeight = mOverlay.getHeight();
            mRecyclerview.setPadding(mRecyclerview.getPaddingLeft(),
                    mRecyclerview.getPaddingTop() + overlayHeight,

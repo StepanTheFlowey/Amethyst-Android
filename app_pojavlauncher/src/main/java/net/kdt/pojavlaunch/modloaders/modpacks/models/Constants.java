@@ -1,7 +1,7 @@
 package net.kdt.pojavlaunch.modloaders.modpacks.models;
 
 public class Constants {
-    private Constants(){}
+    private Constants() {}
 
     /** Types of modpack apis */
     public static final int SOURCE_MODRINTH = 0x0;

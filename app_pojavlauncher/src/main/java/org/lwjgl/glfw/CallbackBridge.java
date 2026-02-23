@@ -79,7 +79,7 @@ public class CallbackBridge {
         }
     }
 
-    public static void sendChar(char keychar, int modifiers){
+    public static void sendChar(char keychar, int modifiers) {
         // Only an EditText goes through here, that means emojis are allowed, so no isISOControl
         // cause we might break emoji mods then.
         // See net/kdt/pojavlaunch/customcontrols/keyboard/TouchCharInput.java#L147 (onTextChanged)
@@ -175,8 +175,8 @@ public class CallbackBridge {
         return currMods;
     }
 
-    public static void setModifiers(int keyCode, boolean isDown){
-        switch (keyCode){
+    public static void setModifiers(int keyCode, boolean isDown) {
+        switch (keyCode) {
             case LwjglGlfwKeycode.GLFW_KEY_LEFT_SHIFT:
                 CallbackBridge.holdingShift = isDown;
                 return;

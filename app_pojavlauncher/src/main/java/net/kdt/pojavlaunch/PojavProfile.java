@@ -37,9 +37,9 @@ public class PojavProfile {
         return name;
     }
 
-	public static List<MinecraftAccount> getAllProfiles(){
+	public static List<MinecraftAccount> getAllProfiles() {
 		List<MinecraftAccount> mcAccountList = new ArrayList<>();;
-		for (String accountName : getAllProfilesList()){
+		for (String accountName : getAllProfilesList()) {
 			if (MinecraftAccount.load(accountName) != null) {
 				mcAccountList.add(MinecraftAccount.load(accountName));
 			}
@@ -47,10 +47,10 @@ public class PojavProfile {
 		return mcAccountList;
 	}
 
-	public static List<String> getAllProfilesList(){
+	public static List<String> getAllProfilesList() {
 		List<String> accountList = new ArrayList<>();
 		File accountFolder = new File(Tools.DIR_ACCOUNT_NEW);
-		if(accountFolder.exists() && accountFolder.list() != null){
+		if(accountFolder.exists() && accountFolder.list() != null) {
 			for (String fileName : Objects.requireNonNull(accountFolder.list())) {
 				accountList.add(fileName.substring(0, fileName.length() - 5));
 			}

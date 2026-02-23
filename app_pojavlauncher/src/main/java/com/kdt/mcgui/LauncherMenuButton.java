@@ -25,7 +25,7 @@ public class LauncherMenuButton extends ExtendedButton {
     }
 
     /** Set style stuff */
-    private void setSettings(){
+    private void setSettings() {
         Resources resources = getContext().getResources();
 
         final int padding = resources.getDimensionPixelSize(R.dimen._22sdp);

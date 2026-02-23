@@ -41,7 +41,7 @@ public class ModpackInstaller {
         if (versionHash != null) {
             modpackName += "_" + versionHash;
         }
-        if (modpackName.length() > 255){
+        if (modpackName.length() > 255) {
             modpackName = modpackName.substring(0,255);
         }
 
@@ -122,7 +122,7 @@ public class ModpackInstaller {
             // Parse the JSON to prepare for instance creation
             JsonObject packInfoJson = JsonParser.parseString(jsonString.toString()).getAsJsonObject();
             String modpackName;
-            if(isModrinth){
+            if(isModrinth) {
                 // Added a for because there is an awkward __ that I can't be bothered to fix
                 // FO only deduplication be like:
                 modpackName = (packInfoJson.get("name").getAsString().toLowerCase(Locale.ROOT) +

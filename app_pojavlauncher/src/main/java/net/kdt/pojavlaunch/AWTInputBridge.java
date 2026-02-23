@@ -17,7 +17,7 @@ public class AWTInputBridge {
         nativeSendData(EVENT_TYPE_KEY, (int) keychar, keycode, state, 0);
     }
 
-    public static void sendChar(char keychar){
+    public static void sendChar(char keychar) {
         nativeSendData(EVENT_TYPE_CHAR, (int) keychar, 0, 0, 0);
     }
 

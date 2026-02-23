@@ -38,16 +38,16 @@ public class FileListView extends LinearLayout
         dialogToTitleListener(build);
     }
 
-    public FileListView(AlertDialog build, String[] fileSuffixes){
+    public FileListView(AlertDialog build, String[] fileSuffixes) {
         this(build.getContext(), null, fileSuffixes);
         dialogToTitleListener(build);
     }
 
-    public FileListView(Context context){
+    public FileListView(Context context) {
         this(context, null);
     }
 
-    public FileListView(Context context, AttributeSet attrs){
+    public FileListView(Context context, AttributeSet attrs) {
         this(context, attrs, new String[0]);
     }
 
@@ -110,30 +110,30 @@ public class FileListView extends LinearLayout
 
     public void listFileAt(final File path) {
         try{
-            if(path.exists()){
-                if(path.isDirectory()){
+            if(path.exists()) {
+                if(path.isDirectory()) {
                     fullPath = path;
 
                     File[] listFile = path.listFiles();
                     FileListAdapter fileAdapter = new FileListAdapter(context);
-                    if(!path.equals(lockPath)){
+                    if(!path.equals(lockPath)) {
                         fileAdapter.add(new File(path, ".."));
                     }
 
-                    if(listFile != null && listFile.length != 0){
+                    if(listFile != null && listFile.length != 0) {
                         Arrays.sort(listFile, new SortFileName());
 
-                        for(File file : listFile){
-                            if(file.isDirectory()){
+                        for(File file : listFile) {
+                            if(file.isDirectory()) {
                                 if(showFolders && ((!file.getName().startsWith(".")) || file.getName().equals(".minecraft")))
                                     fileAdapter.add(file);
                                 continue;
                             }
 
-                            if(showFiles){
-                                if(fileSuffixes.length > 0){
-                                    for(String suffix : fileSuffixes){
-                                        if(file.getName().endsWith("." + suffix)){
+                            if(showFiles) {
+                                if(fileSuffixes.length > 0) {
+                                    for(String suffix : fileSuffixes) {
+                                        if(file.getName().endsWith("." + suffix)) {
                                             fileAdapter.add(file);
                                             break;
                                         }
@@ -153,12 +153,12 @@ public class FileListView extends LinearLayout
                 Toast.makeText(context, "This folder (or file) doesn't exist", Toast.LENGTH_SHORT).show();
                 refreshPath();
             }
-        } catch (Exception e){
+        } catch (Exception e) {
             Tools.showError(context, e);
         }
     }
 
-    public File getFullPath(){
+    public File getFullPath() {
         return fullPath;
     }
 
@@ -167,7 +167,7 @@ public class FileListView extends LinearLayout
     }
 
     public void parentDir() {
-        if(!fullPath.getAbsolutePath().equals("/")){
+        if(!fullPath.getAbsolutePath().equals("/")) {
             listFileAt(fullPath.getParentFile());
         }
     }
@@ -177,11 +177,11 @@ public class FileListView extends LinearLayout
         listFileAt(path);
     }
 
-    public void setShowFiles(boolean showFiles){
+    public void setShowFiles(boolean showFiles) {
         this.showFiles = showFiles;
     }
 
-    public void setShowFolders(boolean showFolders){
+    public void setShowFolders(boolean showFolders) {
         this.showFolders = showFolders;
     }
 }

@@ -31,7 +31,7 @@ public class ModpackCreateFragment extends Fragment {
         });;
     }
 
-    private void tryInstall(Class<? extends Fragment> fragmentClass, String tag){
+    private void tryInstall(Class<? extends Fragment> fragmentClass, String tag) {
         Tools.swapFragment(requireActivity(), fragmentClass, tag, null);
     }
 }

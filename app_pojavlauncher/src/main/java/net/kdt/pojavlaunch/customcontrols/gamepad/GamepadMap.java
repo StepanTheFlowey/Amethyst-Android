@@ -31,7 +31,7 @@ public class GamepadMap {
     /*
      * Sets all buttons to a not pressed state, sending an input if needed
      */
-    public void resetPressedState(){
+    public void resetPressedState() {
         BUTTON_A.resetButtonState();
         BUTTON_B.resetButtonState();
         BUTTON_X.resetButtonState();
@@ -90,7 +90,7 @@ public class GamepadMap {
     /*
      * Returns a pre-done mapping used when the mouse is grabbed by the game.
      */
-    public static GamepadMap getDefaultGameMap(){
+    public static GamepadMap getDefaultGameMap() {
         GamepadMap gameMap = GamepadMap.createEmptyMap();
 
         gameMap.BUTTON_A.keycodes[0] = LwjglGlfwKeycode.GLFW_KEY_SPACE;
@@ -127,7 +127,7 @@ public class GamepadMap {
     /*
      * Returns a pre-done mapping used when the mouse is NOT grabbed by the game.
      */
-    public static GamepadMap getDefaultMenuMap(){
+    public static GamepadMap getDefaultMenuMap() {
         GamepadMap menuMap = GamepadMap.createEmptyMap();
 
         menuMap.BUTTON_A.keycodes[0] = GamepadMap.MOUSE_LEFT;
@@ -163,7 +163,7 @@ public class GamepadMap {
     /*
      * Returns all GamepadEmulatedButtons of the controller key map.
      */
-    public GamepadEmulatedButton[] getButtons(){
+    public GamepadEmulatedButton[] getButtons() {
         return new GamepadEmulatedButton[]{ BUTTON_A, BUTTON_B, BUTTON_X, BUTTON_Y,
                                     BUTTON_SELECT, BUTTON_START,
                                     TRIGGER_LEFT, TRIGGER_RIGHT,
@@ -177,7 +177,7 @@ public class GamepadMap {
     /*
      * Returns an pre-initialized GamepadMap with only empty keycodes
      */
-    @SuppressWarnings("unused") public static GamepadMap createEmptyMap(){
+    @SuppressWarnings("unused") public static GamepadMap createEmptyMap() {
         GamepadMap emptyMap = createAndInitializeButtons();
         for(GamepadEmulatedButton button : emptyMap.getButtons())
             button.keycodes = new short[] {UNSPECIFIED, UNSPECIFIED, UNSPECIFIED, UNSPECIFIED};

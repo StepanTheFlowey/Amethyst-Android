@@ -58,7 +58,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
 
 
 
-    public void observe(String progressKey){
+    public void observe(String progressKey) {
         mMap.add(new LayoutProgressListener(progressKey));
     }
 
@@ -68,12 +68,12 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
         }
     }
 
-    public boolean hasProcesses(){
+    public boolean hasProcesses() {
         return ProgressKeeper.getTaskCount() > 0;
     }
 
 
-    private void init(){
+    private void init() {
         inflate(getContext(), R.layout.view_progress, this);
         mLinearLayout = findViewById(R.id.progress_linear_layout);
         mTaskNumberDisplayer = findViewById(R.id.progress_textview);
@@ -84,22 +84,22 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
 
 
     /** Update the progress bar content */
-    public static void setProgress(String progressKey, int progress){
+    public static void setProgress(String progressKey, int progress) {
         ProgressKeeper.submitProgress(progressKey, progress, -1, (Object)null);
     }
 
     /** Update the text and progress content */
-    public static void setProgress(String progressKey, int progress, @StringRes int resource, Object... message){
+    public static void setProgress(String progressKey, int progress, @StringRes int resource, Object... message) {
         ProgressKeeper.submitProgress(progressKey, progress, resource, message);
     }
 
     /** Update the text and progress content */
-    public static void setProgress(String progressKey, int progress, String message){
+    public static void setProgress(String progressKey, int progress, String message) {
         setProgress(progressKey,progress, -1, message);
     }
 
     /** Update the text and progress content */
-    public static void clearProgress(String progressKey){
+    public static void clearProgress(String progressKey) {
         setProgress(progressKey, -1, -1);
     }
 
@@ -111,7 +111,7 @@ public class ProgressLayout extends ConstraintLayout implements View.OnClickList
 
     @Override
     public void onUpdateTaskCount(int tc) {
-        post(()->{
+        post(() -> {
             if(tc > 0) {
                 mTaskNumberDisplayer.setText(getContext().getString(R.string.progresslayout_tasks_in_progress, tc));
                 setVisibility(VISIBLE);

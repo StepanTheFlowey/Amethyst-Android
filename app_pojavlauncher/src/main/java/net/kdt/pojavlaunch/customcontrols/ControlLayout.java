@@ -84,7 +84,7 @@ public class ControlLayout extends FrameLayout {
 		if(controlLayout != null) {
 			sanitizedModified = LayoutSanitizer.sanitizeLayout(controlLayout);
 		}
-		if(mActionRow == null){
+		if(mActionRow == null) {
 			mActionRow = new ActionRow(getContext());
 			addView(mActionRow);
 		}
@@ -105,7 +105,7 @@ public class ControlLayout extends FrameLayout {
 
 
 		// Joystick(s) first, to workaround the touch dispatch
-		for(ControlJoystickData joystick : mLayout.mJoystickDataList){
+		for(ControlJoystickData joystick : mLayout.mJoystickDataList) {
 			addJoystickView(joystick);
 		}
 
@@ -115,7 +115,7 @@ public class ControlLayout extends FrameLayout {
 		}
 
 		//CONTROL DRAWER
-		for(ControlDrawerData drawerData : controlLayout.mDrawerDataList){
+		for(ControlDrawerData drawerData : controlLayout.mDrawerDataList) {
 			ControlDrawer drawer = addDrawerView(drawerData);
 			if(mModifiable) drawer.areButtonsVisible = true;
 		}
@@ -147,16 +147,16 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	// CONTROL DRAWER
-	public void addDrawer(ControlDrawerData drawerData){
+	public void addDrawer(ControlDrawerData drawerData) {
 		mLayout.mDrawerDataList.add(drawerData);
 		addDrawerView();
 	}
 
-	private void addDrawerView(){
+	private void addDrawerView() {
 		addDrawerView(null);
 	}
 
-	private ControlDrawer addDrawerView(ControlDrawerData drawerData){
+	private ControlDrawer addDrawerView(ControlDrawerData drawerData) {
 
 		final ControlDrawer view = new ControlDrawer(this,drawerData == null ? mLayout.mDrawerDataList.get(mLayout.mDrawerDataList.size()-1) : drawerData);
 
@@ -176,20 +176,20 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	//CONTROL SUB-BUTTON
-	public void addSubButton(ControlDrawer drawer, ControlData controlButton){
+	public void addSubButton(ControlDrawer drawer, ControlData controlButton) {
 		//Yep there isn't much here
 		drawer.getDrawerData().buttonProperties.add(controlButton);
 		addSubView(drawer, drawer.getDrawerData().buttonProperties.get(drawer.getDrawerData().buttonProperties.size()-1 ));
 	}
 
-	private void addSubView(ControlDrawer drawer, ControlData controlButton){
+	private void addSubView(ControlDrawer drawer, ControlData controlButton) {
 		final ControlSubButton view = new ControlSubButton(this, controlButton, drawer);
 
 		if (!mModifiable) {
 			view.setAlpha(view.getProperties().opacity);
 			view.setFocusable(false);
 			view.setFocusableInTouchMode(false);
-		}else{
+		} else {
 			view.setVisible(true);
 		}
 
@@ -201,12 +201,12 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	// JOYSTICK BUTTON
-	public void addJoystickButton(ControlJoystickData data){
+	public void addJoystickButton(ControlJoystickData data) {
 		mLayout.mJoystickDataList.add(data);
 		addJoystickView(data);
 	}
 
-	private void addJoystickView(ControlJoystickData data){
+	private void addJoystickView(ControlJoystickData data) {
 		ControlJoystick view = new ControlJoystick(this, data);
 
 		if (!mModifiable) {
@@ -220,7 +220,7 @@ public class ControlLayout extends FrameLayout {
 
 
 	private void removeAllButtons() {
-		for(ControlInterface button : getButtonChildren()){
+		for(ControlInterface button : getButtonChildren()) {
 			removeView(button.getControlView());
 		}
 
@@ -234,16 +234,16 @@ public class ControlLayout extends FrameLayout {
 		setModified(false);
 	}
 
-	public void toggleControlVisible(){
+	public void toggleControlVisible() {
 		mControlVisible = !mControlVisible;
 		setControlVisible(mControlVisible);
 	}
 
-	public float getLayoutScale(){
+	public float getLayoutScale() {
 		return mLayout.scaledAt;
 	}
 
-	public CustomControls getLayout(){
+	public CustomControls getLayout() {
 		return mLayout;
 	}
 
@@ -251,25 +251,25 @@ public class ControlLayout extends FrameLayout {
 		if (mModifiable) return; // Not using on custom controls activity
 
 		mControlVisible = isVisible;
-		for(ControlInterface button : getButtonChildren()){
+		for(ControlInterface button : getButtonChildren()) {
 			button.setVisible(((button.getProperties().displayInGame && isGrabbing()) || (button.getProperties().displayInMenu && !isGrabbing())) && isVisible);
 		}
 	}
 
 	public void setModifiable(boolean isModifiable) {
-		if(!isModifiable && mModifiable){
+		if(!isModifiable && mModifiable) {
 			removeEditWindow();
 		}
 		mModifiable = isModifiable;
-		if(isModifiable){
+		if(isModifiable) {
 			// In edit mode, all controls have to be shown
-			for(ControlInterface button : getButtonChildren()){
+			for(ControlInterface button : getButtonChildren()) {
 				button.setVisible(true);
 			}
 		}
 	}
 
-	public boolean getModifiable(){
+	public boolean getModifiable() {
 		return mModifiable;
 	}
 
@@ -277,10 +277,10 @@ public class ControlLayout extends FrameLayout {
 		mIsModified = isModified;
 	}
 
-	public List<ControlInterface> getButtonChildren(){
-		if(mModifiable || mButtons == null){
+	public List<ControlInterface> getButtonChildren() {
+		if(mModifiable || mButtons == null) {
 			mButtons = new ArrayList<>();
-			for(int i=0; i<getChildCount(); ++i){
+			for(int i=0; i<getChildCount(); ++i) {
 				View v = getChildAt(i);
 				if(v instanceof ControlInterface)
 					mButtons.add(((ControlInterface) v));
@@ -290,8 +290,8 @@ public class ControlLayout extends FrameLayout {
 		return mButtons;
 	}
 
-	public void refreshControlButtonPositions(){
-		for(ControlInterface button : getButtonChildren()){
+	public void refreshControlButtonPositions() {
+		for(ControlInterface button : getButtonChildren()) {
 			button.setDynamicX(button.getProperties().dynamicX);
 			button.setDynamicY(button.getProperties().dynamicY);
 		}
@@ -300,7 +300,7 @@ public class ControlLayout extends FrameLayout {
     @Override
     public void onViewRemoved(View child) {
         super.onViewRemoved(child);
-        if(child instanceof ControlInterface && mControlDialog != null){
+        if(child instanceof ControlInterface && mControlDialog != null) {
 			mControlDialog.disappearColor();
             mControlDialog.disappear(false);
         }
@@ -310,8 +310,8 @@ public class ControlLayout extends FrameLayout {
 	 * Load the layout if needed, and pass down the burden of filling values
 	 * to the button at hand.
 	 */
-	public void editControlButton(ControlInterface button){
-		if(mControlDialog == null){
+	public void editControlButton(ControlInterface button) {
+		if(mControlDialog == null) {
 			// When the panel is null, it needs to inflate first.
 			// So inflate it, then process it on the next frame
 			mControlDialog = new EditControlSideDialog(getContext(), this);
@@ -329,7 +329,7 @@ public class ControlLayout extends FrameLayout {
 
 		mControlDialog.disappearColor();
 
-		if(mHandleView == null){
+		if(mHandleView == null) {
 			mHandleView = new ControlHandleView(getContext());
 			addView(mHandleView);
 		}
@@ -339,7 +339,7 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	/** Swap the panel if the button position requires it */
-	public void adaptPanelPosition(){
+	public void adaptPanelPosition() {
 		if(mControlDialog != null) mControlDialog.adaptPanelPosition();
 	}
 
@@ -410,8 +410,8 @@ public class ControlLayout extends FrameLayout {
 		InputMethodManager imm = (InputMethodManager) getContext().getSystemService(INPUT_METHOD_SERVICE);
 
 		// When the input window cannot be hidden, it returns false
-		if(!imm.hideSoftInputFromWindow(getWindowToken(), 0)){
-			if(mControlDialog.disappearLayer()){
+		if(!imm.hideSoftInputFromWindow(getWindowToken(), 0)) {
+			if(mControlDialog.disappearLayer()) {
 				mActionRow.setFollowedButton(null);
 				mHandleView.hide();
 			}
@@ -433,7 +433,7 @@ public class ControlLayout extends FrameLayout {
 		if(mHandleView != null) mHandleView.hide();
 	}
 
-	public void save(String path){
+	public void save(String path) {
 		try {
 			mLayout.save(path);
 		} catch (IOException e) {Log.e("ControlLayout", "Failed to save the layout at:" + path);}
@@ -441,7 +441,7 @@ public class ControlLayout extends FrameLayout {
 
 
 	public boolean hasMenuButton() {
-		for(ControlInterface controlInterface : getButtonChildren()){
+		for(ControlInterface controlInterface : getButtonChildren()) {
 			for (int keycode : controlInterface.getProperties().keycodes) {
 				if (keycode == ControlData.SPECIALBTN_MENU) return true;
 			}
@@ -458,8 +458,8 @@ public class ControlLayout extends FrameLayout {
 	}
 
 	/** Cached getter for perf purposes */
-	public MinecraftGLSurface getGameSurface(){
-		if(mGameSurface == null){
+	public MinecraftGLSurface getGameSurface() {
+		if(mGameSurface == null) {
 			mGameSurface = findViewById(R.id.main_game_render_view);
 		}
 		return mGameSurface;
@@ -468,7 +468,7 @@ public class ControlLayout extends FrameLayout {
 	public void askToExit(EditorExitable editorExitable) {
 		if(mIsModified) {
 			openSaveDialog(editorExitable);
-		}else{
+		} else {
 			openExitDialog(editorExitable);
 		}
 	}
@@ -545,7 +545,7 @@ public class ControlLayout extends FrameLayout {
 		FileListView flv = new FileListView(dialog, "json");
 		if(Build.VERSION.SDK_INT < 29)flv.listFileAt(new File(Tools.CTRLMAP_PATH));
 		else flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
-		flv.setFileSelectedListener(new FileSelectedListener(){
+		flv.setFileSelectedListener(new FileSelectedListener() {
 
 			@Override
 			public void onFileSelected(File file, String path) {
@@ -569,7 +569,7 @@ public class ControlLayout extends FrameLayout {
 		final AlertDialog dialog = builder.create();
 		FileListView flv = new FileListView(dialog, "json");
 		flv.lockPathAt(new File(Tools.CTRLMAP_PATH));
-		flv.setFileSelectedListener(new FileSelectedListener(){
+		flv.setFileSelectedListener(new FileSelectedListener() {
 
 			@Override
 			public void onFileSelected(File file, String path) {
@@ -591,11 +591,11 @@ public class ControlLayout extends FrameLayout {
 		builder.setTitle(R.string.customctrl_editor_exit_title);
 		builder.setMessage(R.string.customctrl_editor_exit_msg);
 		builder.setPositiveButton(R.string.global_yes, (d,w)->exitListener.exitEditor());
-		builder.setNegativeButton(R.string.global_no, (d,w)->{});
+		builder.setNegativeButton(R.string.global_no, (d,w) -> {});
 		builder.show();
 	}
 
-	public boolean areControlVisible(){
+	public boolean areControlVisible() {
 		return mControlVisible;
 	}
 }

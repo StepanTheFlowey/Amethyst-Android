@@ -19,7 +19,7 @@ public class DrawerPullButton extends View {
     private final Paint mBackgroundPaint = new Paint();
     private VectorDrawableCompat mDrawable;
 
-    private void init(){
+    private void init() {
         mDrawable = VectorDrawableCompat.create(getContext().getResources(), R.drawable.ic_sharp_settings_24, null);
         setAlpha(0.33f);
         mBackgroundPaint.setColor(Color.BLACK);

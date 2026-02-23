@@ -139,7 +139,7 @@ public class CommonApi implements ModpackApi {
         }
     }
 
-    private @NonNull ModpackApi getModpackApi(Activity activity, Uri zipUri){
+    private @NonNull ModpackApi getModpackApi(Activity activity, Uri zipUri) {
         String modrinthPackInfoFileName = "modrinth.index.json";
         String curseforgePackInfoFileName = "manifest.json";
         InputStream inputStream = null;
@@ -165,7 +165,7 @@ public class CommonApi implements ModpackApi {
     }
 
     /** Fuse the arrays in a way that's fair for every endpoint */
-    private ModItem[] buildFusedResponse(List<ModItem[]> modMatrix){
+    private ModItem[] buildFusedResponse(List<ModItem[]> modMatrix) {
         int totalSize = 0;
 
         // Calculate the total size of the merged array

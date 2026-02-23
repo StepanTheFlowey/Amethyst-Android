@@ -33,7 +33,7 @@ public class MCOptionUtils {
     }
 
 
-    public static void load(){
+    public static void load() {
         load(sOptionFolderPath == null
                 ? Tools.DIR_GAME_NEW
                 : sOptionFolderPath);
@@ -47,7 +47,7 @@ public class MCOptionUtils {
             } catch (IOException e) { e.printStackTrace(); }
         }
 
-        if(sFileObserver == null || !Objects.equals(sOptionFolderPath, folderPath)){
+        if(sFileObserver == null || !Objects.equals(sOptionFolderPath, folderPath)) {
             sOptionFolderPath = folderPath;
             setupFileObserver();
         }
@@ -77,16 +77,16 @@ public class MCOptionUtils {
     }
 
     /** Set an array of String, instead of a simple value. Not supported on all options */
-    public static void set(String key, List<String> values){
+    public static void set(String key, List<String> values) {
         sParameterMap.put(key, values.toString());
     }
 
-    public static String get(String key){
+    public static String get(String key) {
         return sParameterMap.get(key);
     }
 
     /** @return A list of values from an array stored as a string */
-    public static List<String> getAsList(String key){
+    public static List<String> getAsList(String key) {
         String value = get(key);
 
         // Fallback if the value doesn't exist
@@ -122,7 +122,7 @@ public class MCOptionUtils {
         int guiScale = (str == null ? 0 :Integer.parseInt(str));
 
         int scale = Math.max(Math.min(windowWidth / 320, windowHeight / 240), 1);
-        if(scale < guiScale || guiScale == 0){
+        if(scale < guiScale || guiScale == 0) {
             guiScale = scale;
         }
 
@@ -131,8 +131,8 @@ public class MCOptionUtils {
 
     /** Add a file observer to reload options on file change
      * Listeners get notified of the change */
-    private static void setupFileObserver(){
-        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q){
+    private static void setupFileObserver() {
+        if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.Q) {
             sFileObserver = new FileObserver(new File(sOptionFolderPath + "/options.txt"), FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
@@ -140,7 +140,7 @@ public class MCOptionUtils {
                     notifyListeners();
                 }
             };
-        }else{
+        } else {
             sFileObserver = new FileObserver(sOptionFolderPath + "/options.txt", FileObserver.MODIFY) {
                 @Override
                 public void onEvent(int i, @Nullable String s) {
@@ -154,8 +154,8 @@ public class MCOptionUtils {
     }
 
     /** Notify the option listeners */
-    public static void notifyListeners(){
-        for(WeakReference<MCOptionListener> weakReference : sOptionListeners){
+    public static void notifyListeners() {
+        for(WeakReference<MCOptionListener> weakReference : sOptionListeners) {
             MCOptionListener optionListener = weakReference.get();
             if(optionListener == null) continue;
 
@@ -164,16 +164,16 @@ public class MCOptionUtils {
     }
 
     /** Add an option listener, notice how we don't have a reference to it */
-    public static void addMCOptionListener(MCOptionListener listener){
+    public static void addMCOptionListener(MCOptionListener listener) {
         sOptionListeners.add(new WeakReference<>(listener));
     }
 
     /** Remove a listener from existence, or at least, its reference here */
-    public static void removeMCOptionListener(MCOptionListener listener){
-        for(WeakReference<MCOptionListener> weakReference : sOptionListeners){
+    public static void removeMCOptionListener(MCOptionListener listener) {
+        for(WeakReference<MCOptionListener> weakReference : sOptionListeners) {
             MCOptionListener optionListener = weakReference.get();
             if(optionListener == null) continue;
-            if(optionListener == listener){
+            if(optionListener == listener) {
                 sOptionListeners.remove(weakReference);
                 return;
             }

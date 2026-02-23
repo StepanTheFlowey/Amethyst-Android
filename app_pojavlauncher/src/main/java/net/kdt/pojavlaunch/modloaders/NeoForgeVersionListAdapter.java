@@ -44,7 +44,7 @@ public class NeoForgeVersionListAdapter extends BaseExpandableListAdapter implem
         // Make it latest to oldest, top to down.
         Collections.reverse(mGameVersions);
         Collections.reverse(mNeoForgeVersions);
-        for (List<String> mNeoForgeVersion : mNeoForgeVersions){
+        for (List<String> mNeoForgeVersion : mNeoForgeVersions) {
             Collections.reverse(mNeoForgeVersion);
         }
     }
@@ -105,7 +105,7 @@ public class NeoForgeVersionListAdapter extends BaseExpandableListAdapter implem
         return mGameVersions.get(i);
     }
 
-    private String getNeoForgeVersion(int i, int i1){
+    private String getNeoForgeVersion(int i, int i1) {
         return mNeoForgeVersions.get(i).get(i1);
     }
 

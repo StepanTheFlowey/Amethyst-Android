@@ -23,7 +23,7 @@ public class LauncherPreferenceJavaFragment extends LauncherPreferenceFragment {
     private MultiRTConfigDialog mDialogScreen;
     private SwitchPreference mSwitchAutoJRE;
     private final ActivityResultLauncher<Object> mVmInstallLauncher =
-            registerForActivityResult(new OpenDocumentWithExtension("xz"), (data)->{
+            registerForActivityResult(new OpenDocumentWithExtension("xz"), (data) -> {
                 if(data != null) Tools.installRuntimeFromUri(getContext(), data);
             });
 
